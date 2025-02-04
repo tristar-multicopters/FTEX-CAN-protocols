@@ -1,0 +1,327 @@
+{
+  "protocol": {
+    "title": "FTEX BMS CANOpen protocol",
+    "description": "CANOpen protocol specification that a BMS must follow in order to be compatible with the FTEX controller. See the protocol readme for details on node ID, baud rate, etc. The BMS is passive and must not proactively send anything on CAN. The controller or IoT (or HMI) may perform SDO reads on the BMS whenever it needs a value. The query frequency setting explains how often the controller may query the value from the BMS. The query frequency is approximate, and the controller may request data more or less often than what is specified there. A query frequency of ad-hoc means that the controller may get this value at any time. A query frequency of boot-up means that the controller will get this value once, every time the vehicle powers up. A query frequency of real-time means the controller will get this information very rapidly and very often, so the BMS must keep this value updated rapidly.",
+    "version": "2.3.1",
+    "Notes": "If there are two batteries, the controller will only communicate with the main battery node ID. The second battery should still be on the CAN network for diagnostic purposes, but while the vehicle is running, the main battery node ID should communicate the capabilities of both batteries (eg. total max discharge current)."
+  },
+  "Health": {
+    "CO_ID_EXTERNAL_BMS_ERROR_STATE": {
+      "CANOpen_Index": "0x0020",
+      "Description": "Battery Error State parameters.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_BMS_ERROR_STATE": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Bitmask of errors currently detected by the BMS system. If more than one error is occurring, the BMS does an OR mask between errors, to flag different error bits.",
+          "Query_frequency": "real-time",
+          "Notes": "For example, if the BMS detect a cell imbalance warning and an overvoltage error, this parameter should have a value of 20 (ie. 0x4 | 0x20)",
+          "Valid_Options": [
+            {
+              "value": 0,
+              "description": "External_BMS_No_error: No error."
+            },
+            {
+              "value": 1,
+              "description": "External_BMS_Overtemperature_Error: The BMS detects that the temperature is above the safe operating range."
+            },
+            {
+              "value": 2,
+              "description": "External_BMS_Undertemperature_Error: The BMS detects that the temperature is below the safe operating range."
+            },
+            {
+              "value": 4,
+              "description": "External_BMS_Cell_Imbalance_Warning: The BMS detects an imbalance between individual cells in the battery pack."
+            },
+            {
+              "value": 8,
+              "description": "External_BMS_Overvoltage_Error: The BMS detects that the voltage exceeds the safe operating range."
+            },
+            {
+              "value": 16,
+              "description": "External_BMS_Undervoltage_Error: The BMS detects that the voltage is below the safe operating range."
+            },
+            {
+              "value": 32,
+              "description": "External_BMS_Charge_Overcurrent_Error: The BMS detects an overcurrent condition during charging."
+            },
+            {
+              "value": 64,
+              "description": "External_BMS_Discharge_Overcurrent_Error: The BMS detects an overcurrent condition during discharge."
+            },
+            {
+              "value": 128,
+              "description": "External_BMS_Shortcircuit_Error: The BMS detects a short circuit condition."
+            },
+            {
+              "value": 2147483648,
+              "description": "External_BMS_Internal_Error: The BMS detects an unmapped or undefined error."
+            }
+          ]
+        },
+        "CO_PARAM_EXTERNAL_BMS_TEMPERATURE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "C",
+          "Description": "Temperature of the battery",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": -50,
+            "max": 250
+          }
+        }
+      }
+    },
+    "CO_ID_EXTERNAL_BMS_REALTIME_INFO": {
+      "CANOpen_Index": "0x0030",
+      "Description": "Battery charge, discharge information. The BMS must keep these values updated real-time.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_BMS_SOC": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "State-of-charge of the battery, between 0% and 100%. This parameter represents the % left of capacity (Wh) compared to the maximum battery capacity (Wh).",
+          "Valid_Range": {
+            "min": 0,
+            "max": 100
+          },
+          "Query_frequency": "real-time"
+        },
+        "CO_PARAM_EXTERNAL_BMS_VOLTAGE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Voltage of the battery at this moment. This values needs to be greater than the CO_PARAM_EXTERNAL_BMS_UNDERVOLTAGE_LIMIT",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 2000,
+            "max": 10000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_CURRENT": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "int32_t",
+          "Unit": "mA",
+          "Description": "Real-time charge or discharge current of the battery. Positive current means discharge of the battery. Negative current means charge of the battery",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": -100000,
+            "max": 100000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_STATE": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "",
+          "Description": "State of the battery.",
+          "Query_frequency": "real-time",
+          "Valid_Options": [
+            { "value": 0, "description": "Undefined (should not happen)" },
+            { "value": 1, "description": "Charging" },
+            { "value": 2, "description": "Discharging" },
+            { "value": 3, "description": "Fully charged" },
+            { "value": 4, "description": "Fully discharged" },
+            { "value": 5, "description": "Error (in that case, the error state index 0x20 subindex 0x00 must be set to non-zero)" }
+          ]
+        }
+      }
+    }
+  },
+  "Metadata": {
+    "CO_ID_EXTERNAL_BMS_SERIAL_NUMBER": {
+      "CANOpen_Index": "0x0040",
+      "Description": "Battery metadata parameters.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_BMS_SERIAL_NUMBER_MSB": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of the battery (most significant bytes)",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_SERIAL_NUMBER_LSB": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of the battery (least significant bytes)",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_CYCLE_COUNT": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Number of times that the battery went through a discharge cycle (a discharge is if SOC goes below 95%)",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_MODEL_NUMBER": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Number defined by the battery manufacturer identifying this battery model.",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_FW_VERSION": {
+          "Subindex": "0x04",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Firmware version on the BMS",
+          "Query_frequency": "ad-hoc",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        }
+      }
+    }
+  },
+  "Battery_capabilities": {
+    "CO_ID_EXTERNAL_BMS_CAPABILITIES": {
+      "CANOpen_Index": "0x0050",
+      "Description": "Battery capabilities parameters.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_BMS_MAX_DISCHARGE_CURRENT": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "mA",
+          "Description": "Maximum current that the BMS can sustain while discharging.",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 1,
+            "max": 100000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_MAX_CHARGE_CURRENT": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "mA",
+          "Description": "Maximum current that the BMS can sustain while charging.",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 1,
+            "max": 100000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_MAX_DISCHARGE_TIME": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "ms",
+          "Description": "Time during which the BMS can sustain the max discharge current.",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 1,
+            "max": 300000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_CONTINUOUS_CURRENT": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "mA",
+          "Description": "Continuous current that the BMS can sustain. This value needs to be lower or equal to CO_PARAM_EXTERNAL_BMS_MAX_DISCHARGE_CURRENT.",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 1,
+            "max": 100000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_FULL_VOLTAGE": {
+          "Subindex": "0x04",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Max voltage of the battery (ie. voltage corresponding to 100% SOC)",
+          "Query_frequency": "boot-up",
+          "Valid_Range": {
+            "min": 2000,
+            "max": 10000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_EMPTY_VOLTAGE": {
+          "Subindex": "0x05",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Min voltage of the battery (ie. voltage corresponding to 0% SOC). This value needs to be lower to CO_PARAM_EXTERNAL_BMS_FULL_VOLTAGE.",
+          "Query_frequency": "boot-up",
+          "Valid_Range": {
+            "min": 2000,
+            "max": 10000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_UNDERVOLTAGE_LIMIT": {
+          "Subindex": "0x06",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Undervoltage cutoff of the BMS. This value needs to be lower than CO_PARAM_EXTERNAL_BMS_OVERVOLTAGE_LIMIT.",
+          "Query_frequency": "boot-up",
+          "Valid_Range": {
+            "min": 2000,
+            "max": 10000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_OVERVOLTAGE_LIMIT": {
+          "Subindex": "0x07",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Overvoltage cutoff of the BMS",
+          "Query_frequency": "boot-up",
+          "Valid_Range": {
+            "min": 2000,
+            "max": 10000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_MAXIMUM_CAPACITY": {
+          "Subindex": "0x08",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "Wh",
+          "Description": "Maximum capacity of the battery, when the battery SOC is 100%.",
+          "Query_frequency": "boot-up",
+          "Valid_Range": {
+            "min": 100,
+            "max": 5000
+          }
+        },
+        "CO_PARAM_EXTERNAL_BMS_REMAINING_CAPACITY": {
+          "Subindex": "0x09",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "Wh",
+          "Description": "Remaining capacity of the battery, according to the SOC. This values needs to be lower than CO_PARAM_EXTERNAL_BMS_MAXIMUM_CAPACITY.",
+          "Query_frequency": "real-time",
+          "Valid_Range": {
+            "min": 100,
+            "max": 5000
+          }
+        }
+      }
+    }
+  }
+}

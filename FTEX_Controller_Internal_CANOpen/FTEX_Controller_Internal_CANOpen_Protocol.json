@@ -1,0 +1,1098 @@
+{
+  "protocol": {
+      "title": "FTEX Controller Internal CANOpen protocol",
+      "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
+      "version": "1.4.1"
+  },
+  "Master_Slave": {
+      "CO_ID_MOTOR_SPEED": {
+        "CANOpen_Index": "0x2009",
+        "Description": "Motor speed for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_SPEED_MASTER":{
+            "Subindex": "0x00",
+            "Access": "R",
+            "Type": "int16_t",
+            "Valid_Range": {
+              "min": -32768,
+              "max": 32767
+            },
+            "Description": "Motor speed for master",
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_SPEED_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R",
+            "Type": "int16_t",
+            "Description": "Motor speed for slave, if present",
+            "Valid_Range": {
+              "min": -32768,
+              "max": 32767
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_MOTOR_STATE": {
+        "CANOpen_Index": "0x200D",
+        "Description": "Motor state for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_STATE_MASTER":{
+            "Subindex": "0x00",
+            "Access": "R",
+            "Type": "uint16_t",
+            "Description": "Motor state for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 65535
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_STATE_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R",
+            "Type": "uint16_t",
+            "Description": "Motor state for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 65535
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_MOTOR_FAULTS": {
+        "CANOpen_Index": "0x200E",
+        "Description": "Motor faults for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_WARNING_MASTER":{
+            "Subindex": "0x00",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor fault warning for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_WARNING_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor fault warning for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_CURRENT_ERRORS_MASTER":{
+            "Subindex": "0x02",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor current errors for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_CURRENT_ERRORS_SLAVE": {
+            "Subindex": "0x03",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor current errors for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_OCCURED_ERRORS_MASTER":{
+            "Subindex": "0x04",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor occured errors for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_OCCURED_ERRORS_SLAVE": {
+            "Subindex": "0x05",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor occured errors for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_CURRENT_CRITICAL_MASTER":{
+            "Subindex": "0x06",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor current critical faults for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_CURRENT_CRITICAL_SLAVE": {
+            "Subindex": "0x07",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor current critical faults for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_OCCURED_CRITICAL_MASTER":{
+            "Subindex": "0x08",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor occured critical faults for master",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          },
+          "CO_PARAM_MOTOR_OCCURED_CRITICAL_SLAVE": {
+            "Subindex": "0x09",
+            "Access": "R",
+            "Type": "uint32_t",
+            "Description": "Motor occured critical faults for slave, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_MOTOR_TORQUE": {
+        "CANOpen_Index": "0x2010",
+        "Description": "Motor torque for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_TORQUE_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R/W",
+            "Type": "int16_t",
+            "Description": " Slave motor torque, if present",
+            "Valid_Range": {
+              "min": -32768,
+              "max": 32767
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_MOTOR_START": {
+        "CANOpen_Index": "0x2011",
+        "Description": "Motor start for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_START_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R/W",
+            "Type": "uint8_t",
+            "Description": "Slave motor start, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 1
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_MOTOR_ACK_FAULT": {
+        "CANOpen_Index": "0x2012",
+        "Description": "Motor ack fault for master/slave, if present",
+        "Parameters": {
+          "CO_PARAM_MOTOR_ACK_FAULT_SLAVE": {
+            "Subindex": "0x01",
+            "Access": "R/W",
+            "Type": "uint8_t",
+            "Description": "Slave motor ack fault, if present",
+            "Valid_Range": {
+              "min": 0,
+              "max": 1
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      },
+      "CO_ID_SLAVE_TURN_OFF": {
+        "CANOpen_Index": "0x2013",
+        "Description": "Slave lets the master know if it is turning off",
+        "Parameters": {
+          "CO_PARAM_SLAVE_TURN_OFF":{
+            "Subindex": "0x00",
+            "Access": "R/W",
+            "Type": "uint8_t",
+            "Description": "Slave lets the master know if it is turning off",
+            "Valid_Range" : {
+              "min": 0,
+              "max": 1
+            },
+            "Persistence": "Real-time"
+          }
+        }
+      }
+  },
+  "Autotune": {
+      "CO_ID_AUTOTUNE_CONFIG_AND_CONTROL": {
+          "CANOpen_Index": "0x5007",
+          "Description": "Motor control autotune input configuration and control.",
+          "Parameters": {
+              "CO_PARAM_AUTOTUNE_CONTROL": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Control parameter to start the autotune process.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "No Action" },
+                      { "value": 1, "description": "Start Autotune Process" }
+                  ],
+                  "Persistence": "Real-time"
+                },
+              "CO_PARAM_AUTOTUNE_CONFIG_POLEPAIRS": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Autotune input: number of pole pairs in the motor",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 100
+                  },
+                  "Persistence": "Real-time",
+                  "Notes": "Autotune currently only works for pole pairs <= 10"
+              },
+              "CO_PARAM_AUTOTUNE_CONFIG_RATED_CURRENT": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "Autotune input: rated motor current (AC current)",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time",
+                  "Notes": "Autotune currently only works for current up to the max current of the hardware"
+              },
+              "CO_PARAM_AUTOTUNE_MOTOR_GEAR_RATIO": {
+                  "Subindex": "0x03",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "Autotune input: motor gear ratio x10. eg. if the gear ratio is 12, this value is 120.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 1000
+                  },
+                  "Persistence": "Real-time"
+              }
+          }
+      },
+      "CO_ID_AUTOTUNE_OUTPUTS": {
+          "CANOpen_Index": "0x5008",
+          "Description": "Autotune progress and results. One can grab those results to then configure the controller.",
+          "Parameters": {
+              "CO_PARAM_AUTOTUNE_PROGRESS": {
+                  "Subindex": "0x00",
+                  "Access": "R",
+                  "Type": "uint8_t",
+                  "Description": "Autotune progress. Autotune is done when this reaches 100. If tuning has not started, this value is 101.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 101
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "%"
+              },
+              "CO_PARAM_AUTOTUNE_ERRORS_OUTPUT": {
+                "Subindex": "0x01",
+                "Access": "R",
+                "Type": "uint16_t",
+                "Description": "Autotune errors.",
+                "Valid_Options": [
+                    { "value": 0, "description": "No errors" },
+                    { "value": 1, "description": "Hardware overcurrent error" },
+                    { "value": 2, "description": "Software overcurrent error" },
+                    { "value": 3, "description": "Over voltage error" },
+                    { "value": 4, "description": "Under voltage error" },
+                    { "value": 17, "description": "Input value is invalid" },
+                    { "value": 18, "description": "Undefined error code 0x0012" },
+                    { "value": 19, "description": "Rs value after DFT is above the maximum or below the minimum accepted value" },
+                    { "value": 20, "description": "Rs value after RLS filter is above the maximum or below the minimum accepted value" },
+                    { "value": 21, "description": "Ld value after DFT is below the minimum accepted value" },
+                    { "value": 22, "description": "Ld value after RLS filter is below the minimum accepted value" },
+                    { "value": 23, "description": "Lq value after DFT is below the minimum accepted value" },
+                    { "value": 24, "description": "Lq value after RLS filter is below the minimum accepted value" },
+                    { "value": 25, "description": "Ke value is above the maximum or below the minimum accepted value" },
+                    { "value": 26, "description": "J (inertia) value is above the maximum or below the minimum accepted value" },
+                    { "value": 27, "description": "Undefined error code 0x001B" },
+                    { "value": 28, "description": "J calculation startup sequence failed" },
+                    { "value": 65535, "description": "Cannot move on to the next task" }
+                ],
+                "Persistence": "Real-time"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_TORQUECONTROL_IQ_KP": {
+                  "Subindex": "0x10",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Iq Kp for torque control",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_TORQUECONTROL_IQ_KI": {
+                  "Subindex": "0x11",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Iq Ki for torque control",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_TORQUECONTROL_ID_KP": {
+                  "Subindex": "0x12",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Id Kp for torque control",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_TORQUECONTROL_ID_KI": {
+                  "Subindex": "0x13",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Id Ki for torque control",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_STATOR_RESISTANCE": {
+                  "Subindex": "0x14",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Rs value (stator resistance)",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "Ohms x10^-5"
+              },
+              "CO_PARAM_AUTOTUNE_OUTPUTS_STATOR_INDUCTANCE": {
+                  "Subindex": "0x15",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune output: Ls value (stator inductance)",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "H x10^-6"
+              },
+              "CO_PARAM_AUTOTUNE_KE": {
+                  "Subindex": "0x16",
+                  "Access": "R",
+                  "Type": "uint32_t",
+                "Description": "Autotune Ke value, with 4 decimals precision.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 4294967295
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "Nm"
+              },
+              "CO_PARAM_AUTOTUNE_RATED_TORQUE": {
+                  "Subindex": "0x17",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune rated motor torque",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "Nm"
+              },
+              "CO_PARAM_AUTOTUNE_RATED_SPEED": {
+                  "Subindex": "0x18",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Autotune rated motor speed",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time",
+                  "Unit": "Km/h"
+              }
+          }
+      }
+  },
+  "Motor configuration": {
+      "CO_ID_MOTOR_PARAMETERS_CONFIG": {
+          "CANOpen_Index": "0x5000",
+          "Description": "Motor configuration parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_GEAR_RATIO": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "Motor gear ratio x10. eg. if the gear ratio is 12, this value is 120; if the gear ratio is 11.5, this value is 115",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 1000
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_POLEPAIRS": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Number of pole pairs in motor",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 100
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_RATED_CURRENT": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "A",
+                  "Description": "Max current that can go in the motor (ie. AC current)",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 65536
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_MOTORTYPE": {
+                  "Subindex": "0x10",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Motor type. Select the type of motor.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Hub-Drive Motor" },
+                      { "value": 1, "description": "Mid-Drive Motor" },
+                      { "value": 2, "description": "Direct Drive Motor" }
+                  ],
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_STATOR_RESISTANCE": {
+                  "Subindex": "0x20",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "Ohms x10^-9",
+                  "Description": "RS value, stator resistance. Note: the unit is Ohms x10^-9. eg. if your RS value is 0.02954 ohm, then the value on this parameter would be 29540000",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 4294967295
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_STATOR_INDUCTANCE": {
+                  "Subindex": "0x21",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "H x10^-9",
+                  "Description": "LS value, stator inductance\n\nNote: the unit is Hx10^-9. eg. if your LS value is 0.000057 H, then the value on this parameter would be 57000",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 4294967295
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_MAGNET_FLUX": {
+                  "Subindex": "0x22",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "Wb x10^-9",
+                  "Description": "Motor magnet flux. Note: the unit is Wbx10^-9. eg. if your flux value is 0.034657 Wb, then the value on this parameter would be 34657000",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 4294967295
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_ENABLE_VIBRATION_DETECTION": {
+                  "Subindex": "0x30",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Enable or disable motor vibration error detection using the hall sensors",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Disabled" },
+                      { "value": 1, "description": "Enabled" }
+                  ],
+                  "Persistence": "Persistent"
+              }
+          }
+      },
+      "CO_ID_REG_MOTOR_TORQUE_PID_CONFIG": {
+          "CANOpen_Index": "0x5001",
+          "Description": "Motor torque control PID configuration parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_TORQUE_PID_SPEED_THRESHOLD_1": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "rpm",
+                  "Description": "Speed threshold 1 for Iq/Id Kp/Ki values.\nUnder or at this speed threshold, the Iq/Id/Kp/Ki values used are the ones at subindexes:\n- 0x10 (IqKp)\n- 0x20 (IqKi)\n- 0x30 (IdKp)\n- 0x40 (IdKi)\n\nAbove speed threshold 1 (but under speed threshold 2), the Iq/Id/Kp/Ki values are linearly interpolated between:\n- the values above, and\n- the set of Id/Id/Kp/Ki values assigned with speed threshold 2",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "This value should be smaller than speed threshold 2. The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_SPEED_THRESHOLD_2": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "rpm",
+                  "Description": "Speed threshold 2 for Iq/Id Kp/Ki values.\n\nThis value must be under speed threshold 1.\n\nAbove or at this speed threshold, the Iq/Id/Kp/Ki values used are the ones at subindexes:\n- 0x11 (IqKp)\n- 0x21 (IqKi)\n- 0x31 (IdKp)\n- 0x41 (IdKi)\n\nUnder speed threshold 2, but above speed threshold 1, the Iq/Id/Kp/Ki values are linearly interpolated between:\n- the values above, and\n- the set of Id/Id/Kp/Ki values assigned with speed threshold 1",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "This value should be greater than speed threshold 1. The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_IQ_KP_THRESHOLD_1": {
+                  "Subindex": "0x10",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Description": "Iq Kp value for torque control PID, assigned to speed threshold 1",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_IQ_KP_THRESHOLD_2": {
+                  "Subindex": "0x11",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Description": "Iq Kp value for torque control PID, assigned to speed threshold 2",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_IQ_KI_THRESHOLD_1": {
+                  "Subindex": "0x20",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "",
+                  "Description": "Iq Ki value for torque control PID, assigned to speed threshold 1",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_IQ_KI_THRESHOLD_2": {
+                  "Subindex": "0x21",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "",
+                  "Description": "Iq Ki value for torque control PID, assigned to speed threshold 2",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_ID_KP_THRESHOLD_1": {
+                  "Subindex": "0x30",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Description": "Id Kp value for torque control PID, assigned to speed threshold 1",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_ID_KP_THRESHOLD_2": {
+                  "Subindex": "0x31",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "",
+                  "Description": "Id Kp value for torque control PID, assigned to speed threshold 2",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_ID_KI_THRESHOLD_1": {
+                  "Subindex": "0x40",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "",
+                  "Description": "Id Ki value for torque control PID, assigned to speed threshold 1",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_TORQUE_PID_ID_KI_THRESHOLD_2": {
+                  "Subindex": "0x41",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "",
+                  "Description": "Id Ki value for torque control PID, assigned to speed threshold 2",
+                  "Valid_Range": {
+                      "min": 101,
+                      "max": 3276700
+                  },
+                  "Persistence": "Persistent"
+              }
+          }
+      },
+      "CO_ID_REG_MOTOR_POWER_CONFIG": {
+          "CANOpen_Index": "0x5002",
+          "Description": "Motor power configuration parameters.",
+          "Parameters": {
+              "CO_PARAM_MAX_SPEED_SYSTEM_EFFICIENCY": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "%",
+                  "Description": "Estimated system efficiency at motor max speed (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 200
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_LOW_SPEED_SYSTEM_EFFICIENCY": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "%",
+                  "Description": "Estimated system efficiency at motor low speed (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 200
+                  },
+                  "Persistence": "Persistent"
+              }
+          }
+      },
+      "CO_ID_REG_MOTOR_SPEED_PID_CONFIG": {
+          "CANOpen_Index": "0x5003",
+          "Description": "Motor speed configuration parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_MAX_SPEED": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "rpm",
+                  "Description": "Max speed of the motor",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_KP": {
+                  "Subindex": "0x10",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "PID Speed Kp value",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_KI": {
+                  "Subindex": "0x11",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "PID Speed Ki value",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_KI_GAIN_DIVIDER": {
+                  "Subindex": "0x12",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "PID Speed control Ki gain divider. This value must be a power of 2. eg. 512, or 1024, or 2048, or 4096, etc",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_FOLDBACK_INTERVAL": {
+                  "Subindex": "0x20",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "rpm",
+                  "Description": "Speed foldback interval of torque ramp. This parameter represents how many rpm below the max rpm should the controller start to derate. For example, if the max rpm is 1000, and this parameter is set to 200, then the controller will start derating at 800 rpm.\n\nThis parameter is only used for direct drive motors.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The rpm is the internal motor rpm, before gear ratio is applied."
+              }
+          }
+      },
+      "CO_ID_FLUX_WEAKENING": {
+          "CANOpen_Index": "0x5004",
+          "Description": "flux weakening motor parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_FLUX_WEAKENING_ENABLE": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Get/set this parameter to enable or disable flux weakening.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Disabled" },
+                      { "value": 1, "description": "Enabled" }
+                  ],
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_FLUX_WEAKENING_MAX_CURRENT": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "int16_t",
+                  "Unit": "A",
+                  "Description": "Flux weakening max current. Value must be negative.",
+                  "Valid_Range": {
+                      "min": -100,
+                      "max": 0
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_FLUX_WEAKENING_DIRECTION": {
+                  "Subindex": "0x04",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Flux Weakening Direction.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Counterclockwise" },
+                      { "value": 1, "description": "Clockwise" }
+                  ],
+                  "Persistence": "Persistent",
+                  "Notes": "This should eventually be moved to hall sensor configuration"
+              }
+          }
+      },
+      "CO_ID_MOTOR_CONFIG_TEMP": {
+          "CANOpen_Index": "0x5005",
+          "Description": "Configuration of the motor temperature settings.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_ENABLE_TEMP_SENSOR": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Enable or disable the motor NTC temperature sensor. When disabled, the controller will not read or use the motor temperature. When enabled, the controller will use the motor temperature for derating, raising errors, and potentially read the wheel speed sensor signal (if muxed).",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Sensor Disabled" },
+                      { "value": 1, "description": "Sensor Enabled" }
+                  ],
+                  "Persistence": "Persistent",
+                  "Notes": "If the sensor is enabled, the two coefficients at subindexes 0x10 and 0x11 must not be 0"
+              },
+              "CO_PARAM_MOTOR_CONFIG_ENABLE_MUXED_WSS_TEMP": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Enable or disable muxed wheel speed sensor and temperature. When muxing is enabled, WSS and temperature share a single line from the motor, where the voltage of the WSS signal changes depending on motor temperature.\n\n0 = muxing disabled\n1 = muxing enabled",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Muxing Disabled" },
+                      { "value": 1, "description": "Muxing Enabled" }
+                  ],
+                  "Persistence": "Persistent",
+                  "Notes": "This parameter impacts the wheel speed sensor input, configured at 0x201F"
+              },
+              "CO_PARAM_MOTOR_CONFIG_NTC_BETA_COEFFICIENT": {
+                  "Subindex": "0x10",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Description": "Motor NTC beta coefficient, at 25C",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_NTC_PRECOMPUTED_COEFFICIENT": {
+                  "Subindex": "0x11",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "x10^-2",
+                  "Description": "Pre-computed coefficient. Compute this coefficient and pass it to the controller. To compute it, use the following formula:\nPrecomputed_coefficient = (10^2) * exp(NTC_Beta_coefficient / 298.15) / NTC_resistance_coefficient\n\nnotes:\n- The beta and resistance coefficients must be for what is rated at 25C (or 298.15K)",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_MAX_TEMP": {
+                  "Subindex": "0x20",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "C",
+                  "Description": "Max motor temp. At this value, the controller raises a motor overtemperature error.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_TEMP_ERROR_HYSTERESIS": {
+                  "Subindex": "0x21",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "C",
+                  "Description": "Motor temp error hysteresis.\n\nAfter an overtemperature of the motor error, this is the amount of degrees C temperature that the motor needs to decrease to in order to clear the error.\n\neg. this setting is set to 10 Celsius, max motor temp is set to 100 Celsius. If we reach 100 Celsius, the controller raises an error, and the error is cleared once the motor temperature reaches (100 - 10) = 90 Celsius",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_FOLDBACK_TEMP": {
+                  "Subindex": "0x22",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "deg C",
+                  "Description": "Motor foldback temperature.\n\nThis is the temperature of the motor where the controller will start to apply power derating, in order to slow down the heating of the motor.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              }
+          }
+      },
+      "CO_ID_RAMP_MANAGER": {
+          "CANOpen_Index": "0x5009",
+          "Description": "Motor control ramps management parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_TORQUE_CONTROL_UPRAMP": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "cNm/s",
+                  "Description": "Torque control up ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_TORQUE_CONTROL_DOWNRAMP": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "cNm/s",
+                  "Description": "Torque control down ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_CONTROL_UPRAMP": {
+                  "Subindex": "0x03",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "rpm/s",
+                  "Description": "Speed control up ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_CONTROL_DOWNRAMP": {
+                  "Subindex": "0x04",
+                  "Access": "R/W",
+                  "Type": "uint32_t",
+                  "Unit": "rpm/s",
+                  "Description": "Speed control down ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_CONFIG_RAMP_BUTTERWORTH_FILTERING_ALPHA": {
+                  "Subindex": "0x05",
+                  "Access": "R/W",
+                  "Type": "int32_t",
+                  "Unit": "constant x 10^-6",
+                  "Description": "Alpha constant to configure Butterworth filter for mechanical speed filtering",
+                  "Valid_Range": {
+                      "min": -2147483648,
+                      "max": 2147483647
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The unit is x 10^-6. In other words, if your alpha constant is 7.366197 for example, then the value here should be 7366197"
+              },
+              "CO_PARAM_MOTOR_CONFIG_RAMP_BUTTERWORTH_FILTERING_BETA": {
+                  "Subindex": "0x06",
+                  "Access": "R/W",
+                  "Type": "int32_t",
+                  "Unit": "constant x 10^-6",
+                  "Description": "Beta constant to configure Butterworth filter for mechanical speed filtering",
+                  "Valid_Range": {
+                      "min": -2147483648,
+                      "max": 2147483647
+                  },
+                  "Persistence": "Persistent",
+                  "Notes": "The unit is x 10^-6. In other words, if your alpha constant is 7.366197 for example, then the value here should be 7366197"
+              }
+          }
+      },
+      "CO_ID_MOTOR_CONFIG_HALL_SENSORS": {
+          "CANOpen_Index": "0x500A",
+          "Description": "Hall sensor configuration parameters.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_CONFIG_HALL_SENSORS_PHASE_SHIFT": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Mechanical position of the hall sensors (phase shift).",
+                  "Valid_Options": [
+                      { "value": 0, "description": "120 degrees" },
+                      { "value": 1, "description": "60 degrees" }
+                  ],
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_HALL_SENSORS_FIFO_DEPTH": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Depth of the FIFO used to average hall sensor values",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_CONFIG_HALL_SENSORS_ELECTRICAL_PHASE_SHIFT": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Unit": "degrees",
+                  "Description": "Electrical phase shift between the low to high transition of signal H1 and the zero crossing of the back EMF induced between phase A and B",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              }
+          }
+      }
+  },
+  "DFU": {
+      "CO_ID_FIRMWARE_UPDATE": {
+          "CANOpen_Index": "0x3000",
+          "Description": "Firmware update configuration and control.",
+          "Parameters": {
+              "CO_PARAM_FIRMWARE_UPDATE_COMMAND": {
+                "Subindex": "0x00",
+                "Access": "W",
+                "Type": "uint8_t",
+                "Description": "OTA commands.",
+                "Valid_Options": [
+                    { "value": 0, "description": "On standby" },
+                    { "value": 1, "description": "Prepare for file transfer" }
+                ],
+                "Persistence": "Real-time"
+              },
+              "CO_PARAM_FIRMWARE_UPDATE_STATUS": {
+                  "Subindex": "0x01",
+                  "Access": "R",
+                  "Type": "uint8_t",
+                  "Description": "OTA status.. F0 = Storage Hardware Error. F1 = Low Battery. FD = Transfer Error: Internal Error. FE = Transfer Error: Corrupted Frame. FF = Transfer Error: Missing Frame",
+                  "Valid_Options": [
+                      { "value": 0, "description": "No errors or normal state" },
+                      { "value": 1, "description": "Ready for file transfer" },
+                      { "value": 2, "description": "File transfer complete" },
+                      { "value": 240, "description": "Storage Hardware Error (0xF0)" },
+                      { "value": 241, "description": "Low Battery (0xF1)" },
+                      { "value": 253, "description": "Transfer Error: Internal Error (0xFD)" },
+                      { "value": 254, "description": "Transfer Error: Corrupted Frame (0xFE)" },
+                      { "value": 255, "description": "Transfer Error: Missing Frame (0xFF)" }
+                  ],
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_FIRMWARE_UPDATE_DATA_TRANSFER": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "DOMAIN",
+                  "Description": "This parameter is used for the actual binary file transfer.",
+                  "Persistence": "Real-time"
+              },
+              "CO_PARAM_FIRMWARE_UPDATE_DATA_FRAME_NUMBER": {
+                  "Subindex": "0x03",
+                  "Access": "R",
+                  "Type": "uint16_t",
+                  "Description": "Frame count parameter.",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 65535
+                  },
+                  "Persistence": "Real-time"
+              }
+          }
+      }
+  },
+  "Internal Controller Test Modes": {
+      "CO_ID_INTERNAL_TEST_MODE": {
+          "CANOpen_Index": "0x6000",
+          "Description": "Firmware test mode configuration. This allows the controller to go to a specific runtime configuration for different testing purposes. Please note that, if the controller goes to any test mode, a full reboot is required to go back to the test mode disabled; normal firmware behaviour",
+          "Parameters": {
+              "CO_PARAM_INTERNAL_TEST_MODE": {
+                "Subindex": "0x00",
+                "Access": "R/W",
+                "Type": "uint8_t",
+                "Description": "Current test mode selected.",
+                "Valid_Options": [
+                    { "value": 0, "description": "Test mode disabled, controller is running on normal firmware behaviour." },
+                    { "value": 1, "description": "EOL Test Mode 1 : Requested by manufacturing. Mode config : Speed limit : 99km/h | PAS 5 | Max DC Current 14A | Continuous DC Current 14A | Hybrid torque/cadence PAS | Front light ON | Rear light ON | Cadence AND Torque PAS detection | Deactivate CAN BMS. Please note that it is impossible to go back to Test mode disabled from this mode. You need to perform a complete bootup to restore the default firmware behaviour." }
+                ],
+                "Persistence": "Real-time"
+              }
+          }
+      }
+  }
+}

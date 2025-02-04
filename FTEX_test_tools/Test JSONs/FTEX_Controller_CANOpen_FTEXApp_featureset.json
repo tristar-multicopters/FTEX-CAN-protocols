@@ -1,0 +1,53 @@
+{
+  "speed": {
+    "index": "0x2000",
+    "subindex": "0x01",
+    "access": "R"
+  },
+  "max_power": {
+    "index": "0x2005",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "total_dc_power": {
+    "index": "0x2001",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "pas_level": {
+    "current_level": {
+      "index": "0x2003",
+      "subindex": "0x00",
+      "access": "R/W"
+  },
+  "max_level": {
+    "index": "0x2004",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "battery_soc": {
+    "index": "0x2002",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "errors": {
+    "index": "0x2006",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "serial_number_msb": {
+    "index": "0x2007",
+    "subindex": "0x00",
+    "access": "R"
+  },
+  "serial_number_lsb": {
+    "index": "0x2007",
+    "subindex": "0x01",
+    "access": "R"
+  },
+  "pack_version": {
+    "index": "0x2008",
+    "subindex": "0x00",
+    "access": "R"
+  }
+}

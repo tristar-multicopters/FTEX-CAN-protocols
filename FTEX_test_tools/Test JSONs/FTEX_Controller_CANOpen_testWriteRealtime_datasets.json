@@ -1,0 +1,18 @@
+{
+    "movement_capable_parameters": {
+      "CO_PARAM_THROTTLE_REALTIME_CONTROL": [2500, 5000],
+      "CO_PARAM_WALK_MODE_CONTROL": [0, 1],
+      "CO_PARAM_PAS_LEVEL_CONTROL": [1, 3],
+      "CO_PARAM_CRUISE_CONTROL_ENABLE": [0, 1],
+      "CO_PARAM_VEHICLE_PRESET": [1, 2]
+    },
+    "no_movement_capable_parameters": {
+      "CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL": [1, 0],
+      "CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL": [1, 0],
+      "CO_PARAM_POWERTRAIN_LOCK_CONTROL": [1, 0],
+      "CO_PARAM_AUTOTUNE_CONFIG_POLEPAIRS": [6, 8],
+      "CO_PARAM_AUTOTUNE_CONFIG_RATED_CURRENT": [20, 40],
+      "CO_PARAM_AUTOTUNE_MOTOR_GEAR_RATIO": [120, 500],
+      "CO_ID_MAX_POWER_LEGACY": [5, 4000]
+   }
+}

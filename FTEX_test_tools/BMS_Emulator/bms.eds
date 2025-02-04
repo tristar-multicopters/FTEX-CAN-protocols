@@ -1,0 +1,180 @@
+[FileInfo]
+FileName=bms.eds
+FileVersion=0.1
+Description=BMS implementation by Alvaro Ramirez
+
+[DeviceInfo]
+VendorName=BMS
+VendorNumber=12345
+ProductName=BMS
+
+[Communication]
+BaudRate=500000
+NodeID=5
+
+[0020]
+ParameterName=CO_ID_EXTERNAL_BMS_ERROR_STATE
+ObjectType=0x8                 ; Record object with sub-indices
+SubNumber=2                    ; Number of sub-indices
+
+[0020sub0]
+ParameterName=CO_PARAM_EXTERNAL_BMS_ERROR_STATE
+ObjectType=0x07             ; variable
+AccessType=r                ;Read Only
+DataType=0x0007             ;Unsigned32 
+DOMapping=0                 ; Not PDO mappable
+
+[0020sub1]
+ParameterName=CO_PARAM_EXTERNAL_BMS_TEMPERATURE
+ObjectType=0x07             ; variable
+AccessType=r                ;Read Only
+DataType=0x0003             ;signed16 
+DOMapping=0                 ; Not PDO mappable
+
+[0030]
+ParameterName=CO_ID_EXTERNAL_BMS_REALTIME_INFO
+ObjectType=0x8                 ; Record object with sub-indices
+SubNumber=4                    ; Number of sub-indices
+
+[0030sub0]
+ParameterName=CO_PARAM_EXTERNAL_BMS_SOC
+ObjectType=0x07             ; variable
+AccessType=r                ;Read Only
+DataType=0x0005             ;Unsigned8  
+DOMapping=0                 ;Not PDO mappable
+
+[0030sub1]
+ParameterName=CO_PARAM_EXTERNAL_BMS_VOLTAGE
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0030sub2]
+ParameterName=CO_PARAM_EXTERNAL_BMS_CURRENT
+ObjectType=0x07             ; variable
+AccessType=r                ;Read Only
+DataType=0x0004             ;signed32  
+DOMapping=0                 ;Not PDO mappable
+
+[0030sub3]
+ParameterName=CO_PARAM_EXTERNAL_BMS_STATE
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0005             ;Unsigned8   
+DOMapping=0                 ;Not PDO mappable
+
+[0040]
+ParameterName=CO_ID_EXTERNAL_BMS_SERIAL_NUMBER
+ObjectType=0x8                 ; Record object with sub-indices
+SubNumber=0x5                  ; Number of sub-indices
+
+[0040sub0]
+ParameterName=CO_PARAM_EXTERNAL_BMS_SERIAL_NUMBER_MSB
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0040sub1]
+ParameterName=CO_PARAM_EXTERNAL_BMS_SERIAL_NUMBER_LSB
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0040sub2]
+ParameterName=CO_PARAM_EXTERNAL_BMS_CYCLE_COUNT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0040sub3]
+ParameterName=CO_PARAM_EXTERNAL_BMS_MODEL_NUMBER
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0040sub4]
+ParameterName=CO_PARAM_EXTERNAL_BMS_FW_VERSION
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0050]
+ParameterName=CO_ID_EXTERNAL_BMS_DISCHARGE_CURRENT
+ObjectType=0x8                 ; Record object with sub-indices
+SubNumber=0xA                  ; Number of sub-indices
+
+[0050sub0]
+ParameterName=CO_PARAM_EXTERNAL_BMS_MAX_DISCHARGE_CURRENT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub1]
+ParameterName=CO_PARAM_EXTERNAL_BMS_MAX_CHARGE_CURRENT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub2]
+ParameterName=CO_PARAM_EXTERNAL_BMS_MAX_DISCHARGE_TIME
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub3]
+ParameterName=CO_PARAM_EXTERNAL_BMS_CONTINUOUS_CURRENT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0007             ;Unsigned32  
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub4]
+ParameterName=CO_PARAM_EXTERNAL_BMS_FULL_VOLTAGE
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub5]
+ParameterName=CO_PARAM_EXTERNAL_BMS_EMPTY_VOLTAGE
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub6]
+ParameterName=CO_PARAM_EXTERNAL_BMS_UNDERVOLTAGE_LIMIT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub7]
+ParameterName=CO_PARAM_EXTERNAL_BMS_OVERVOLTAGE_LIMIT
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub8]
+ParameterName=CO_PARAM_EXTERNAL_BMS_MAXIMUM_CAPACITY
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable
+
+[0050sub9]
+ParameterName=CO_PARAM_EXTERNAL_BMS_REMAINING_CAPACITY
+ObjectType=0x07             ; variable
+AccessType=r                    ;Read Only
+DataType=0x0006             ;Unsigned16   
+DOMapping=0                 ;Not PDO mappable

@@ -1,0 +1,224 @@
+{
+  "protocol": {
+    "title": "FTEX PAS CANOpen protocol",
+    "description": "CANOpen protocol specification that a PAS (Pedal Assist System) sensor must follow to be compatible with the FTEX controller. The PAS sensor is passive and must not proactively send anything on CAN. The controller or IoT device may perform SDO reads on the PAS whenever it needs a value. The default, expected node ID of the PAS sensor is 0x10.",
+    "version": "1.0.0"
+  },
+  "Real-time measurements": {
+    "CO_ID_EXTERNAL_PAS_REALTIME_MEASUREMENTS": {
+      "CANOpen_Index": "0x2030",
+      "Description": "Real-time measurements from the PAS sensor. The PAS must keep these values updated real-time.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_PAS_CADENCE_PACKED": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Packed real-time cadence information. Byte 1 (MSB): Cadence pedaling state . Bytes 2-3: pedaling RPM (0-65535). Byte 4 (LSB): PAS sensor state",
+          "Notes": "Possible cadence pedaling states: 0=idle, 1=pedaling forward, 2=pedaling backward. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating"
+        },
+        "CO_PARAM_EXTERNAL_PAS_TORQUE_PACKED": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Packed real-time torque information. Byte 1 (MSB): Torque pedaling state. Bytes 2-3: torque percentage (0-10000, representing 0-100.00%. The unit is in % x 100 (eg. a value of 3245 means, 32.45% press). Byte 4 (LSB): PAS sensor state (0=idle, 1=active, 2=error, 3=calibrating)",
+          "Notes": "Possible torque pedaling states: 0=idle, 1=torque press on left crank, 2=torque press on right crank. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating"
+        },
+        "CO_PARAM_EXTERNAL_PAS_TORQUE_RAW": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Real-time raw analog value from the torque sensor",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+        },
+        "CO_PARAM_EXTERNAL_PAS_CADENCE_RAW": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Raw pulses count of the pedaling rotation. This is a pure pulses count that increases every time the PAS sensor detects a cadence pulse/magnet. This count should increase only if the pedaling direction is forward.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Notes": "This count should not reset to 0 if the user stops pedaling, it should just stop increasing, and start increasing again when the user pedals. The value is expected to reset to 0 only after it reaches 65535 (so the pulses count should be 0, 1, ..., 65534, 65535, 0, 1, ..."
+        },
+        "CO_PARAM_EXTERNAL_PAS_TEMPERATURE": {
+          "Subindex": "0x04",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "C",
+          "Description": "Temperature of the PAS sensor (optional)",
+          "Valid_Range": {
+            "min": -40,
+            "max": 125
+          }
+        }
+      }
+    }
+  },
+  "Health and Status": {
+    "CO_ID_EXTERNAL_PAS_ERROR_STATE": {
+      "CANOpen_Index": "0x2020",
+      "Description": "PAS Error State parameters.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_PAS_ERROR_STATE": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Bitmask of errors currently detected by the PAS system. If more than one error is occurring, the PAS must do an OR mask between errors.",
+          "Valid_Options": [
+            {
+              "value": 0,
+              "description": "PAS_No_error: No error."
+            },
+            {
+              "value": 1,
+              "description": "PAS_Torque_Sensor_Error: The torque sensor is not responding or providing invalid readings."
+            },
+            {
+              "value": 2,
+              "description": "PAS_Calibration_Error: The sensor calibration is invalid or out of range."
+            },
+            {
+              "value": 4,
+              "description": "PAS_Communication_Error: Internal communication error."
+            },
+            {
+              "value": 8,
+              "description": "PAS_Cadence_Sensor_Error: The cadence sensor is not responding or providing invalid readings."
+            },
+            {
+              "value": 16,
+              "description": "PAS_Temperature_Error: Temperature outside of safe operating range."
+            },
+            {
+              "value": 2147483648,
+              "description": "PAS_Internal_Error: The PAS detects an unmapped or undefined error."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Calibration": {
+    "CO_ID_EXTERNAL_PAS_CALIBRATION": {
+      "CANOpen_Index": "0x2025",
+      "Description": "PAS calibration parameters for torque sensor measurement.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_PAS_TORQUE_ADC_MIN_OFFSET": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Minimum ADC offset value for the torque sensor calibration. Under this value, the torque sensor is considered to be at rest.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+        },
+        "CO_PARAM_EXTERNAL_PAS_TORQUE_ADC_MAX": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Maximum ADC value for the torque sensor calibration",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+        },
+        "CO_PARAM_EXTERNAL_PAS_CADENCE_PULSES_PER_ROTATION": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Number of pulses per full 360° rotation of the cadence sensor",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          }
+        }
+      }
+    }
+  },
+  "Metadata": {
+    "CO_ID_EXTERNAL_PAS_VERSION_INFO": {
+      "CANOpen_Index": "0x2040",
+      "Description": "PAS version and identification parameters.",
+      "Parameters": {
+        "CO_PARAM_EXTERNAL_PAS_SERIAL_NUMBER_MSB": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of this PAS sensor (most significant bytes)",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_SERIAL_NUMBER_LSB": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of this PAS sensor (least significant bytes)",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_FIRMWARE_VERSION": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Firmware version installed on the PAS sensor",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_HARDWARE_VERSION": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Hardware version of the PAS sensor",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_PROTOCOL_MAJOR_VERSION": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Major number version of FTEX PAS CAN protocol used by the sensor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_MINOR_VERSION": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Minor number version of FTEX PAS CAN protocol used by the sensor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          }
+        },
+        "CO_PARAM_EXTERNAL_PAS_BUILD_VERSION": {
+          "Subindex": "0x12",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Build number version of FTEX PAS CAN protocol used by the sensor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          }        
+        }
+      }
+    }
+  }
+}

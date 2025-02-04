@@ -1,0 +1,264 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FTEX Controller Configuration Schema",
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Notes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "CANOpen_NodeID": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["title", "description", "version"],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^(?!protocol$).*": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "Notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "patternProperties": {
+        "^CO_ID_.*": {
+          "type": "object",
+          "properties": {
+            "CANOpen_Index": {
+              "type": "string",
+              "pattern": "^0x[0-9A-Fa-f]{4}$",
+              "minLength": 1
+            },
+            "Description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "Parameters": {
+              "type": "object",
+              "minProperties": 1,
+              "patternProperties": {
+                "^CO_PARAM_EXTERNAL_BMS.*$": {
+                  "type": "object",
+                  "properties": {
+                    "Subindex": {
+                      "type": "string",
+                      "pattern": "^0x[0-9A-Fa-f]{2}$",
+                      "minLength": 1
+                    },
+                    "Access": {
+                      "type": "string",
+                      "enum": ["R", "W", "R/W"],
+                      "minLength": 1
+                    },
+                    "Type": {
+                      "type": "string",
+                      "enum": ["uint8_t", "uint16_t", "uint32_t", "int8_t", "int16_t", "int32_t"],
+                      "minLength": 1
+                    },
+                    "Unit": {
+                      "type": "string"
+                    },
+                    "Description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Query_frequency": {
+                      "type": "string",
+                      "enum": ["ad-hoc", "boot-up", "real-time", "10s", "on controller boot-up"],
+                      "minLength": 1
+                    },
+                    "Notes": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Valid_Range": {
+                      "type": "object",
+                      "properties": {
+                        "min": { "type": "number" },
+                        "max": { "type": "number" }
+                      },
+                      "required": ["min", "max"],
+                      "additionalProperties": false
+                    },
+                    "Valid_Options": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "value": { "type": ["number", "string"] },
+                          "description": { "type": "string" }
+                        },
+                        "required": ["value", "description"],
+                        "additionalProperties": false
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "required": ["Subindex", "Access", "Description", "Query_frequency"],
+                  "additionalProperties": false,
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": { "Type": { "const": "DOMAIN" } }
+                      },
+                      "then": {},
+                      "else": {
+                        "oneOf": [
+                          {
+                            "required": ["Valid_Range"],
+                            "properties": {
+                              "Valid_Range": { "$ref": "#/definitions/ValidRange" }
+                            }
+                          },
+                          {
+                            "required": ["Valid_Options"],
+                            "properties": {
+                              "Valid_Options": { "$ref": "#/definitions/ValidOptions" }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "Subindex": {
+                    "type": "string",
+                    "pattern": "^0x[0-9A-Fa-f]{2}$",
+                    "minLength": 1
+                  },
+                  "Access": {
+                    "type": "string",
+                    "enum": ["R", "W", "R/W"],
+                    "minLength": 1
+                  },
+                  "Type": {
+                    "type": "string",
+                    "enum": ["uint8_t", "uint16_t", "uint32_t", "int8_t", "int16_t", "int32_t", "DOMAIN"],
+                    "minLength": 1
+                  },
+                  "Unit": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "Persistence": {
+                    "type": "string",
+                    "enum": ["Persistent", "Real-time", "Both"],
+                    "minLength": 1
+                  },
+                  "Notes": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "Valid_Range": {
+                    "type": "object",
+                    "properties": {
+                      "min": { "type": "number" },
+                      "max": { "type": "number" }
+                    },
+                    "required": ["min", "max"],
+                    "additionalProperties": false
+                  },
+                  "Valid_Options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "value": { "type": ["number", "string"] },
+                        "description": { "type": "string" }
+                      },
+                      "required": ["value", "description"],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": ["Subindex", "Access", "Description", "Persistence"],
+                "additionalProperties": false,
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": { "Type": { "const": "DOMAIN" } }
+                    },
+                    "then": {},
+                    "else": {
+                      "oneOf": [
+                        {
+                          "required": ["Valid_Range"],
+                          "properties": {
+                            "Valid_Range": { "$ref": "#/definitions/ValidRange" }
+                          }
+                        },
+                        {
+                          "required": ["Valid_Options"],
+                          "properties": {
+                            "Valid_Options": { "$ref": "#/definitions/ValidOptions" }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": ["CANOpen_Index", "Description", "Parameters"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "ValidRange": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" }
+      },
+      "required": ["min", "max"],
+      "additionalProperties": false
+    },
+    "ValidOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": ["number", "string"] },
+          "description": { "type": "string" }
+        },
+        "required": ["value", "description"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

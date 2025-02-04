@@ -1,0 +1,1948 @@
+{
+  "protocol": {
+    "title": "FTEX Controller CANOpen protocol",
+    "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
+    "version": "2.4.11"
+  },
+  "Communication and memory configuration": {
+    "CO_ID_CAN_CONFIG": {
+      "CANOpen_Index": "0x2060",
+      "Description": "CAN configuration of the FTEX controller.",
+      "Parameters": {
+        "CO_PARAM_CAN_BAUD_RATE": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "CAN baud rate of the system. The default is 500kbps. The FTEX IoT is always on 500kbps.",
+          "Valid_Options": [
+            { "value": 0, "description": "250 kbps" },
+            { "value": 1, "description": "500 kbps" }
+          ],
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_CAN_TERMINATION": {
+            "Subindex": "0x01",
+            "Access": "R/W",
+            "Type": "uint8_t",
+            "Description": "Enable or disable the CAN bus 120 Ω termination resistor.",
+            "Valid_Options": [
+              { "value": 0, "description": "Not enabled" },
+              { "value": 1, "description": "Enabled" }
+            ],
+            "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_MEMORY_CONFIG": {
+      "CANOpen_Index": "0x2014",
+      "Description": "Memory configuration of the controller.",
+      "Parameters": {
+        "CO_PARAM_SAVE_PARAMETERS": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Write to this parameter to allow parameters to be saved to the controller's memory. See readme for details (parameters persistence section)",
+          "Persistence": "Real-time",
+          "Valid_Options": [
+            { "value": 54691, "description": "0xD5A3 (ie. 0d54691): to let the controller know that save-persistent parameters will be changed."},
+            { "value": 49893, "description": "0xC2E5 (ie. 0d49893): will make the controller save the parameters, reset and apply the new values."}
+          ]
+        }
+      }
+    },
+    "CO_ID_PERIPHERALS_NODE_ID": {
+      "CANOpen_Index": "0x2037",
+      "Description": "Node IDs config for external bike peripherals, such as BMS and HMI. The master, IoT and slave node IDs are currently fixed (node ID 1, 2 and 3 respectively).",
+      "Parameters": {
+        "CO_PARAM_HMI_NODE_ID": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "HMI Node ID. This is the node ID the HMI will use on the FTEX bike system. Default ID is 0x04.",
+          "Valid_Range": {
+              "min": 4,
+              "max": 127
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BMS_NODE_ID": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "BMS Node ID. This is the node ID the BMS will use on the FTEX bike system. Default ID is 0x05.",
+          "Valid_Range": {
+              "min": 4,
+              "max": 127
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_UART_PROTOCOL": {
+      "CANOpen_Index": "0x2038",
+      "Description": "UART protocol parameter allows the user to select a specific UART protcol, mostly used to connect a UART screen to the FTEX bike system.",
+      "Parameters": {
+        "CO_PARAM_UART_PROTOCOL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "UART protocol selection. Default is 0x00 : UART Disable.",
+          "Valid_Options": [
+            { "value": 0, "description": "UART Disable : The FTEX controller does not used any UART protocol."},
+            { "value": 1, "description": "UART APT Screen : The FTEX controller uses the APT screen protocol."},
+            { "value": 2, "description": "UART Cloud Drive Screen : The FTEX controller uses the Cloud Drive screen protocol."},
+            { "value": 3, "description": "UART KD718 Screen : The FTEX controller uses the KD718 screen protocol."},
+            { "value": 4, "description": "UART EOL Tester Protocol : The FTEX controller uses the EOL tester protocol."},
+            { "value": 100, "description": "UART High Speed Logger : The FTEX controller uses the high speed logger. This protocol is specified as an internal FTEX protocol."}
+          ],
+          "Persistence": "Persistent"
+        }
+      }
+    }
+  },
+  "Peripherals and sensors": {
+    "CO_ID_WHEELS": {
+      "CANOpen_Index": "0x201F",
+      "Description": "Wheel (and wheel speed) configuration settings.",
+      "Parameters": {
+        "CO_PARAM_WHEEL_DIAMETER": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "mm",
+          "Description": "Diameter of the vehicle's wheels where the wheel speed sensor is installed.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1500
+          },
+          "Persistence": "Both"
+        },
+        "CO_PARAM_WHEELSPEED_SENSOR_PULSES_PER_ROTATION": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Number of pulses per rotation of the wheel speed sensor.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 50
+          },
+          "Persistence": "Persistent",
+          "Notes": "If the wheel speed sensor signal is muxed with the motor temperature signal, the motor temperature input must be configured with the muxed parameter set to true (FTEX internal parameter CO_PARAM_MOTOR_CONFIG_ENABLE_MUXED_WSS_TEMP)"
+        }
+      }
+    },
+    "CO_ID_THROTTLE": {
+      "CANOpen_Index": "0x2027",
+      "Description": "Throttle control and configuration.",
+      "Parameters": {
+        "CO_PARAM_THROTTLE_REALTIME_CONTROL": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Description": "Get or set the value of the throttle, in % × 100. For example, 3476 means, 34.76% of max throttle torque should be applied immediately in the motor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 10000
+          },
+          "Persistence": "Real-time",
+          "Type": "uint16_t",
+          "Unit": "% x 100",
+          "Notes": "In case of missing heartbeats from the HMI node ID, the controller will disable the throttle by CAN."
+        },
+        "CO_PARAM_THROTTLE_CONFIG_MIN_VALUE": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Analog throttle min value (offset), between 0–65535 (0V to 5V). Minimum value is 9200 (approx. 0.7V) for safety reasons.",
+          "Valid_Range": {
+              "min": 9200,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_THROTTLE_CONFIG_MAX_VALUE": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Analog throttle max value, between 0–65535. Minimum safe value is 9200 (approx. 0.7V) for safety reasons.",
+          "Valid_Range": {
+              "min": 9200,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_THROTTLE_CONFIG_ENABLED": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get/set if the throttle is enabled. This allows or disallows the throttle as a peripheral.",
+          "Valid_Options": [
+            { "value": 0, "description": "Throttle is disabled" },
+            { "value": 1, "description": "Throttle is enabled" }
+          ],
+          "Persistence": "Both"
+        },
+        "CO_PARAM_THROTTLE_CONFIG_MAX_SPEED": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get/set the max speed that the vehicle should reach on throttle.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Unit": "km/h",
+          "Persistence": "Persistent",
+          "Notes": "The vehicle speed on throttle will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_THROTTLE_CONFIG_MAX_SPEED."
+        },
+        "CO_PARAM_THROTTLE_VS_PAS_PRIORITY": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Set the priority of throttle vs PAS.",
+          "Valid_Options": [
+            { "value": 0, "description": "Throttle has priority over PAS" },
+            { "value": 1, "description": "PAS has priority over throttle" }
+          ],
+          "Persistence": "Persistent",
+          "Notes": "If throttle has priority, then PAS is ignored while throttle is engaged. If PAS has priority, then throttle is ignored while PAS is engaged."
+        }
+      }
+    },
+    "CO_ID_BRAKE": {
+      "CANOpen_Index": "0x202C",
+      "Description": "Brake configuration and measurements.",
+      "Parameters": {
+        "CO_PARAM_BRAKE_MEASUREMENT": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "The current brake status. If digital brake: 0 = not pressed. 100 = brake pressed. If analog brake: the value represents the % of brake pressed in the min-max brake range.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Real-time",
+          "Notes": "Currently, only digital brakes are supported."
+        }
+      }
+    },
+    "CO_ID_PAS_SENSOR": {
+      "CANOpen_Index": "0x2024",
+      "Description": "Pedal Assist Sensor configuration and real-time measurements.",
+      "Parameters": {
+        "CO_PARAM_PAS_CADENCE_MEASUREMENT": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "rpm",
+          "Description": "Real-time pedaling cadence detected the PAS sensor. Positive means pedaling forward; negative means pedaling backward.",
+          "Valid_Range": {
+              "min": -5000,
+              "max": 5000
+          },
+          "Persistence": "Real-time",
+          "Notes": "Only forward pedaling is supported currently."
+        },
+        "CO_PARAM_PAS_TORQUE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Real-time torque detected on the pedals (if torque sensor is present), expressed in % of the torque min-max range.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_PAS_CONFIG_MAGNETS_PER_ROTATION": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get/set the number of magnets per rotation of the PAS cadence sensor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_MIN_VALUE": {
+          "Subindex": "0x30",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "PAS torque sensor min value (offset), between 0–65535 (0V to 3.3V). Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Valid_Range": {
+              "min": 4966,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_MAX_VALUE": {
+          "Subindex": "0x31",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "PAS torque sensor max value, between 0–65535. Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Valid_Range": {
+              "min": 4966,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_FILTERING_ACCELERATION_CONFIG": {
+          "Subindex": "0x40",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Low pass filter bandwidth value on torque sensor acceleration. Increasing this value increases the filtering on the input (smoother acceleration), which may help reduce the yo-yo effect sometimes felt from pure PAS torque assistance.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_FILTERING_DECELERATION_CONFIG": {
+          "Subindex": "0x41",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Low pass filter bandwidth value on torque sensor deceleration. Increasing this value increases the filtering on the input (smoother deceleration), which may help reduce the yo-yo effect sometimes felt from pure PAS torque assistance.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 65535
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_LEGACY_VOLTAGE": {
+      "CANOpen_Index": "0x200A",
+      "Description": "Legacy voltage real-time measure",
+      "Parameters": {
+        "CO_PARAM_LEGACY_VOLTAGE": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Legacy voltage real-time measure",
+          "Valid_Range": {
+            "min": 0,
+            "max": 20000
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_BATTERY": {
+      "CANOpen_Index": "0x2002",
+      "Description": "Measurements and configuration of the vehicle battery.",
+      "Parameters": {
+        "CO_PARAM_BATTERY_SOC": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Real-time approximate SOC of the battery, in percentage.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Real-time",
+          "Notes": "This parameter is a linear approximation of the SOC based on the voltage which is not accurate. A better way to get the battery SOC is to query directly the BMS."
+        },
+        "CO_PARAM_BATTERY_REALTIME_VOLTAGE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Real-time bus voltage on the vehicle battery connected to the controller.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 20000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_BATTERY_REALTIME_VOLTAGE_SLAVE": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Real-time bus voltage on the vehicle battery connected to the slave controller, if present.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 20000
+          },
+          "Persistence": "Real-time",
+          "Notes": "This parameter will be deprecated"
+        },
+        "CO_PARAM_BATTERY_CONFIG_EMPTY_VOLTAGE": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Battery empty voltage. Needs to be smaller than the battery full voltage setting below.",
+          "Valid_Range": {
+              "min": 2800,
+              "max": 8499
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BATTERY_CONFIG_FULL_VOLTAGE": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Battery full voltage. Needs to be greater than battery empty voltage above.",
+          "Valid_Range": {
+              "min": 2800,
+              "max": 8499
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BATTERY_CONFIG_MAX_CURRENT": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "amps",
+          "Description": "Max DC current that the controller can draw from the battery.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
+        },
+        "CO_PARAM_BATTERY_CONFIG_MAX_TIME": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "ms",
+          "Description": "Duration of the peak current, after which the controller will start derating to continuous current, using the derating time as a curve.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 120000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BATTERY_CONFIG_DERATING_TIME": {
+          "Subindex": "0x12",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "ms",
+          "Description": "Derating ramp time from peak to continuous current.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 120000
+          },
+          "Persistence": "Persistent",
+          "Notes": "Once CO_PARAM_BATTERY_CONFIG_MAX_TIME is elapsed, the controller starts to derate towards continuous current; the time it takes to go down to the continuous current is configured by this parameter."
+        },
+        "CO_PARAM_BATTERY_CONFIG_CONTINUOUS_CURRENT": {
+          "Subindex": "0x13",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "amps",
+          "Description": "Continuous DC current that the controller can draw from the battery.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 60
+          },
+          "Persistence": "Persistent",
+          "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
+        },
+        "CO_PARAM_BATTERY_CONFIG_MAX_CAPACITY": {
+          "Subindex": "0x20",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "Wh",
+          "Description": "Maximum capacity of the battery, when the SOC is at 100%.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 5000
+          },
+          "Persistence": "Persistent",
+          "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
+        },
+        "CO_PARAM_BMS_PROTOCOL_CONFIG": {
+          "Subindex": "0x30",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Select the BMS protocol on the vehicle. 0 = no BMS protocol. 1 = FTEX BMS Protocol. >1 = custom BMS protocol",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Notes": "The default is 1. For now, changing the protocol is not possible (ie. this parameter is readonly)."
+        },
+        "CO_PARAM_BMS_MISSING_CONFIG": {
+          "Subindex": "0x31",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
+          "Persistence": "Persistent",
+          "Notes": "The BMS must send frequent heartbeats to be detected as alive, and it must send valid messages to the controller. CO_PARAM_BMS_MISSING_CONFIG is only relevant if CO_PARAM_BMS_PROTOCOL_CONFIG !=0, otherwise this parameter is ignored. Default is 1.",
+          "Valid_Options": [
+            { "value": 0, "description": "Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters." },
+            { "value": 1, "description": "Stop_powertrain: If we lose the BMS communication, stop the powertrain and prevent any power from being pushed to the motor."},
+            { "value": 2, "description": "Raise_error_on_can: If we lose the BMS communication, raise an error on the controller's CAN parameter."}
+          ]
+        }
+      }
+    },
+    "CO_ID_MOTOR_MEASUREMENTS": {
+      "CANOpen_Index": "0x200B",
+      "Description": "Motor sensors measurements (or measurements of FTEX sensors connected into the motor).",
+      "Parameters": {
+        "CO_PARAM_MOTOR_TEMPERATURE_MEASUREMENT": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "Celsius",
+          "Description": "Temperature of the motor connected to the controller.",
+          "Valid_Range": {
+              "min": -50,
+              "max": 250
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MOTOR_TEMPERATURE_MEASUREMENT_SLAVE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "Celsius",
+          "Description": "Temperature of the motor connected to the slave controller, if present.",
+          "Valid_Range": {
+              "min": -50,
+              "max": 250
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MOTOR_RPM_BEFORE_GEAR_RATIO_MEASUREMENT": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "rpm",
+          "Description": "Current RPM of the motor - no gear ratio is applied. This rpm is computed from the hall sensors.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MOTOR_RPM_AFTER_GEAR_RATIO_MEASUREMENT": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "rpm",
+          "Description": "Current RPM of the motor as expressed in CO_PARAM_MOTOR_RPM_WITHOUT_GEAR_RATIO_MEASUREMENT, after which gear ratio is applied.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MOTOR_PHASE_U_CURRENT_MEASUREMENT": {
+          "Subindex": "0x20",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "centiamps",
+          "Description": "Real-time current measurement on the current sensor on phase U. Updated approximately twice a second; represents the absolute RMS value of the current.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 20000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MOTOR_PHASE_V_CURRENT_MEASUREMENT": {
+          "Subindex": "0x21",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "centiamps",
+          "Description": "Real-time current measurement on the current sensor on phase V. Updated approximately twice a second; represents the absolute RMS value of the current.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 20000
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_CONTROLLER_INTERNALS_MEASUREMENTS": {
+      "CANOpen_Index": "0x200C",
+      "Description": "Controller internal sensors measurement.",
+      "Parameters": {
+        "CO_PARAM_CONTROLLER_TEMPERATURE_MEASUREMENT": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "Celsius",
+          "Description": "Current temperature of the controller.",
+          "Valid_Range": {
+              "min": -50,
+              "max": 350
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_CONTROLLER_TEMPERATURE_MEASUREMENT_SLAVE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "Celsius",
+          "Description": "Current temperature of the slave controller, if present.",
+          "Valid_Range": {
+              "min": -50,
+              "max": 350
+          },
+          "Persistence": "Real-time",
+          "Notes": "This parameter will be deprecated"
+        }
+      }
+    }
+  },
+  "Vehicle": {
+    "CO_ID_ODOMETER_AND_RANGE": {
+      "CANOpen_Index": "0x2030",
+      "Description": "Controller odometer and range configuration and values.",
+      "Parameters": {
+        "CO_PARAM_CONTROLLER_ODOMETER": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "meters",
+          "Description": "Odometer of the full distance traveled while the controller is on, computed using wheel size and wheel speed sensor.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967294
+          },
+          "Persistence": "Persistent",
+          "Notes": "As of today, the odometer may reset to 0 on firmware updates."
+        },
+        "CO_PARAM_ESTIMATED_RANGE": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Unit": "km",
+          "Description": "Estimated range left on the vehicle, based on remaining battery capacity, and on average speed/power usage in the last 30 seconds.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967294
+          },
+          "Persistence": "Real-time",
+          "Notes": "Remaining battery capacity comes from the BMS over CANOpen if available; otherwise it is roughly computed from the SOC and from the parameter CO_PARAM_BATTERY_CONFIG_MAX_CAPACITY"
+        }
+      }
+    },
+    "CO_ID_SPEED_MEASUREMENTS": {
+      "CANOpen_Index": "0x2000",
+      "Description": "Real-time speed measurements of the vehicle.",
+      "Parameters": {
+        "CO_PARAM_SPEED_INTEGER": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Speed of the vehicle as integer.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_SPEED_DECIMAL": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "km/h x 10",
+          "Description": "Speed of the vehicle with one decimal precision (ie. in km/h x 10). For example, a value of 234 means 23.4 km/h; a value of 1 means 0.1 km/h; etc.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 999
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_POWER_MEASUREMENTS": {
+      "CANOpen_Index": "0x2001",
+      "Description": "Real-time power measurements.",
+      "Parameters": {
+        "CO_PARAM_TOTAL_POWER": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "watts",
+          "Description": "Real-time approximate total power of the vehicle (DC Power). Note: Screens/IoT devices should use this value for displaying power to the user. Also note that this is a rough estimation.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_REQUESTED_TORQUE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "cNm",
+          "Description": "Real-time approximate requested torque on the motor. Note: This is a torque setpoint and may differ from the actual motor mechanical torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100000
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_MECHANICAL_POWER": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "watts",
+          "Description": "Real-time approximate mechanical power in the motor. This is a rough estimation.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50000
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_MAX_POWER_LEGACY": {
+      "CANOpen_Index": "0x2005",
+      "Description": "Max power legacy parameters",
+      "Parameters": {
+        "CO_PARAM_MAX_POWER_LEGACY": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "watts",
+          "Description": "This legacy parameter represents the max power the vehicle can reach (ie. max DC current * battery full voltage)",
+          "Valid_Range": {
+              "min": 1,
+              "max": 8500
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_SYSTEM_ERRORS": {
+      "CANOpen_Index": "0x2006",
+      "Description": "System error state as detected by the controller.",
+      "Parameters": {
+        "CO_PARAM_ACTIVE_ERRORS": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Get the active errors currently detected by the controller. Multiple errors at the same time can be raised in parallel. Retrieving individual errors can be done using a bitmask.",
+          "Notes": "Eg. if there is a brake error (0x20000) and a hall sensor error (0x200), the controller will raise 0x20200 ie. 0d131584",
+          "Valid_Options": [
+            {
+              "value": 0,
+              "description": "No_error: No error."
+            },
+            {
+              "value": 1,
+              "description": "Throttle_Error: If the controller turns on and it detects that the throttle is immediately/already above the minimum threshold value, the motor assistance is disabled and this error is shown on the screen."
+            },
+            {
+              "value": 2,
+              "description": "DC_Undervoltage_Error: When the DC bus goes under the safe voltage operating range of the controller."
+            },
+            {
+              "value": 4,
+              "description": "DC_Overvoltage_Error: When the DC bus goes over the safe voltage operating range of the controller."
+            },
+            {
+              "value": 8,
+              "description": "Controller_Undertemperature_Error: If the controller is detecting that the temperature is under safe operating limits (around -30C)."
+            },
+            {
+              "value": 16,
+              "description": "Motor_Overtemperature_Error: The motor is overheating and assistance is stopped."
+            },
+            {
+              "value": 32,
+              "description": "Motor_Overtemperature_Foldback_Warning: Foldback has been applied because motor is overheating."
+            },
+            {
+              "value": 64,
+              "description": "Motor_Undertemperature_Error: Motor temperature sensor is disconnected or cold warning."
+            },
+            {
+              "value": 128,
+              "description": "Controller_Overtemperature_Error: When the controller shuts down due to overheating."
+            },
+            {
+              "value": 256,
+              "description": "Controller_Foldback_Warning: Foldback has been applied because the controller is overheating."
+            },
+            {
+              "value": 512,
+              "description": "Motor_Hall_Sensor_Error: Controller can’t read the motor hall sensor, or the reading is not within safe/normal range."
+            },
+            {
+              "value": 1024,
+              "description": "Motor_Phase_Error: Motor phase wire connection is detected as being faulted."
+            },
+            {
+              "value": 2048,
+              "description": "IoT_Communication_Error: When the controller loses communication with the IoT module over CAN bus."
+            },
+            {
+              "value": 4096,
+              "description": "Controller_Dual_Communication_Error: Display this error when the master controller (which controls the screen) loses communication with the slave controller (which controls the second motor), if slave controller is enabled."
+            },
+            {
+              "value": 8192,
+              "description": "Controller_Overcurrent_Warning: When the controller hits an overcurrent. This is a warning but the controller self-recovers."
+            },
+            {
+              "value": 16384,
+              "description": "Battery_Low_Error: Battery is low and needs charging."
+            },
+            {
+              "value": 32768,
+              "description": "PAS_Torque_Startup_Error: If the controller is detecting that the PAS torque did not return to a normal original value when the controller started up."
+            },
+            {
+              "value": 65536,
+              "description": "Controller_Anomaly_Error: The controller detects that the system is in a bad or unrecoverable state. For example, a short in the harness can trigger this error."
+            },
+            {
+              "value": 131072,
+              "description": "Brake_Error: The brake cutoff sensor has an anomaly (e.g., the reading did not go back to the normal, original value on startup)."
+            },
+            {
+              "value": 262144,
+              "description": "Screen_Communication_Error: If the controller detects that it has lost communication with the HMI peripheral on the system.\n- If CANOpen screen, then it means that there was a CAN heartbeats timeout detected.\n- If UART screen, then it means that there was a timeout detected for receiving UART frames from the screen."
+            },
+            {
+              "value": 524288,
+              "description": "PAS_Torque_Stuck_Error: If the controller is detecting that the torque sensor input is detected, but no cadence pulses are detected (potential hardware problem with the PAS sensor)."
+            },
+            {
+              "value": 1048576,
+              "description": "Bike_Locked_Error: If the IoT lock protection is activated and stopping powertrain, this error is raised over CAN."
+            },
+            {
+              "value": 2097152,
+              "description": "Battery_Error: Default battery error, signaling that battery is either damaged or signaled an internal error to the controller, stopping powertrain."
+            },
+            {
+              "value": 4194304,
+              "description": "BMS_Communication_Error: This error is raised if the BMS communication with the controller failed or if an <n> number of invalid inputs were sent to the controller."
+            }
+          ],
+          "Persistence": "Real-time"
+        }
+
+      }
+    },
+    "CO_ID_SPEED_CONFIGURATION": {
+      "CANOpen_Index": "0x201C",
+      "Description": "Maximum speed settings.",
+      "Parameters": {
+        "CO_PARAM_MAX_VEHICLE_SPEED": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Max speed of the vehicle. Overrides PAS or throttle speeds if its value is lower.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_WALK_MODE": {
+      "CANOpen_Index": "0x201D",
+      "Description": "Walk mode control and configuration.",
+      "Parameters": {
+        "CO_PARAM_WALK_MODE_CONTROL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Activate or deactivate walk mode.",
+          "Valid_Options": [
+            { "value": 0, "description": "Walkmode deactivated" },
+            { "value": 1, "description": "Walkmode activated" }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "The controller may disengage walk mode automatically, e.g., if brakes are applied."
+        },
+        "CO_PARAM_WALK_MODE_MAX_TORQUE": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Percentage of vehicle torque used by the walk mode, in % of vehicle max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Notes": "If the torque percentage engages the walk mode above walk mode speed and/or vehicle max speed, the torque will be lowered to match the max speed configuration or the vehicle max speed. The vehicle speed on walkmode will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_WALKMODE_CONFIG_MAX_SPEED."
+        },
+        "CO_PARAM_WALK_MODE_MAX_SPEED": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Max speed limit used by the walk mode, in km/h.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Notes": "If the speed engages the walk mode above walk mode torque and/or vehicle max speed, the speed will be lowered to match the max torque configuration or the vehicle max speed. The vehicle speed on walkmode will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_WALKMODE_CONFIG_MAX_TORQUE."
+        }
+      }
+    },
+    "CO_ID_VEHICLE_TOGGABLE_OUTPUT_1": {
+      "CANOpen_Index": "0x2021",
+      "Description": "Control and configuration of the low-side switch togglable output 1 (usually used for front light).",
+      "Parameters": {
+        "CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Manually get or set the togglable output 1.",
+          "Valid_Options": [
+            { "value": 0, "description": "Output is off." },
+            { "value": 1, "description": "Output is on." }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL to on activates the low-side switch and grounds the OUTPUT_1 pin (eg. front light)."
+        },
+        "CO_PARAM_TOGGLABLE_OUTPUT_1_DEFAULT_CONFIG": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the output's default state for when the vehicle powers on.",
+          "Valid_Options": [
+            { "value": 0, "description": "Output is off when the vehicle powers on" },
+            { "value": 1, "description": "Output is on when the vehicle powers on" }
+          ],
+          "Persistence": "Persistent",
+          "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL."
+        }
+      }
+    },
+    "CO_ID_VEHICLE_TOGGABLE_OUTPUT_2": {
+      "CANOpen_Index": "0x2022",
+      "Description": "Control and configuration of the low-side switch togglable output 2 (usually used for rear light).",
+      "Parameters": {
+        "CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Manually get or set the togglable output 2.",
+          "Valid_Options": [
+            { "value": 0, "description": "Output is off." },
+            { "value": 1, "description": "Output is on." }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL to on activates the low-side switch and grounds the OUTPUT_2 pin (eg. rear light)."
+        },
+        "CO_PARAM_TOGGLABLE_OUTPUT_2_DEFAULT_CONFIG": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the output's default state for when the vehicle powers on.",
+          "Valid_Options": [
+            { "value": 0, "description": "Output is off when the vehicle powers on" },
+            { "value": 1, "description": "Output is on when the vehicle powers on" }
+          ],
+          "Persistence": "Persistent",
+          "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL."
+        },
+        "CO_PARAM_TOGGLABLE_OUTPUT_2_BRAKE_CONFIG": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Configure the special output behavior to adopt when brake input is detected.",
+          "Valid_Options": [
+            { "value": 0, "description": "No special behavior on brake" },
+            { "value": 1, "description": "Blink the output on brake" }
+          ],
+          "Persistence": "Persistent",
+          "Notes": "For example, this can be useful if you want to configure a rear light to blink when the brake is pressed."
+        }
+      }
+    },
+    "CO_ID_VEHICLE_CRUISE": {
+      "CANOpen_Index": "0x2020",
+      "Description": "Cruise control settings.",
+      "Parameters": {
+        "CO_PARAM_CRUISE_CONTROL_ENABLE": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the cruise control on the vehicle.",
+          "Valid_Options": [
+            { "value": 0, "description": "Cruise control deactivated" },
+            { "value": 1, "description": "Cruise control activated" }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "The controller deactivates cruise control if PAS is detected, brake is detected, or if there are missing heartbeats from the HMI."
+        }
+      }
+    },
+    "CO_ID_VEHICLE_ON_OFF_CONFIGURATION": {
+      "CANOpen_Index": "0x2023",
+      "Description": "Vehicle power on|off configuration",
+      "Parameters": {
+        "CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the vehicle on off configuration.",
+          "Valid_Options": [
+            { "value": 0, "description": "Vehicle power is always on. The controller starts as soon as the power is active, e.g. throttle, PAS will be activated and motor will push power" },
+            { "value": 1, "description": "Vehicle power requires a power lock signal. Until the controller receives this power signal, the controller will not be powered on. On pin J-P-22. This powerlock signal is also referred to as KEY IN in some datasheets." }
+          ],
+          "Persistence": "Persistent"
+        }
+      }
+    }
+  },
+  "Metadata": {
+    "CO_ID_SERIAL_NUMBER": {
+      "CANOpen_Index": "0x2007",
+      "Description": "Controller serial number.",
+      "Parameters": {
+        "CO_PARAM_SERIAL_NUMBER_MSB": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of the controller (MS Bytes).",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_SERIAL_NUMBER_LSB": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Serial number of the controller (LS Bytes).",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_BLOB_STORAGE": {
+      "CANOpen_Index": "0x2039",
+      "Description": "Dual blob storage. This allow the user to store n amount of bytes on the non-volatile controller memory.",
+      "Parameters": {
+        "CO_PARAM_BLOB_1_OPERATION": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Current blob 1 state. This allows the user to enter read/write/idle blob mode. Default state is 0:Idle",
+          "Valid_Options": [
+            { "value": 0, "description": "Idle: Blob storage is in idle mode, it is currently not reading nor writing." },
+            { "value": 1, "description": "Read: Blob storage is in read mode, it is currently reading data on its file descriptor." },
+            { "value": 2, "description": "Write: Blob storage is in write mode, it is currently writing its own data on its file descriptor." }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "On controller boot up, the state will always be 0:Idle."
+        },
+        "CO_PARAM_BLOB_2_OPERATION": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Current blob 2 state. This allows the user to enter read/write/idle blob mode. Default state is 0:Idle",
+          "Valid_Options": [
+            { "value": 0, "description": "Idle: Blob storage is in idle mode, it is currently not reading nor writing." },
+            { "value": 1, "description": "Read: Blob storage is in read mode, user can read data on its file descriptor." },
+            { "value": 2, "description": "Write: Blob storage is in write mode, user can write data on its file descriptor." }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "On controller boot up, the state will always be 0:Idle."
+        },
+        "CO_PARAM_BLOB_1_CAPACITY": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Blob 1 max memory size, in bytes.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 512
+          },
+          "Persistence": "Persistent",
+          "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
+        },
+        "CO_PARAM_BLOB_2_CAPACITY": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Blob 2 max memory size, in bytes.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 512
+          },
+          "Persistence": "Persistent",
+          "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
+        },
+        "CO_PARAM_BLOB_1_OPERATION_FRAME_INDEX": {
+          "Subindex": "0x30",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Read/Write data index. This allows the user to target a specific blob storage index for read or write operation. Please note that each frame is composed of one data word.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 65535
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_BLOB_2_OPERATION_FRAME_INDEX": {
+          "Subindex": "0x31",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Read/Write data index. This allows the user to target a specific blob storage index for read or write operation. Please note that each frame is composed of one data word.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 65535
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_BLOB_1_FILE_DESCRIPTOR": {
+          "Subindex": "0xF0",
+          "Access": "R/W",
+          "Type": "uint32_t",
+          "Description": "File descriptor pipe. During a write operation, this is where you placed the write data to transfer to blob storage. During a read operation, the data will be displayed on this data pipe.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Real-time"
+        },
+        "CO_PARAM_BLOB_2_FILE_DESCRIPTOR": {
+          "Subindex": "0xF1",
+          "Access": "R/W",
+          "Type": "uint32_t",
+          "Description": "File descriptor pipe. During a write operation, this is where you placed the write data to transfer to blob storage. During a read operation, the data will be displayed on this data pipe.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_SOFTWARE_VERSIONS": {
+      "CANOpen_Index": "0x2008",
+      "Description": "Controller software versioning.",
+      "Parameters": {
+        "CO_PARAM_PACK_VERSION": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Pack version installed on the controller. First two bytes: Firmware version, third byte: Bike model (if applicable), last byte: Hardware version.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent",
+          "Notes": "Example: 0x04 0x00 0x02 0x03 -> firmware version 0x0004, bike model 0x02, hardware version 0x03"
+        },
+        "CO_PARAM_OPEN_PROTOCOL_MAJOR_VERSION": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Major number version of FTEX open CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_OPEN_PROTOCOL_MINOR_VERSION": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Minor number version of FTEX open CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_OPEN_PROTOCOL_BUILD_VERSION": {
+          "Subindex": "0x12",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Build number version of FTEX open CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_INTERNAL_PROTOCOL_MAJOR_VERSION": {
+          "Subindex": "0x20",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Major number version of FTEX internal CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_INTERNAL_PROTOCOL_MINOR_VERSION": {
+          "Subindex": "0x21",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Minor number version of FTEX internal CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_INTERNAL_PROTOCOL_BUILD_VERSION": {
+          "Subindex": "0x22",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Build number version of FTEX internal CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BMS_PROTOCOL_MAJOR_VERSION": {
+          "Subindex": "0x30",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Major number version of FTEX BMS CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BMS_PROTOCOL_MINOR_VERSION": {
+          "Subindex": "0x31",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Minor number version of FTEX BMS CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_BMS_PROTOCOL_BUILD_VERSION": {
+          "Subindex": "0x32",
+          "Access": "R",
+          "Type": "uint32_t",
+          "Description": "Build number version of FTEX BMS CAN protocol.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 4294967295
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    }
+  },
+  "Security": {
+    "CO_ID_IOT_LOCK_PROTECTION_CONFIG": {
+      "CANOpen_Index": "0x2033",
+      "Description": "IoT auto lock/unlock configuration.",
+      "Parameters": {
+        "CO_PARAM_IOT_LOCK_CONFIG": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: Disabled, 1: Enabled. If enabled, the bike will automatically disable the motor and raise an error if no IoT is detected after vehicle power-on.",
+          "Valid_Options": [
+            { "value": 0, "description": "Disabled" },
+            { "value": 1, "description": "Enabled" }
+          ],
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_LOCK_CONTROL": {
+      "CANOpen_Index": "0x2032",
+      "Description": "Powertrain lock/unlock manual control.",
+      "Parameters": {
+        "CO_PARAM_POWERTRAIN_LOCK_CONTROL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: Bike is unlocked, 1: Bike is locked. When locked, the motor is disabled and an error is raised.",
+          "Valid_Options": [
+            { "value": 0, "description": "Bike is unlocked" },
+            { "value": 1, "description": "Bike is locked" }
+          ],
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_IOT_PRESENT_OR_ABSENT_FLAG": {
+      "CANOpen_Index": "0x2036",
+      "Description": "IoT present of absent flag. This flag is used by the controller in order to raise an error if an IoT connection is expected, but the IoT is missing.",
+      "Parameters": {
+        "CO_PARAM_IOT_PRESENT_OR_ABSENT_FLAG": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: IoT is expected to be absent in the FTEX system, 1: IoT is expected to be present in the FTEX system.",
+          "Valid_Options": [
+            { "value": 0, "description": "IoT is absent" },
+            { "value": 1, "description": "IoT is present" }
+          ],
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_CONTROLLER_RESET": {
+      "CANOpen_Index": "0x203A",
+      "Description": "Allow the user to perform a controller reset.",
+      "Parameters": {
+        "CO_PARAM_CONTROLLER_RESET": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: Reset disabled, the controller behaves as usual. 1: Reset is requested, the controller will reset as soon as it processes this value. This delay is usually around 100ms.",
+          "Valid_Options": [
+            { "value": 0, "description": "Reset disabled, default idle value." },
+            { "value": 1, "description": "Reset enabled." }
+          ],
+          "Persistence": "Real-time"
+        }
+      }
+    }
+  },
+  "PAS General Configuration": {
+    "Notes": "This section contains general PAS configuration outside of PAS detection and power delivery.",
+    "CO_ID_PAS_LEVEL": {
+      "CANOpen_Index": "0x2003",
+      "Description": "PAS level configuration and control",
+      "Parameters": {
+        "CO_PARAM_PAS_LEVEL_CONTROL": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the current PAS level. This must be set to a value under the max number of PAS levels.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 9
+          },
+          "Persistence": "Real-time"
+        }
+      }
+    },
+    "CO_ID_PAS_LEVELS_CONFIG": {
+      "CANOpen_Index": "0x2004",
+      "Description": "Configuration of the maximum PAS level of the vehicle",
+      "Parameters": {
+        "CO_PARAM_PAS_LEVEL_MAX_CONFIG": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the max PAS level.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 9
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_DEFAULT_PAS_LEVEL": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Select the default PAS level that the controller will boot on. Regardless of the default, the IoT and/or HMI may then write any PAS level on the controller as needed.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 9
+          },
+          "Persistence": "Persistent",
+          "Notes": "If the selected default PAS level is higher than the max number of levels, the max will be selected instead. If not specified, the default level is 0, which is preferable for safety reasons."
+        }
+      }
+    },
+    "CO_ID_PAS_SPEED_LIMITS": {
+      "CANOpen_Index": "0x201A",
+      "Description": "Maximum speed for each PAS level.",
+      "Parameters": {
+        "CO_PARAM_PAS_SPEED_LEVEL1": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 1.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL2": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 2.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL3": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 3.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL4": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 4.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL5": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 5.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL6": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 6.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL7": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 7.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL8": {
+          "Subindex": "0x07",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 8.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL9": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    }
+  },
+  "PAS Detection": {
+    "Notes": "Parameters that determine if PAS is being detected, and therefore if PAS power can be delivered. PAS power enabled vs disabled follows this diagram: https://drive.google.com/file/d/1KU7igrGCDXFrd31KXi9ZGoqXIbsWHrj5/view?usp=drive_link. The PAS detection section configures the logic of the detection of the user pedaling, from the PAS sensor. The sensor itself is configured in CO_ID_PAS_SENSOR; and the actual power in the motor is determined by the PAS power section.",
+    "CO_ID_PAS_DETECTION_SPEED_THRESHOLDS": {
+      "CANOpen_Index": "0x2034",
+      "Description": "Startup and runtime thresholds of the PAS detection (A and B in the diagram in the Notes on PAS Detection).",
+      "Parameters": {
+        "CO_PARAM_SPEED_THRESHOLD_A": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the speed threshold A of the PAS detection algorithm.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 255
+          },
+          "Persistence": "Persistent",
+          "Unit": "km/h"
+        },
+        "CO_PARAM_SPEED_THRESHOLD_B": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the speed threshold B of the PAS detection algorithm.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 255
+          },
+          "Persistence": "Persistent",
+          "Unit": "km/h"
+        }
+      }
+    },
+    "CO_ID_PAS_DETECTION_PARAMETERS_CONFIG" : {
+      "CANOpen_Index": "0x2035",
+      "Description": "Torque and cadence input parameters driving PAS detection",
+      "Parameters": {
+        "CO_PARAM_STARTUP_DETECTION_TORQUE_CONFIG": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "T1 torque threshold for PAS detection during startup conditions (see details in the diagram in the Notes on PAS Detection). This value is a % of the sensor's min-max range.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Unit": "%"
+        },
+        "CO_PARAM_STARTUP_DETECTION_PULSES_CONFIG": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Number of cadence pulses nbP1 for PAS detection during startup conditions (see details in the diagram in the Notes on PAS Detection).",
+          "Valid_Range": {
+              "min": 1,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_STARTUP_DETECTION_WINDOW_CONFIG": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Time window TW1 for PAS detection during startup conditions (see details in the diagram in the Notes on PAS Detection).",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Unit": "ms"
+        },
+        "CO_PARAM_RUNTIME_DETECTION_PULSES_CONFIG": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Number of cadence pulses nbP2 for PAS detection during runtime conditions (see details in the diagram in the Notes on PAS Detection).",
+          "Valid_Range": {
+              "min": 1,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_RUNTIME_DETECTION_WINDOW_CONFIG": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Time window TW2 for PAS detection during runtime conditions (see details in the diagram in the Notes on PAS Detection).",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Unit": "ms"
+        },
+        "CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG": {
+          "Subindex": "0x20",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Flag used to let the controller know the PAS detection criterias. 0 = Cadence OR Torque. 1 = Cadence AND Torque. (see details in the diagram in the Notes on PAS Detection)",
+          "Valid_Options": [
+            { "value": 0, "description": "Cadence OR Torque" },
+            { "value": 1, "description": "Cadence AND Torque" }
+          ],
+          "Persistence": "Persistent",
+          "Unit": "ms",
+          "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
+        }
+      }
+    }
+  },
+  "PAS Power Delivery": {
+    "Notes": "This section is for configuration of the power delivered in the motor when PAS is detected. PAS detection configuration is done in the PAS Detection section.",
+    "CO_ID_PAS_MOTOR_MAX_TORQUE_CONFIG": {
+      "CANOpen_Index": "0x201B",
+      "Description": "How much torque can each PAS level deliver. Each % is expressed as a % of the max motor torque.",
+      "Parameters": {
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL1": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 1, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL2": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 2, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL3": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 3, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL4": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 4, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL5": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 5, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL6": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 6, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL7": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 7, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL8": {
+          "Subindex": "0x07",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 8, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL9": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 9, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_PAS_MOTOR_MIN_TORQUE_CONFIG": {
+      "CANOpen_Index": "0x2019",
+      "Description": "Minimum torque settings for PAS levels. Minimum torque represents a floor of how much torque is driven in the motor if PAS is detected. This is useful for a bike with a torque sensor, to drive a hybrid feeling. eg. set min torque to 10%, and as soon as cadence is detected, a little bit of power will be driven in the motor. More power can be driven in the motor if the user presses harder on the pedals.",
+      "Parameters": {
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL1": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 1.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL2": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 2.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL3": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 3.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL4": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 4.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL5": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 5.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL6": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 6.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL7": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 7.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL8": {
+          "Subindex": "0x07",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 8.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL9": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_PAS_TORQUE_GAIN_CONFIG": {
+      "CANOpen_Index": "0x2018",
+      "Description": "Torque input gain settings for PAS levels. This gain is used to affect the torque delivery when PAS torque input is detected. Higher values mean the controller will push more power with less pedal effort. A higher value (eg. 200-500%) means the bike feels more cadence-y. A lower value (eg. 100-150%) means the bike feels more sporty and reactive 1-1 to the torque sensor input. Here are a few examples. A gain of 100% means max torque is reached when a 100% press on the torque sensor input is detected. A gain of 200% means max torque is reached when a 50% press on the torque sensor input is detected.",
+      "Parameters": {
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL1": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 1.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL2": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 2.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL3": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 3.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL4": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 4.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL5": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 5.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL6": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 6.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL7": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 7.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL8": {
+          "Subindex": "0x07",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 8.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL9": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 9.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent"
+        }
+      }
+    },
+    "CO_ID_VEHICLE_PRESETS": {
+      "CANOpen_Index": "0x202B",
+      "Description": "Vehicle presets configuration.",
+      "Parameters": {
+        "CO_PARAM_VEHICLE_PRESET": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Set of rapid presets to switch between PAS behaviors in real-time.",
+          "Valid_Options": [
+            { "value": 1, "description": "Torque feeling preset" },
+            { "value": 2, "description": "Cadence feeling preset" }
+          ],
+          "Persistence": "Real-time",
+          "Notes": "Under the covers, setting to 1 will set the minimum torque % setting to 0%, and setting to 2 will set the minimum torque % setting to be the same as max torque % (because if min torque % is equal to max torque %, the bike feels like cadence)."
+        }
+      }
+    }
+  }
+}

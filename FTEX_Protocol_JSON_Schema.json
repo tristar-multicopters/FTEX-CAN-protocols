@@ -168,6 +168,11 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "Obfuscation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "enum": ["True", "False"]
+                  },
                   "Persistence": {
                     "type": "string",
                     "enum": ["Persistent", "Real-time", "Both"],

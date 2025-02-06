@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.11"
+    "version": "2.4.12"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -18,7 +18,8 @@
             { "value": 0, "description": "250 kbps" },
             { "value": 1, "description": "500 kbps" }
           ],
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_CAN_TERMINATION": {
             "Subindex": "0x01",
@@ -29,7 +30,8 @@
               { "value": 0, "description": "Not enabled" },
               { "value": 1, "description": "Enabled" }
             ],
-            "Persistence": "Persistent"
+            "Persistence": "Persistent",
+            "Obfuscation": "False"
         }
       }
     },
@@ -43,6 +45,7 @@
           "Type": "uint16_t",
           "Description": "Write to this parameter to allow parameters to be saved to the controller's memory. See readme for details (parameters persistence section)",
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Valid_Options": [
             { "value": 54691, "description": "0xD5A3 (ie. 0d54691): to let the controller know that save-persistent parameters will be changed."},
             { "value": 49893, "description": "0xC2E5 (ie. 0d49893): will make the controller save the parameters, reset and apply the new values."}
@@ -63,7 +66,8 @@
               "min": 4,
               "max": 127
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_BMS_NODE_ID": {
           "Subindex": "0x01",
@@ -74,7 +78,8 @@
               "min": 4,
               "max": 127
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         }
       }
     },
@@ -95,7 +100,8 @@
             { "value": 4, "description": "UART EOL Tester Protocol : The FTEX controller uses the EOL tester protocol."},
             { "value": 100, "description": "UART High Speed Logger : The FTEX controller uses the high speed logger. This protocol is specified as an internal FTEX protocol."}
           ],
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }
@@ -115,7 +121,8 @@
               "min": 1,
               "max": 1500
           },
-          "Persistence": "Both"
+          "Persistence": "Both",
+          "Obfuscation": "True"
         },
         "CO_PARAM_WHEELSPEED_SENSOR_PULSES_PER_ROTATION": {
           "Subindex": "0x01",
@@ -127,6 +134,7 @@
               "max": 50
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "If the wheel speed sensor signal is muxed with the motor temperature signal, the motor temperature input must be configured with the muxed parameter set to true (FTEX internal parameter CO_PARAM_MOTOR_CONFIG_ENABLE_MUXED_WSS_TEMP)"
         }
       }
@@ -144,6 +152,7 @@
               "max": 10000
           },
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Type": "uint16_t",
           "Unit": "% x 100",
           "Notes": "In case of missing heartbeats from the HMI node ID, the controller will disable the throttle by CAN."
@@ -157,7 +166,8 @@
               "min": 9200,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_THROTTLE_CONFIG_MAX_VALUE": {
           "Subindex": "0x03",
@@ -168,7 +178,8 @@
               "min": 9200,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_THROTTLE_CONFIG_ENABLED": {
           "Subindex": "0x04",
@@ -179,7 +190,8 @@
             { "value": 0, "description": "Throttle is disabled" },
             { "value": 1, "description": "Throttle is enabled" }
           ],
-          "Persistence": "Both"
+          "Persistence": "Both",
+          "Obfuscation": "True"
         },
         "CO_PARAM_THROTTLE_CONFIG_MAX_SPEED": {
           "Subindex": "0x05",
@@ -192,6 +204,7 @@
           },
           "Unit": "km/h",
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "The vehicle speed on throttle will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_THROTTLE_CONFIG_MAX_SPEED."
         },
         "CO_PARAM_THROTTLE_VS_PAS_PRIORITY": {
@@ -204,6 +217,7 @@
             { "value": 1, "description": "PAS has priority over throttle" }
           ],
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "If throttle has priority, then PAS is ignored while throttle is engaged. If PAS has priority, then throttle is ignored while PAS is engaged."
         }
       }
@@ -223,6 +237,7 @@
               "max": 100
           },
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "Currently, only digital brakes are supported."
         }
       }
@@ -242,6 +257,7 @@
               "max": 5000
           },
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "Only forward pedaling is supported currently."
         },
         "CO_PARAM_PAS_TORQUE": {
@@ -254,7 +270,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_CONFIG_MAGNETS_PER_ROTATION": {
           "Subindex": "0x10",
@@ -265,7 +282,8 @@
               "min": 0,
               "max": 50
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_MIN_VALUE": {
           "Subindex": "0x30",
@@ -276,7 +294,8 @@
               "min": 4966,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_MAX_VALUE": {
           "Subindex": "0x31",
@@ -287,7 +306,8 @@
               "min": 4966,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_FILTERING_ACCELERATION_CONFIG": {
           "Subindex": "0x40",
@@ -298,7 +318,8 @@
               "min": 1,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_FILTERING_DECELERATION_CONFIG": {
           "Subindex": "0x41",
@@ -309,7 +330,8 @@
               "min": 1,
               "max": 65535
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -326,7 +348,8 @@
             "min": 0,
             "max": 20000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },
@@ -345,6 +368,7 @@
               "max": 100
           },
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "This parameter is a linear approximation of the SOC based on the voltage which is not accurate. A better way to get the battery SOC is to query directly the BMS."
         },
         "CO_PARAM_BATTERY_REALTIME_VOLTAGE": {
@@ -357,7 +381,8 @@
               "min": 0,
               "max": 20000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_BATTERY_REALTIME_VOLTAGE_SLAVE": {
           "Subindex": "0x02",
@@ -370,6 +395,7 @@
               "max": 20000
           },
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "This parameter will be deprecated"
         },
         "CO_PARAM_BATTERY_CONFIG_EMPTY_VOLTAGE": {
@@ -382,7 +408,8 @@
               "min": 2800,
               "max": 8499
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BATTERY_CONFIG_FULL_VOLTAGE": {
           "Subindex": "0x04",
@@ -394,7 +421,8 @@
               "min": 2800,
               "max": 8499
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BATTERY_CONFIG_MAX_CURRENT": {
           "Subindex": "0x10",
@@ -407,6 +435,7 @@
               "max": 100
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
         },
         "CO_PARAM_BATTERY_CONFIG_MAX_TIME": {
@@ -419,7 +448,8 @@
               "min": 0,
               "max": 120000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BATTERY_CONFIG_DERATING_TIME": {
           "Subindex": "0x12",
@@ -432,6 +462,7 @@
               "max": 120000
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "Once CO_PARAM_BATTERY_CONFIG_MAX_TIME is elapsed, the controller starts to derate towards continuous current; the time it takes to go down to the continuous current is configured by this parameter."
         },
         "CO_PARAM_BATTERY_CONFIG_CONTINUOUS_CURRENT": {
@@ -445,6 +476,7 @@
               "max": 60
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
         },
         "CO_PARAM_BATTERY_CONFIG_MAX_CAPACITY": {
@@ -458,6 +490,7 @@
               "max": 5000
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
         },
         "CO_PARAM_BMS_PROTOCOL_CONFIG": {
@@ -478,6 +511,7 @@
           "Type": "uint8_t",
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "The BMS must send frequent heartbeats to be detected as alive, and it must send valid messages to the controller. CO_PARAM_BMS_MISSING_CONFIG is only relevant if CO_PARAM_BMS_PROTOCOL_CONFIG !=0, otherwise this parameter is ignored. Default is 1.",
           "Valid_Options": [
             { "value": 0, "description": "Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters." },
@@ -501,7 +535,8 @@
               "min": -50,
               "max": 250
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_MOTOR_TEMPERATURE_MEASUREMENT_SLAVE": {
           "Subindex": "0x01",
@@ -513,7 +548,8 @@
               "min": -50,
               "max": 250
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_MOTOR_RPM_BEFORE_GEAR_RATIO_MEASUREMENT": {
           "Subindex": "0x10",
@@ -525,7 +561,8 @@
               "min": 0,
               "max": 50000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_MOTOR_RPM_AFTER_GEAR_RATIO_MEASUREMENT": {
           "Subindex": "0x11",
@@ -537,7 +574,8 @@
               "min": 0,
               "max": 50000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_MOTOR_PHASE_U_CURRENT_MEASUREMENT": {
           "Subindex": "0x20",
@@ -549,7 +587,8 @@
               "min": 0,
               "max": 20000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_MOTOR_PHASE_V_CURRENT_MEASUREMENT": {
           "Subindex": "0x21",
@@ -561,7 +600,8 @@
               "min": 0,
               "max": 20000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         }
       }
     },
@@ -579,7 +619,8 @@
               "min": -50,
               "max": 350
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_CONTROLLER_TEMPERATURE_MEASUREMENT_SLAVE": {
           "Subindex": "0x01",
@@ -592,6 +633,7 @@
               "max": 350
           },
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "This parameter will be deprecated"
         }
       }
@@ -613,6 +655,7 @@
               "max": 4294967294
           },
           "Persistence": "Persistent",
+          "Obfuscation": "False",
           "Notes": "As of today, the odometer may reset to 0 on firmware updates."
         },
         "CO_PARAM_ESTIMATED_RANGE": {
@@ -626,6 +669,7 @@
               "max": 4294967294
           },
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "Remaining battery capacity comes from the BMS over CANOpen if available; otherwise it is roughly computed from the SOC and from the parameter CO_PARAM_BATTERY_CONFIG_MAX_CAPACITY"
         }
       }
@@ -644,7 +688,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_SPEED_DECIMAL": {
           "Subindex": "0x01",
@@ -656,7 +701,8 @@
               "min": 0,
               "max": 999
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },
@@ -674,7 +720,8 @@
               "min": 0,
               "max": 50000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_REQUESTED_TORQUE": {
           "Subindex": "0x01",
@@ -686,7 +733,8 @@
               "min": 0,
               "max": 100000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         },
         "CO_PARAM_MECHANICAL_POWER": {
           "Subindex": "0x02",
@@ -698,7 +746,8 @@
               "min": 0,
               "max": 50000
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         }
       }
     },
@@ -716,7 +765,8 @@
               "min": 1,
               "max": 8500
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },
@@ -828,9 +878,9 @@
               "description": "BMS_Communication_Error: This error is raised if the BMS communication with the controller failed or if an <n> number of invalid inputs were sent to the controller."
             }
           ],
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         }
-
       }
     },
     "CO_ID_SPEED_CONFIGURATION": {
@@ -847,7 +897,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -865,6 +916,7 @@
             { "value": 1, "description": "Walkmode activated" }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "The controller may disengage walk mode automatically, e.g., if brakes are applied."
         },
         "CO_PARAM_WALK_MODE_MAX_TORQUE": {
@@ -877,6 +929,7 @@
               "max": 100
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "If the torque percentage engages the walk mode above walk mode speed and/or vehicle max speed, the torque will be lowered to match the max speed configuration or the vehicle max speed. The vehicle speed on walkmode will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_WALKMODE_CONFIG_MAX_SPEED."
         },
         "CO_PARAM_WALK_MODE_MAX_SPEED": {
@@ -889,6 +942,7 @@
               "max": 99
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "If the speed engages the walk mode above walk mode torque and/or vehicle max speed, the speed will be lowered to match the max torque configuration or the vehicle max speed. The vehicle speed on walkmode will go to the minimum value between CO_PARAM_MAX_VEHICLE_SPEED and CO_PARAM_WALKMODE_CONFIG_MAX_TORQUE."
         }
       }
@@ -907,6 +961,7 @@
             { "value": 1, "description": "Output is on." }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL to on activates the low-side switch and grounds the OUTPUT_1 pin (eg. front light)."
         },
         "CO_PARAM_TOGGLABLE_OUTPUT_1_DEFAULT_CONFIG": {
@@ -919,6 +974,7 @@
             { "value": 1, "description": "Output is on when the vehicle powers on" }
           ],
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL."
         }
       }
@@ -937,6 +993,7 @@
             { "value": 1, "description": "Output is on." }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL to on activates the low-side switch and grounds the OUTPUT_2 pin (eg. rear light)."
         },
         "CO_PARAM_TOGGLABLE_OUTPUT_2_DEFAULT_CONFIG": {
@@ -949,6 +1006,7 @@
             { "value": 1, "description": "Output is on when the vehicle powers on" }
           ],
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL."
         },
         "CO_PARAM_TOGGLABLE_OUTPUT_2_BRAKE_CONFIG": {
@@ -961,6 +1019,7 @@
             { "value": 1, "description": "Blink the output on brake" }
           ],
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "For example, this can be useful if you want to configure a rear light to blink when the brake is pressed."
         }
       }
@@ -979,6 +1038,7 @@
             { "value": 1, "description": "Cruise control activated" }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "The controller deactivates cruise control if PAS is detected, brake is detected, or if there are missing heartbeats from the HMI."
         }
       }
@@ -996,7 +1056,8 @@
             { "value": 0, "description": "Vehicle power is always on. The controller starts as soon as the power is active, e.g. throttle, PAS will be activated and motor will push power" },
             { "value": 1, "description": "Vehicle power requires a power lock signal. Until the controller receives this power signal, the controller will not be powered on. On pin J-P-22. This powerlock signal is also referred to as KEY IN in some datasheets." }
           ],
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }
@@ -1015,7 +1076,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_SERIAL_NUMBER_LSB": {
           "Subindex": "0x01",
@@ -1026,7 +1088,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         }
       }
     },
@@ -1045,6 +1108,7 @@
             { "value": 2, "description": "Write: Blob storage is in write mode, it is currently writing its own data on its file descriptor." }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "On controller boot up, the state will always be 0:Idle."
         },
         "CO_PARAM_BLOB_2_OPERATION": {
@@ -1058,6 +1122,7 @@
             { "value": 2, "description": "Write: Blob storage is in write mode, user can write data on its file descriptor." }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "True",
           "Notes": "On controller boot up, the state will always be 0:Idle."
         },
         "CO_PARAM_BLOB_1_CAPACITY": {
@@ -1070,6 +1135,7 @@
               "max": 512
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
         },
         "CO_PARAM_BLOB_2_CAPACITY": {
@@ -1082,6 +1148,7 @@
               "max": 512
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
         },
         "CO_PARAM_BLOB_1_OPERATION_FRAME_INDEX": {
@@ -1093,7 +1160,8 @@
               "min": 0,
               "max": 65535
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BLOB_2_OPERATION_FRAME_INDEX": {
           "Subindex": "0x31",
@@ -1104,7 +1172,8 @@
               "min": 0,
               "max": 65535
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BLOB_1_FILE_DESCRIPTOR": {
           "Subindex": "0xF0",
@@ -1115,7 +1184,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         },
         "CO_PARAM_BLOB_2_FILE_DESCRIPTOR": {
           "Subindex": "0xF1",
@@ -1126,7 +1196,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1144,6 +1215,7 @@
               "max": 4294967295
           },
           "Persistence": "Persistent",
+          "Obfuscation": "False",
           "Notes": "Example: 0x04 0x00 0x02 0x03 -> firmware version 0x0004, bike model 0x02, hardware version 0x03"
         },
         "CO_PARAM_OPEN_PROTOCOL_MAJOR_VERSION": {
@@ -1155,7 +1227,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_OPEN_PROTOCOL_MINOR_VERSION": {
           "Subindex": "0x11",
@@ -1166,7 +1239,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_OPEN_PROTOCOL_BUILD_VERSION": {
           "Subindex": "0x12",
@@ -1177,7 +1251,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_INTERNAL_PROTOCOL_MAJOR_VERSION": {
           "Subindex": "0x20",
@@ -1188,7 +1263,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_INTERNAL_PROTOCOL_MINOR_VERSION": {
           "Subindex": "0x21",
@@ -1199,7 +1275,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_INTERNAL_PROTOCOL_BUILD_VERSION": {
           "Subindex": "0x22",
@@ -1210,7 +1287,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_BMS_PROTOCOL_MAJOR_VERSION": {
           "Subindex": "0x30",
@@ -1221,7 +1299,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_BMS_PROTOCOL_MINOR_VERSION": {
           "Subindex": "0x31",
@@ -1232,7 +1311,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_BMS_PROTOCOL_BUILD_VERSION": {
           "Subindex": "0x32",
@@ -1243,7 +1323,8 @@
               "min": 0,
               "max": 4294967295
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         }
       }
     }
@@ -1262,7 +1343,8 @@
             { "value": 0, "description": "Disabled" },
             { "value": 1, "description": "Enabled" }
           ],
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1279,7 +1361,8 @@
             { "value": 0, "description": "Bike is unlocked" },
             { "value": 1, "description": "Bike is locked" }
           ],
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1296,7 +1379,8 @@
             { "value": 0, "description": "IoT is absent" },
             { "value": 1, "description": "IoT is present" }
           ],
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1313,7 +1397,8 @@
             { "value": 0, "description": "Reset disabled, default idle value." },
             { "value": 1, "description": "Reset enabled." }
           ],
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     }
@@ -1333,7 +1418,8 @@
               "min": 0,
               "max": 9
           },
-          "Persistence": "Real-time"
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
         }
       }
     },
@@ -1350,7 +1436,8 @@
               "min": 0,
               "max": 9
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         },
         "CO_PARAM_PAS_DEFAULT_PAS_LEVEL": {
           "Subindex": "0x01",
@@ -1362,6 +1449,7 @@
               "max": 9
           },
           "Persistence": "Persistent",
+          "Obfuscation": "False",
           "Notes": "If the selected default PAS level is higher than the max number of levels, the max will be selected instead. If not specified, the default level is 0, which is preferable for safety reasons."
         }
       }
@@ -1379,7 +1467,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL2": {
           "Subindex": "0x01",
@@ -1390,7 +1479,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL3": {
           "Subindex": "0x02",
@@ -1401,7 +1491,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL4": {
           "Subindex": "0x03",
@@ -1412,7 +1503,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL5": {
           "Subindex": "0x04",
@@ -1423,7 +1515,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL6": {
           "Subindex": "0x05",
@@ -1434,7 +1527,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL7": {
           "Subindex": "0x06",
@@ -1445,7 +1539,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL8": {
           "Subindex": "0x07",
@@ -1456,7 +1551,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL9": {
           "Subindex": "0x08",
@@ -1467,7 +1563,8 @@
               "min": 0,
               "max": 99
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }
@@ -1488,6 +1585,7 @@
               "max": 255
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "km/h"
         },
         "CO_PARAM_SPEED_THRESHOLD_B": {
@@ -1500,6 +1598,7 @@
               "max": 255
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "km/h"
         }
       }
@@ -1518,6 +1617,7 @@
               "max": 100
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "%"
         },
         "CO_PARAM_STARTUP_DETECTION_PULSES_CONFIG": {
@@ -1529,7 +1629,8 @@
               "min": 1,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_STARTUP_DETECTION_WINDOW_CONFIG": {
           "Subindex": "0x02",
@@ -1541,6 +1642,7 @@
               "max": 10000
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "ms"
         },
         "CO_PARAM_RUNTIME_DETECTION_PULSES_CONFIG": {
@@ -1552,7 +1654,8 @@
               "min": 1,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_RUNTIME_DETECTION_WINDOW_CONFIG": {
           "Subindex": "0x11",
@@ -1564,6 +1667,7 @@
               "max": 10000
           },
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "ms"
         },
         "CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG": {
@@ -1576,6 +1680,7 @@
             { "value": 1, "description": "Cadence AND Torque" }
           ],
           "Persistence": "Persistent",
+          "Obfuscation": "True",
           "Unit": "ms",
           "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
         }
@@ -1598,7 +1703,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL2": {
           "Subindex": "0x01",
@@ -1610,7 +1716,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL3": {
           "Subindex": "0x02",
@@ -1622,7 +1729,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL4": {
           "Subindex": "0x03",
@@ -1634,7 +1742,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL5": {
           "Subindex": "0x04",
@@ -1646,7 +1755,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL6": {
           "Subindex": "0x05",
@@ -1658,7 +1768,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL7": {
           "Subindex": "0x06",
@@ -1670,7 +1781,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL8": {
           "Subindex": "0x07",
@@ -1682,7 +1794,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL9": {
           "Subindex": "0x08",
@@ -1694,7 +1807,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1712,7 +1826,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL2": {
           "Subindex": "0x01",
@@ -1724,7 +1839,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL3": {
           "Subindex": "0x02",
@@ -1736,7 +1852,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL4": {
           "Subindex": "0x03",
@@ -1748,7 +1865,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL5": {
           "Subindex": "0x04",
@@ -1760,7 +1878,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL6": {
           "Subindex": "0x05",
@@ -1772,7 +1891,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL7": {
           "Subindex": "0x06",
@@ -1784,7 +1904,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL8": {
           "Subindex": "0x07",
@@ -1796,7 +1917,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL9": {
           "Subindex": "0x08",
@@ -1808,7 +1930,8 @@
               "min": 0,
               "max": 100
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1826,7 +1949,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL2": {
           "Subindex": "0x01",
@@ -1838,7 +1962,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL3": {
           "Subindex": "0x02",
@@ -1850,7 +1975,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL4": {
           "Subindex": "0x03",
@@ -1862,7 +1988,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL5": {
           "Subindex": "0x04",
@@ -1874,7 +2001,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL6": {
           "Subindex": "0x05",
@@ -1886,7 +2014,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL7": {
           "Subindex": "0x06",
@@ -1898,7 +2027,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL8": {
           "Subindex": "0x07",
@@ -1910,7 +2040,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL9": {
           "Subindex": "0x08",
@@ -1922,7 +2053,8 @@
               "min": 1,
               "max": 1000
           },
-          "Persistence": "Persistent"
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1940,6 +2072,7 @@
             { "value": 2, "description": "Cadence feeling preset" }
           ],
           "Persistence": "Real-time",
+          "Obfuscation": "False",
           "Notes": "Under the covers, setting to 1 will set the minimum torque % setting to 0%, and setting to 2 will set the minimum torque % setting to be the same as max torque % (because if min torque % is equal to max torque %, the bike feels like cadence)."
         }
       }

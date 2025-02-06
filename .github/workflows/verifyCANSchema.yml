@@ -1,0 +1,33 @@
+name: Validate CAN protocol schemas
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-public-can-protocol:
+    runs-on: self-hosted  # Use self-hosted GitHub runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Ensure full history to detect changes and submodule state
+
+      - name: Init submodules
+        run: git submodule update --init --recursive  # Initialize and update submodules
+
+      - name: Check FTEX public CANOpen schema file
+        shell: powershell
+        run: |
+          python FTEX_Schema_validator.py FTEX_Protocol_JSON_Schema.json FTEX_Controller_Public_CANOpen//FTEX_Controller_CANOpen_Protocol.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python FTEX_Schema_validator.py FTEX_Protocol_JSON_Schema.json FTEX_Controller_Internal_CANOpen//FTEX_Controller_Internal_CANOpen_Protocol.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python FTEX_Schema_validator.py FTEX_Protocol_JSON_Schema.json FTEX_Peripherals_CANOpen//FTEX_BMS_CANOpen//FTEX_BMS_CANOpen_Protocol.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

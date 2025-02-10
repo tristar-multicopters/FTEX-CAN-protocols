@@ -1111,7 +1111,7 @@
                 ],
                 "Persistence": "Persistent"
               },
-              "CO_PARAM_XOR_FLAG": {
+              "CO_PARAM_CAN_OBFUSCATION_XOR_FLAG": {
                 "Subindex": "0x01",
                 "Access": "R",
                 "Type": "uint32_t",

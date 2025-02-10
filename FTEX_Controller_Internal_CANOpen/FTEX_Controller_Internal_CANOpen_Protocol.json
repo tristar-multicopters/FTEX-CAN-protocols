@@ -1094,5 +1094,35 @@
               }
           }
       }
+  },
+  "CAN Obfuscation": {
+      "CO_ID_CAN_OBFUSCATION": {
+          "CANOpen_Index": "0x6001",
+          "Description": "CAN obfuscation parameters. Contains the XOR mask used for runtime obfuscation and activation/deactivation flag.",
+          "Parameters": {
+              "CO_PARAM_ACTIVATION_FLAG": {
+                "Subindex": "0x00",
+                "Access": "R/W",
+                "Type": "uint8_t",
+                "Description": "Activation flag for CAN obfuscation process.",
+                "Valid_Options": [
+                    { "value": 0, "description": "CAN obfuscation process is disabled." },
+                    { "value": 1, "description": "CAN obfuscation process is enabled." }
+                ],
+                "Persistence": "Persistent"
+              },
+              "CO_PARAM_XOR_FLAG": {
+                "Subindex": "0x01",
+                "Access": "R",
+                "Type": "uint32_t",
+                "Description": "XOR mask used for obfuscation.",
+                "Valid_Range": {
+                    "min": 0,
+                    "max": 4294967295
+                },
+                "Persistence": "Real-time"
+              }
+          }
+      }
   }
 }

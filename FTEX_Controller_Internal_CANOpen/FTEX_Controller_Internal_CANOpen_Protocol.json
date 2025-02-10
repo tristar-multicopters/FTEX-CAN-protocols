@@ -1100,7 +1100,7 @@
           "CANOpen_Index": "0x6001",
           "Description": "CAN obfuscation parameters. Contains the XOR mask used for runtime obfuscation and activation/deactivation flag.",
           "Parameters": {
-              "CO_PARAM_ACTIVATION_FLAG": {
+              "CO_PARAM_CAN_OBFUSCATION_ACTIVATION_FLAG": {
                 "Subindex": "0x00",
                 "Access": "R/W",
                 "Type": "uint8_t",

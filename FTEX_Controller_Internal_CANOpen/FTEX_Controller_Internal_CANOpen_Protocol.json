@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.1"
+      "version": "1.4.2"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -1090,6 +1090,36 @@
                     { "value": 0, "description": "Test mode disabled, controller is running on normal firmware behaviour." },
                     { "value": 1, "description": "EOL Test Mode 1 : Requested by manufacturing. Mode config : Speed limit : 99km/h | PAS 5 | Max DC Current 14A | Continuous DC Current 14A | Hybrid torque/cadence PAS | Front light ON | Rear light ON | Cadence AND Torque PAS detection | Deactivate CAN BMS. Please note that it is impossible to go back to Test mode disabled from this mode. You need to perform a complete bootup to restore the default firmware behaviour." }
                 ],
+                "Persistence": "Real-time"
+              }
+          }
+      }
+  },
+  "CAN Obfuscation": {
+      "CO_ID_CAN_OBFUSCATION": {
+          "CANOpen_Index": "0x6001",
+          "Description": "CAN obfuscation parameters. Contains the XOR mask used for runtime obfuscation and activation/deactivation flag.",
+          "Parameters": {
+              "CO_PARAM_CAN_OBFUSCATION_ACTIVATION_FLAG": {
+                "Subindex": "0x00",
+                "Access": "R/W",
+                "Type": "uint8_t",
+                "Description": "Activation flag for CAN obfuscation process.",
+                "Valid_Options": [
+                    { "value": 0, "description": "CAN obfuscation process is disabled." },
+                    { "value": 1, "description": "CAN obfuscation process is enabled." }
+                ],
+                "Persistence": "Persistent"
+              },
+              "CO_PARAM_CAN_OBFUSCATION_XOR_FLAG": {
+                "Subindex": "0x01",
+                "Access": "R",
+                "Type": "uint32_t",
+                "Description": "XOR mask used for obfuscation.",
+                "Valid_Range": {
+                    "min": 0,
+                    "max": 4294967295
+                },
                 "Persistence": "Real-time"
               }
           }

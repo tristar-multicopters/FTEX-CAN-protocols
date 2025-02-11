@@ -1098,17 +1098,17 @@
   "CAN Obfuscation": {
       "CO_ID_CAN_OBFUSCATION": {
           "CANOpen_Index": "0x6001",
-          "Description": "CAN obfuscation parameters. Contains the XOR mask used for runtime obfuscation and activation/deactivation flag.",
+          "Description": "CAN obfuscation parameters. Contains the XOR ciphered based keys used for runtime CAN obfuscation.",
           "Parameters": {
-              "CO_PARAM_CAN_OBFUSCATION_LOCK_STATUS": {
+              "CO_PARAM_CAN_OBFUSCATION_UNLOCK_COMMAND": {
                 "Subindex": "0x00",
                 "Access": "R/W",
                 "Type": "uint8_t",
-                "Description": "Activation flag for CAN obfuscation process.",
-                "Valid_Options": [
-                    { "value": 0, "description": "Controller CAN read/write processes are unlocked for all parameters." },
-                    { "value": 1, "description": "Controller CAN read/write processes are locked for obfuscated parameters." }
-                ],
+                "Description": "Unlock CAN key, sent from the IoT.",
+                "Valid_Range": {
+                    "min": 0,
+                    "max": 4294967295
+                },
                 "Persistence": "Real-time"
               },
               "CO_PARAM_CAN_OBFUSCATION_XOR_FLAG": {

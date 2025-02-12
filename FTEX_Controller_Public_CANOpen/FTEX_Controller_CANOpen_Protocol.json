@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.12"
+    "version": "2.4.13"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -689,7 +689,7 @@
               "max": 99
           },
           "Persistence": "Real-time",
-          "Obfuscation": "True"
+          "Obfuscation": "False"
         },
         "CO_PARAM_SPEED_DECIMAL": {
           "Subindex": "0x01",
@@ -702,7 +702,7 @@
               "max": 999
           },
           "Persistence": "Real-time",
-          "Obfuscation": "True"
+          "Obfuscation": "False"
         }
       }
     },
@@ -766,7 +766,7 @@
               "max": 8500
           },
           "Persistence": "Real-time",
-          "Obfuscation": "True"
+          "Obfuscation": "False"
         }
       }
     },
@@ -961,7 +961,7 @@
             { "value": 1, "description": "Output is on." }
           ],
           "Persistence": "Real-time",
-          "Obfuscation": "True",
+          "Obfuscation": "False",
           "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL to on activates the low-side switch and grounds the OUTPUT_1 pin (eg. front light)."
         },
         "CO_PARAM_TOGGLABLE_OUTPUT_1_DEFAULT_CONFIG": {
@@ -993,7 +993,7 @@
             { "value": 1, "description": "Output is on." }
           ],
           "Persistence": "Real-time",
-          "Obfuscation": "True",
+          "Obfuscation": "False",
           "Notes": "Since the output is a low-side switch, turning CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL to on activates the low-side switch and grounds the OUTPUT_2 pin (eg. rear light)."
         },
         "CO_PARAM_TOGGLABLE_OUTPUT_2_DEFAULT_CONFIG": {

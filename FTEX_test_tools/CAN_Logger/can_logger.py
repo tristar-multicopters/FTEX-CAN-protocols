@@ -8,6 +8,8 @@ from datetime import datetime
 from curses import wrapper
 from utils.list_channels import list_available_channels
 from collections import deque
+from pathlib import Path
+import csv
 
 CONFIG_FILE = 'can_config.json'
 MAX_MESSAGES = 100  # Maximum number of messages to store in history
@@ -109,6 +111,22 @@ def setup_initial_config():
     
     return config
 
+def create_log_file():
+    # Create logs directory if it doesn't exist
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+    
+    # Create a new log file with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = log_dir / f"can_log_{timestamp}.csv"
+    
+    # Initialize CSV file with headers
+    with open(log_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Time', 'ID', 'Data', 'DLC (Data Length Code)'])
+    
+    return log_file
+
 class CANMonitorUI:
     def __init__(self, stdscr, config):
         self.stdscr = stdscr
@@ -116,6 +134,7 @@ class CANMonitorUI:
         self.messages = deque(maxlen=MAX_MESSAGES)
         self.running = True
         self.setup_colors()
+        self.log_file = create_log_file()
         
     def setup_colors(self):
         curses.start_color()
@@ -145,7 +164,8 @@ class CANMonitorUI:
             self.stdscr.addstr(start_row + i, 0, msg, curses.color_pair(2))
 
     def draw_status(self):
-        status = "Press 'q' to quit | 'p' to pause/resume"
+        log_name = Path(self.log_file).name
+        status = f"Logging to: {log_name} | Press 'q' to quit | 'p' to pause/resume"
         self.stdscr.addstr(curses.LINES - 1, 0, status, curses.color_pair(4))
 
     def format_can_message(self, msg):
@@ -197,6 +217,16 @@ class CANMonitorUI:
                     if msg:
                         formatted_msg = self.format_can_message(msg)
                         self.messages.append(formatted_msg)
+                        
+                        # Log message to CSV
+                        with open(self.log_file, 'a', newline='') as f:
+                            writer = csv.writer(f)
+                            writer.writerow([
+                                self.format_timestamp_ms(msg.timestamp),
+                                f"{msg.arbitration_id:#04x}",
+                                self.format_can_data(msg.data),
+                                len(msg.data)
+                            ])
 
                 time.sleep(0.01)  # Small delay to prevent high CPU usage
 

@@ -1,12 +1,16 @@
+import curses
 import re
 import can
 import time
 import os
 import json
 from datetime import datetime
+from curses import wrapper
 from utils.list_channels import list_available_channels
+from collections import deque
 
 CONFIG_FILE = 'can_config.json'
+MAX_MESSAGES = 100  # Maximum number of messages to store in history
 
 def load_config():
     default_config = {
@@ -105,69 +109,123 @@ def setup_initial_config():
     
     return config
 
-def setup_bus(channel: str, bitrate: int, baudrate: int) -> can.Bus:
-    try:
-        print("Initializing CAN Bus...")
+class CANMonitorUI:
+    def __init__(self, stdscr, config):
+        self.stdscr = stdscr
+        self.config = config
+        self.messages = deque(maxlen=MAX_MESSAGES)
+        self.running = True
+        self.setup_colors()
         
-        can_bus = can.interface.Bus(
-            interface='seeedstudio',
-            channel=channel,
-            bitrate=bitrate * 1000,  # Convert kbps to bps
-            baudrate=baudrate,
-            timeout=0.1,
-            operation_mode='normal'
-        )
-        return can_bus
-    except Exception as e:
-        print(f"Error initializing CAN network: {e}")
-        raise
+    def setup_colors(self):
+        curses.start_color()
+        curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Headers
+        curses.init_pair(2, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Messages
+        curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)    # Errors
+        curses.init_pair(4, curses.COLOR_CYAN, curses.COLOR_BLACK)   # Status
 
-def format_can_data(data: bytes) -> str:
-    """Format CAN data bytes with spaces between each byte."""
-    return ' '.join(f"{b:02X}" for b in data)
+    def draw_header(self):
+        header = "=== CAN Bus Monitor ==="
+        self.stdscr.addstr(0, 0, "=" * curses.COLS, curses.color_pair(1))
+        self.stdscr.addstr(0, (curses.COLS - len(header)) // 2, header, curses.color_pair(1))
+        
+        # Show current configuration
+        config_str = f"Channel: {self.config['channel']} | Bitrate: {self.config['bitrate']} kbps | Baudrate: {self.config['baudrate']} bps"
+        self.stdscr.addstr(1, 0, config_str, curses.color_pair(4))
+        
+        # Column headers
+        self.stdscr.addstr(3, 0, "Time          ID      Data", curses.color_pair(1))
+        self.stdscr.addstr(4, 0, "-" * curses.COLS, curses.color_pair(1))
 
-def format_timestamp_ms(timestamp: float) -> str:
-    """Convert Unix timestamp to readable time with milliseconds."""
-    dt = datetime.fromtimestamp(timestamp)
-    return dt.strftime('%H:%M:%S.%f')[:-3]  # Show only milliseconds, not microseconds
+    def draw_messages(self):
+        start_row = 5
+        for i, msg in enumerate(self.messages):
+            if start_row + i >= curses.LINES - 1:  # Leave room for status line
+                break
+            self.stdscr.addstr(start_row + i, 0, msg, curses.color_pair(2))
 
-def listen_CAN_bus(bus):
-    try:
-        print("Listening to CAN messages. Press Ctrl+C to stop.")
-        print("Time          ID      Data")
-        print("-" * 50)
-        for msg in bus:  # Continuously listen for messages
-            timestamp = format_timestamp_ms(msg.timestamp)
-            data = format_can_data(msg.data)
-            print(f"{timestamp}  {msg.arbitration_id:#04x}    {data}")
-    except KeyboardInterrupt:
-        print("\nListener stopped by user.")
-    finally:
-        bus.shutdown()
+    def draw_status(self):
+        status = "Press 'q' to quit | 'p' to pause/resume"
+        self.stdscr.addstr(curses.LINES - 1, 0, status, curses.color_pair(4))
+
+    def format_can_message(self, msg):
+        timestamp = self.format_timestamp_ms(msg.timestamp)
+        data = self.format_can_data(msg.data)
+        return f"{timestamp}  {msg.arbitration_id:#04x}    {data}"
+
+    @staticmethod
+    def format_can_data(data: bytes) -> str:
+        return ' '.join(f"{b:02X}" for b in data)
+
+    @staticmethod
+    def format_timestamp_ms(timestamp: float) -> str:
+        dt = datetime.fromtimestamp(timestamp)
+        return dt.strftime('%H:%M:%S.%f')[:-3]
+
+    def run(self):
+        try:
+            bus = can.interface.Bus(
+                interface='seeedstudio',
+                channel=self.config['channel'],
+                bitrate=self.config['bitrate'] * 1000,
+                baudrate=self.config['baudrate'],
+                timeout=0.1
+            )
+            
+            paused = False
+            while self.running:
+                self.stdscr.clear()
+                self.draw_header()
+                self.draw_messages()
+                self.draw_status()
+                self.stdscr.refresh()
+
+                # Check for user input (non-blocking)
+                self.stdscr.nodelay(1)
+                try:
+                    key = self.stdscr.getch()
+                    if key == ord('q'):
+                        self.running = False
+                    elif key == ord('p'):
+                        paused = not paused
+                except curses.error:
+                    pass
+
+                if not paused:
+                    # Check for CAN messages (non-blocking due to timeout)
+                    msg = bus.recv()
+                    if msg:
+                        formatted_msg = self.format_can_message(msg)
+                        self.messages.append(formatted_msg)
+
+                time.sleep(0.01)  # Small delay to prevent high CPU usage
+
+        except Exception as e:
+            self.stdscr.addstr(curses.LINES - 2, 0, f"Error: {str(e)}", curses.color_pair(3))
+            self.stdscr.refresh()
+            time.sleep(2)
+        finally:
+            if 'bus' in locals():
+                bus.shutdown()
 
 def main():
-    try:
-        # Load or create configuration
-        config = setup_initial_config()
-        if not config:
-            print("Setup failed. Exiting.")
-            return
+    # First do the regular config setup
+    config = setup_initial_config()
+    if not config:
+        print("Setup failed. Exiting.")
+        return
 
-        if not config['channel']:
-            print("No valid COM port selected. Exiting.")
-            return
+    if not config['channel']:
+        print("No valid COM port selected. Exiting.")
+        return
 
-        print(f"Using configuration:")
-        print(f"Channel: {config['channel']}")
-        print(f"Bitrate: {config['bitrate']} kbps")
-        print(f"Baudrate: {config['baudrate']} bps")
+    # Then start the curses interface
+    def start_ui(stdscr):
+        curses.curs_set(0)  # Hide cursor
+        ui = CANMonitorUI(stdscr, config)
+        ui.run()
 
-        canBus = setup_bus(config['channel'], config['bitrate'], config['baudrate'])
-        time.sleep(1)
-        
-        listen_CAN_bus(canBus)
-    except Exception as e:
-        print(type(e), e.args, e)
+    wrapper(start_ui)
 
 if __name__ == "__main__":
     main()

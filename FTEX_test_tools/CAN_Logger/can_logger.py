@@ -3,18 +3,17 @@ import can
 import time
 import os
 import json
+from datetime import datetime
 from utils.list_channels import list_available_channels
 
 # Configuration variables
 BITRATE = 500000  # CAN bitrate
 BAUDRATE = 2000000  # CAN baudrate
 
-# Network setup function
 def setup_bus(channel: str, bitrate: int, baudrate: int) -> can.Bus:
     try:
         print("Initializing CAN Bus...")
         
-        # Create a new CANopen Network
         can_bus = can.interface.Bus(
             interface='seeedstudio',
             channel=channel,
@@ -28,17 +27,28 @@ def setup_bus(channel: str, bitrate: int, baudrate: int) -> can.Bus:
         print(f"Error initializing CAN network: {e}")
         raise
 
+def format_can_data(data: bytes) -> str:
+    """Format CAN data bytes with spaces between each byte."""
+    return ' '.join(f"{b:02X}" for b in data)
+
+def format_timestamp_ms(timestamp: float) -> str:
+    """Convert Unix timestamp to readable time with milliseconds."""
+    dt = datetime.fromtimestamp(timestamp)
+    return dt.strftime('%H:%M:%S.%f')[:-3]  # Show only milliseconds, not microseconds
 
 def listen_CAN_bus(bus):
     try:
         print("Listening to CAN messages. Press Ctrl+C to stop.")
+        print("Time          ID      Data")
+        print("-" * 50)
         for msg in bus:  # Continuously listen for messages
-            print(f"Timestamp: {msg.timestamp:.6f}, ID: {msg.arbitration_id:#04x}, Data: {msg.data.hex()}")
+            timestamp = format_timestamp_ms(msg.timestamp)
+            data = format_can_data(msg.data)
+            print(f"{timestamp}  {msg.arbitration_id:#04x}    {data}")
     except KeyboardInterrupt:
         print("\nListener stopped by user.")
     finally:
         bus.shutdown()
-
 
 def select_channel():
     available_channels = list_available_channels()
@@ -60,7 +70,6 @@ def select_channel():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-
 def main():
     try:
         channel = select_channel()
@@ -77,6 +86,5 @@ def main():
     except Exception as e:
         print(type(e), e.args, e)
 
-    
 if __name__ == "__main__":
     main()

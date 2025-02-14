@@ -123,7 +123,7 @@ def create_log_file():
     # Initialize CSV file with headers
     with open(log_file, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['Time', 'ID', 'Data', 'DLC (Data Length Code)'])
+        writer.writerow(['Time', 'ID', 'Data', 'DLC'])
     
     return log_file
 
@@ -135,6 +135,13 @@ class CANMonitorUI:
         self.running = True
         self.setup_colors()
         self.log_file = create_log_file()
+        # Statistics
+        self.msg_count = 0
+        self.start_time = time.time()
+        self.last_msg_time = None
+        self.max_gap = 0
+        self.min_gap = float('inf')  # Initialize min_gap to infinity
+        self.msg_per_id = {}
         
     def setup_colors(self):
         curses.start_color()
@@ -152,12 +159,24 @@ class CANMonitorUI:
         config_str = f"Channel: {self.config['channel']} | Bitrate: {self.config['bitrate']} kbps | Baudrate: {self.config['baudrate']} bps"
         self.stdscr.addstr(1, 0, config_str, curses.color_pair(4))
         
+        # Show statistics
+        runtime = time.time() - self.start_time
+        msg_rate = self.msg_count / runtime if runtime > 0 else 0
+        stats = f"Messages: {self.msg_count} | Rate: {msg_rate:.1f} msg/s | Gap min/max: {self.min_gap*1000:.1f}/{self.max_gap*1000:.1f}ms"
+        self.stdscr.addstr(2, 0, stats, curses.color_pair(4))
+        
+        # Show top IDs
+        if self.msg_per_id:
+            top_ids = sorted(self.msg_per_id.items(), key=lambda x: x[1], reverse=True)[:3]
+            top_ids_str = "Top IDs: " + " | ".join(f"{id_}: {count}" for id_, count in top_ids)
+            self.stdscr.addstr(3, 0, top_ids_str, curses.color_pair(4))
+        
         # Column headers
-        self.stdscr.addstr(3, 0, "Time          ID      Data", curses.color_pair(1))
-        self.stdscr.addstr(4, 0, "-" * curses.COLS, curses.color_pair(1))
+        self.stdscr.addstr(4, 0, "Time          ID      Data", curses.color_pair(1))
+        self.stdscr.addstr(5, 0, "-" * curses.COLS, curses.color_pair(1))
 
     def draw_messages(self):
-        start_row = 5
+        start_row = 6
         for i, msg in enumerate(self.messages):
             if start_row + i >= curses.LINES - 1:  # Leave room for status line
                 break
@@ -215,6 +234,23 @@ class CANMonitorUI:
                     # Check for CAN messages (non-blocking due to timeout)
                     msg = bus.recv()
                     if msg:
+                        # Update statistics
+                        self.msg_count += 1
+                        current_time = time.time()
+                        
+                        # Update message gap tracking
+                        if self.last_msg_time is not None:
+                            gap = current_time - self.last_msg_time
+                            if gap > self.max_gap:
+                                self.max_gap = gap
+                            if gap < self.min_gap:
+                                self.min_gap = gap
+                        self.last_msg_time = current_time
+                        
+                        # Update ID counting
+                        msg_id = f"{msg.arbitration_id:#04x}"
+                        self.msg_per_id[msg_id] = self.msg_per_id.get(msg_id, 0) + 1
+                        
                         formatted_msg = self.format_can_message(msg)
                         self.messages.append(formatted_msg)
                         

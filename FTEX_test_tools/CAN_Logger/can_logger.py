@@ -12,7 +12,7 @@ from pathlib import Path
 import csv
 
 CONFIG_FILE = 'can_config.json'
-MAX_MESSAGES = 100  # Maximum number of messages to store in history
+STATIC_LINES_IN_TERMINAL = 7  # Maximum number of messages to store in history
 
 def load_config():
     default_config = {
@@ -20,7 +20,9 @@ def load_config():
         "bitrate": 500,  # in kbps
         "baudrate": 2000000,  # in bps
         "common_bitrates": [125, 250, 500, 1000],  # in kbps
-        "common_baudrates": [115200, 921600, 2000000]  # in bps
+        "common_baudrates": [115200, 921600, 2000000],  # in bps
+        "can_id_filter": "",
+        "obj_dir_filter": ""
     }
     
     if os.path.exists(CONFIG_FILE):
@@ -43,7 +45,10 @@ def setup_initial_config():
     print(f"Channel: {config['channel']}")
     print(f"Bitrate: {config['bitrate']} kbps")
     print(f"Baudrate: {config['baudrate']} bps")
-    
+    print(f"CANOpen ID Filter: {[hex(id_) for id_ in config['can_id_filter']]}")
+    print(f"Object Directory Address Filter: {[hex(addr) for addr in config['obj_dir_filter']]}")
+
+
     edit = input("\nDo you want to edit the configuration? (y/n): ").lower()
     if edit == 'y':
         # Channel selection
@@ -106,6 +111,13 @@ def setup_initial_config():
             except ValueError:
                 print("Please enter a number.")
 
+        can_id_filter = input("\nEnter CANOpen ID filter(s) (comma-separated, leave empty for all messages): ")
+        config['can_id_filter'] = [int(x.strip(), 16) for x in can_id_filter.split(',') if x.strip()] if can_id_filter else []
+
+        obj_dir_filter = input("Enter Object Directory Address filter(s) (comma-separated, leave empty for all messages): ")
+        config['obj_dir_filter'] = [int(x.strip(), 16) for x in obj_dir_filter.split(',') if x.strip()] if obj_dir_filter else []
+
+
         save_config(config)
         print("\nConfiguration saved!")
     
@@ -131,7 +143,8 @@ class CANMonitorUI:
     def __init__(self, stdscr, config):
         self.stdscr = stdscr
         self.config = config
-        self.messages = deque(maxlen=MAX_MESSAGES)
+        self.max_display_messages = curses.LINES - STATIC_LINES_IN_TERMINAL  # Leave space for headers and footer
+        self.messages = deque(maxlen=max(STATIC_LINES_IN_TERMINAL, self.max_display_messages))  # Ensure at least 10 messages
         self.running = True
         self.setup_colors()
         self.log_file = create_log_file()
@@ -234,6 +247,19 @@ class CANMonitorUI:
                     # Check for CAN messages (non-blocking due to timeout)
                     msg = bus.recv()
                     if msg:
+                         # Apply filters
+                        can_id_filter = self.config['can_id_filter']
+                        obj_dir_filter = self.config['obj_dir_filter']
+                        msg_id = msg.arbitration_id
+                        if can_id_filter:
+                            if can_id_filter and msg_id not in can_id_filter:
+                                continue
+                        
+                        if obj_dir_filter:
+                            obj_dir = int.from_bytes(msg.data[1:4], byteorder='little') if len(msg.data) > 3 else None
+                            if obj_dir is None or obj_dir not in obj_dir_filter:
+                                continue
+                        
                         # Update statistics
                         self.msg_count += 1
                         current_time = time.time()

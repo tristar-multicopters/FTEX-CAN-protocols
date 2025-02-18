@@ -151,6 +151,8 @@ Example : Manual obfuscation mechanism bypass
 #endif
 ```
 
+Another way to bypass the obfuscation mechanism is to directly send the unlock command to the controller. The obfuscation will be deactivate for the duration of the controller's runtime. Let's say you are working on a controller with no access to an IoT module or the possibility to recompile the firmware, simply sending `0x29A4A5D0` to the CANOpen index:`0x6001`, subindex:`0x00`. 
+
 #### Internal Obfuscation Mechanism
 The previous sections served as an overview on how to use this feature on a day-to-day basis. The following section explains the implementation details of this feature.
 

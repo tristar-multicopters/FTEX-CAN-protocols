@@ -135,7 +135,7 @@ def create_log_file():
     # Initialize CSV file with headers
     with open(log_file, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['Time', 'ID', 'Data', 'DLC'])
+        writer.writerow(['Time', 'ID', 'Data'])
     
     return log_file
 
@@ -286,8 +286,7 @@ class CANMonitorUI:
                             writer.writerow([
                                 self.format_timestamp_ms(msg.timestamp),
                                 f"{msg.arbitration_id:#04x}",
-                                self.format_can_data(msg.data),
-                                len(msg.data)
+                                self.format_can_data(msg.data)
                             ])
 
                 time.sleep(0.01)  # Small delay to prevent high CPU usage

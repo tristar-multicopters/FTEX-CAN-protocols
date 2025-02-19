@@ -977,6 +977,20 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL."
+        },
+        "CO_PARAM_TOGGLABLE_OUTPUT_1_BEHAVIOUR_CONFIG": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
+          "Valid_Options": [
+            { "value": 0, "description": "No special behavior on brake" },
+            { "value": 1, "description": "Blink the output on brake" },
+            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "For example, this can be useful if you want to configure a rear light to blink when the brake is pressed."
         }
       }
     },
@@ -1010,14 +1024,15 @@
           "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL."
         },
-        "CO_PARAM_TOGGLABLE_OUTPUT_2_BRAKE_CONFIG": {
+        "CO_PARAM_TOGGLABLE_OUTPUT_2_BEHAVIOUR_CONFIG": {
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Configure the special output behavior to adopt when brake input is detected.",
+          "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
           "Valid_Options": [
             { "value": 0, "description": "No special behavior on brake" },
-            { "value": 1, "description": "Blink the output on brake" }
+            { "value": 1, "description": "Blink the output on brake" },
+            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",

@@ -493,8 +493,21 @@
           "Obfuscation": "True",
           "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
         },
-        "CO_PARAM_BMS_PROTOCOL_CONFIG": {
+        "CO_PARAM_BATTERY_ERROR_BEHAVIOUR": {
           "Subindex": "0x30",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Select the behaviour on the controller once a battery error is detected.",
+          "Valid_Options": [
+            { "value": 0, "description": "Ignore error: The controller will not display the battery error over CAN/HMI. Powertrain will work as usual." },
+            { "value": 1, "description": "Display error: The controller will raise the error over CAN/HMI. Powertrain will work as usual."},
+            { "value": 2, "description": "Disable powertrain: The controller will raise the error over CAN/HMI. Powertrain will be disable for the entire battery error duration."}
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_BMS_PROTOCOL_CONFIG": {
+          "Subindex": "0x31",
           "Access": "R",
           "Type": "uint8_t",
           "Description": "Select the BMS protocol on the vehicle. 0 = no BMS protocol. 1 = FTEX BMS Protocol. >1 = custom BMS protocol",
@@ -507,7 +520,7 @@
           "Notes": "The default is 1. For now, changing the protocol is not possible (ie. this parameter is readonly)."
         },
         "CO_PARAM_BMS_MISSING_CONFIG": {
-          "Subindex": "0x31",
+          "Subindex": "0x32",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",

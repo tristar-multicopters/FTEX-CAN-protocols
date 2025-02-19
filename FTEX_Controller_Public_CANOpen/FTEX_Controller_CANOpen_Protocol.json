@@ -1402,6 +1402,24 @@
           "Obfuscation": "True"
         }
       }
+    },
+    "CO_ID_USER_CONFIG_RESET": {
+      "CANOpen_Index": "0x203B",
+      "Description": "Allow the user to perform a full controller user config reset. The feature erases the current saved user config and load the default user config. Controller will also reset once the user config erase proces is completed.",
+      "Parameters": {
+        "CO_PARAM_USER_CONFIG_RESET": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: Reset disabled, the controller behaves as usual. 1: Reset is requested, the user config will be erased and the default config will be loaded, then the controller will reset. This sequence will be executed within 100ms once the value is set to 1.",
+          "Valid_Options": [
+            { "value": 0, "description": "User config reset disabled, default idle value." },
+            { "value": 1, "description": "User config reset requested, the user config will be erased and loaded with default config." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        }
+      }
     }
   },
   "PAS General Configuration": {

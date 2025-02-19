@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.14"
+    "version": "2.4.15"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -493,8 +493,21 @@
           "Obfuscation": "True",
           "Notes": "The controller doesn't have a current sensor on the DC line, so this setting is approximately respected but it is not very accurate."
         },
-        "CO_PARAM_BMS_PROTOCOL_CONFIG": {
+        "CO_PARAM_BATTERY_ERROR_BEHAVIOUR": {
           "Subindex": "0x30",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Select the behaviour on the controller once a battery error is detected.",
+          "Valid_Options": [
+            { "value": 0, "description": "Ignore error: The controller will not display the battery error over CAN/HMI. Powertrain will work as usual." },
+            { "value": 1, "description": "Display error: The controller will raise the error over CAN/HMI. Powertrain will work as usual."},
+            { "value": 2, "description": "Disable powertrain: The controller will raise the error over CAN/HMI. Powertrain will be disable for the entire battery error duration."}
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_BMS_PROTOCOL_CONFIG": {
+          "Subindex": "0x31",
           "Access": "R",
           "Type": "uint8_t",
           "Description": "Select the BMS protocol on the vehicle. 0 = no BMS protocol. 1 = FTEX BMS Protocol. >1 = custom BMS protocol",
@@ -507,7 +520,7 @@
           "Notes": "The default is 1. For now, changing the protocol is not possible (ie. this parameter is readonly)."
         },
         "CO_PARAM_BMS_MISSING_CONFIG": {
-          "Subindex": "0x31",
+          "Subindex": "0x32",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
@@ -977,6 +990,20 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_1_CONTROL."
+        },
+        "CO_PARAM_TOGGLABLE_OUTPUT_1_BEHAVIOUR_CONFIG": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
+          "Valid_Options": [
+            { "value": 0, "description": "No special behavior on brake" },
+            { "value": 1, "description": "Blink the output on brake" },
+            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "For example, this can be useful if you want to configure a rear light to blink when the brake is pressed."
         }
       }
     },
@@ -1010,14 +1037,15 @@
           "Obfuscation": "True",
           "Notes": "For example, this is to automatically turn on a light when the vehicle turns on. The output can still be toggled afterwards with CO_PARAM_TOGGLABLE_OUTPUT_2_CONTROL."
         },
-        "CO_PARAM_TOGGLABLE_OUTPUT_2_BRAKE_CONFIG": {
+        "CO_PARAM_TOGGLABLE_OUTPUT_2_BEHAVIOUR_CONFIG": {
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Configure the special output behavior to adopt when brake input is detected.",
+          "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
           "Valid_Options": [
             { "value": 0, "description": "No special behavior on brake" },
-            { "value": 1, "description": "Blink the output on brake" }
+            { "value": 1, "description": "Blink the output on brake" },
+            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1397,6 +1425,24 @@
           "Valid_Options": [
             { "value": 0, "description": "Reset disabled, default idle value." },
             { "value": 1, "description": "Reset enabled." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        }
+      }
+    },
+    "CO_ID_USER_CONFIG_RESET": {
+      "CANOpen_Index": "0x203B",
+      "Description": "Allow the user to perform a full controller user config reset. The feature erases the current saved user config and load the default user config. Controller will also reset once the user config erase proces is completed.",
+      "Parameters": {
+        "CO_PARAM_USER_CONFIG_RESET": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "0: Reset disabled, the controller behaves as usual. 1: Reset is requested, the user config will be erased and the default config will be loaded, then the controller will reset. This sequence will be executed within 100ms once the value is set to 1.",
+          "Valid_Options": [
+            { "value": 0, "description": "User config reset disabled, default idle value." },
+            { "value": 1, "description": "User config reset requested, the user config will be erased and loaded with default config." }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "True"

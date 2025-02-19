@@ -1124,5 +1124,25 @@
               }
           }
       }
+  },
+  "Hardware Configuration": {
+      "CO_ID_HARDWARE_PRESET_CONFIG": {
+          "CANOpen_Index": "0x6002",
+          "Description": "CO_PARAM_HARDWARE_PRESET_CONFIG",
+          "Parameters": {
+              "CO_PARAM_HARDWARE_PRESET_CONFIG": {
+                "Subindex": "0x00",
+                "Access": "R/W",
+                "Type": "uint8_t",
+                "Description": "Unlock CAN key, sent from the IoT.",
+                "Valid_Options": [
+                    { "value": 0, "description": "Default pinout config file, pin 17 and 18 used as UART comm port." },
+                    { "value": 1, "description": "Pinout config used by Legacy Super73 DC/DC Converter and horn support." },
+                    { "value": 255, "description": "Using a custom pinout hal_config.h config file, imported during firmware compilation time." }
+                ],
+                "Persistence": "Persistent"
+              }
+          }
+      }
   }
 }

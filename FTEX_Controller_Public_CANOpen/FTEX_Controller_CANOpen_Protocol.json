@@ -237,7 +237,7 @@
               "max": 100
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False",
+          "Obfuscation": "True",
           "Notes": "Currently, only digital brakes are supported."
         }
       }
@@ -563,7 +563,7 @@
               "max": 250
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_MOTOR_RPM_BEFORE_GEAR_RATIO_MEASUREMENT": {
           "Subindex": "0x10",
@@ -602,7 +602,7 @@
               "max": 20000
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_MOTOR_PHASE_V_CURRENT_MEASUREMENT": {
           "Subindex": "0x21",
@@ -615,7 +615,7 @@
               "max": 20000
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         }
       }
     },
@@ -634,7 +634,7 @@
               "max": 350
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_CONTROLLER_TEMPERATURE_MEASUREMENT_SLAVE": {
           "Subindex": "0x01",
@@ -647,7 +647,7 @@
               "max": 350
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False",
+          "Obfuscation": "True",
           "Notes": "This parameter will be deprecated"
         }
       }
@@ -669,7 +669,7 @@
               "max": 4294967294
           },
           "Persistence": "Persistent",
-          "Obfuscation": "False",
+          "Obfuscation": "True",
           "Notes": "As of today, the odometer may reset to 0 on firmware updates."
         },
         "CO_PARAM_ESTIMATED_RANGE": {
@@ -1484,7 +1484,7 @@
               "max": 9
           },
           "Persistence": "Persistent",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_PAS_DEFAULT_PAS_LEVEL": {
           "Subindex": "0x01",
@@ -1496,7 +1496,7 @@
               "max": 9
           },
           "Persistence": "Persistent",
-          "Obfuscation": "False",
+          "Obfuscation": "True",
           "Notes": "If the selected default PAS level is higher than the max number of levels, the max will be selected instead. If not specified, the default level is 0, which is preferable for safety reasons."
         }
       }

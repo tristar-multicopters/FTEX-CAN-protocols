@@ -550,7 +550,7 @@
               "max": 250
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_MOTOR_TEMPERATURE_MEASUREMENT_SLAVE": {
           "Subindex": "0x01",

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.15"
+    "version": "2.4.16"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -19,7 +19,7 @@
             { "value": 1, "description": "500 kbps" }
           ],
           "Persistence": "Persistent",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_CAN_TERMINATION": {
             "Subindex": "0x01",
@@ -748,7 +748,7 @@
               "max": 100000
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         },
         "CO_PARAM_MECHANICAL_POWER": {
           "Subindex": "0x02",
@@ -761,7 +761,7 @@
               "max": 50000
           },
           "Persistence": "Real-time",
-          "Obfuscation": "False"
+          "Obfuscation": "True"
         }
       }
     },

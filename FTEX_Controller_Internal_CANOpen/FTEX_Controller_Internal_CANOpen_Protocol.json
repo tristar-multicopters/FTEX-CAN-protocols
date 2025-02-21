@@ -1104,18 +1104,18 @@
                 "Subindex": "0x00",
                 "Access": "R/W",
                 "Type": "uint32_t",
-                "Description": "Unlock CAN key, sent from the IoT.",
+                "Description": "Unlock CAN command, sent from the IoT.",
                 "Valid_Range": {
                     "min": 0,
                     "max": 4294967295
                 },
                 "Persistence": "Real-time"
               },
-              "CO_PARAM_CAN_OBFUSCATION_XOR_FLAG": {
+              "CO_PARAM_CAN_OBFUSCATION_FLAG": {
                 "Subindex": "0x01",
                 "Access": "R",
                 "Type": "uint32_t",
-                "Description": "XOR ciphere based secret key.",
+                "Description": "Flag used by the IoT. See internal implementation for details.",
                 "Valid_Range": {
                     "min": 0,
                     "max": 4294967295

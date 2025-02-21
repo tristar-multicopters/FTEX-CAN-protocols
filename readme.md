@@ -14,13 +14,19 @@ FTEX uses SDO expedited transfer for transferring objects with up to four bytes.
 
 ![CANframe](https://drive.google.com/uc?export=view&id=1d4pl2eg4_aW4hmxD5vwenTk4lDIGYi2R "Standard CAN frame")
 
-Here, the <CMD> byte is dependent on the length of the data that are to be written. <CMD> can be one of the following values:
-- 1 byte data length: 2Fh
-- 2 byte data length: 2Bh
-- 3 byte data length: 27h
-- 4 byte data length: 23h
+Here, the <CMD> byte is dependent on the length of the data that are to be written or read. <CMD> can be one of the following values:
+- 1 byte write: 0x2F
+- 2 bytes write: 0x2B
+- 3 bytes write: 0x27
+- 4 bytes write: 0x23
 
-The <Data> field is written with the data that are to be written; the LSB of the data is entered in byte 4.
+For read operations:
+- 1 byte read: 0x4F
+- 2 bytes read: 0x4B
+- 3 bytes read: 0x47
+- 4 bytes read: 0x43
+
+The <Data> field is written with the data that are to be written, if applicable; the LSB of the data is entered in byte 4. The data field is reserved/unused for read operations.
 
 ### Node ID
 - 0x01: Node ID of the FTEX master controller

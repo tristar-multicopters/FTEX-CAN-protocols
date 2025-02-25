@@ -1729,7 +1729,6 @@
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Unit": "ms",
           "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
         }
       }

@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.7"
+      "version": "1.4.8"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -348,8 +348,8 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Iq Kp for torque control",
                   "Valid_Range": {
-                      "min": 0,
-                      "max": 4294967295
+                      "min": 101,
+                      "max": 3276700
                   },
                   "Persistence": "Real-time"
               },
@@ -359,8 +359,8 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Iq Ki for torque control",
                   "Valid_Range": {
-                      "min": 0,
-                      "max": 4294967295
+                      "min": 101,
+                      "max": 3276700
                   },
                   "Persistence": "Real-time"
               },
@@ -370,8 +370,8 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Id Kp for torque control",
                   "Valid_Range": {
-                      "min": 0,
-                      "max": 4294967295
+                      "min": 101,
+                      "max": 3276700
                   },
                   "Persistence": "Real-time"
               },
@@ -381,8 +381,8 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Id Ki for torque control",
                   "Valid_Range": {
-                      "min": 0,
-                      "max": 4294967295
+                      "min": 101,
+                      "max": 3276700
                   },
                   "Persistence": "Real-time"
               },
@@ -392,11 +392,11 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Rs value (stator resistance)",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 4294967295
                   },
                   "Persistence": "Real-time",
-                  "Unit": "Ohms x10^-5"
+                  "Unit": "Ohms x10^-9"
               },
               "CO_PARAM_AUTOTUNE_OUTPUTS_STATOR_INDUCTANCE": {
                   "Subindex": "0x15",
@@ -404,23 +404,23 @@
                   "Type": "uint32_t",
                   "Description": "Autotune output: Ls value (stator inductance)",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 4294967295
                   },
                   "Persistence": "Real-time",
-                  "Unit": "H x10^-6"
+                  "Unit": "H x10^-9"
               },
               "CO_PARAM_AUTOTUNE_KE": {
                   "Subindex": "0x16",
                   "Access": "R",
                   "Type": "uint32_t",
-                "Description": "Autotune Ke value, with 4 decimals precision.",
+                "Description": "Autotune Ke value, with 9 decimals precision.",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 4294967295
                   },
                   "Persistence": "Real-time",
-                  "Unit": "Nm"
+                  "Unit": "Wb x10^-9"
               },
               "CO_PARAM_AUTOTUNE_RATED_TORQUE": {
                   "Subindex": "0x17",

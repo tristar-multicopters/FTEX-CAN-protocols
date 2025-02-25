@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.16"
+    "version": "2.4.17"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -508,16 +508,17 @@
         },
         "CO_PARAM_BMS_PROTOCOL_CONFIG": {
           "Subindex": "0x31",
-          "Access": "R",
+          "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Select the BMS protocol on the vehicle. 0 = no BMS protocol. 1 = FTEX BMS Protocol. >1 = custom BMS protocol",
-          "Valid_Range": {
-              "min": 0,
-              "max": 99
-          },
+          "Valid_Options": [
+            { "value": 0, "description": "No BMS protocol specified: Controller will use its default values." },
+            { "value": 1, "description": "FTEX BMS Protocol: Controller will use the FTEX BMS protocol."},
+            { "value": 100, "description": "FTEX Custom BMS Protocol 1: Controller will use the proprietary BMS protocol 1."}
+          ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "The default is 1. For now, changing the protocol is not possible (ie. this parameter is readonly)."
+          "Notes": "The default is 1: FTEX BMS Protocol"
         },
         "CO_PARAM_BMS_MISSING_CONFIG": {
           "Subindex": "0x32",

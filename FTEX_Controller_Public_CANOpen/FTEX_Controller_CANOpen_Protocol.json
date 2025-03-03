@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.17"
+    "version": "2.4.18"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1368,7 +1368,7 @@
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "0: Disabled, 1: Enabled. If enabled, the bike will automatically disable the motor and raise an error if no IoT is detected after vehicle power-on.",
+          "Description": "0: Disabled, 1: Enabled. If enabled, the bike will automatically disable the motor and raise an error if there isn't an FTEX IoT detected after vehicle power-on.",
           "Valid_Options": [
             { "value": 0, "description": "Disabled" },
             { "value": 1, "description": "Enabled" }

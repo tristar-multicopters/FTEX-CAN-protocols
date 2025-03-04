@@ -701,6 +701,18 @@
                       "max": 200
                   },
                   "Persistence": "Persistent"
+              },
+              "CO_PARAM_LOW_BATTERY_TORQUE": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "uint16_t",
+                  "Unit": "cNm/s",
+                  "Description": "When the battery voltage is low, the torque will be limited to this value.",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 200
+                  },
+                  "Persistence": "Persistent"
               }
           }
       },

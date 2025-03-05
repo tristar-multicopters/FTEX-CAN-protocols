@@ -705,7 +705,7 @@
               "CO_PARAM_LOW_BATTERY_TORQUE": {
                   "Subindex": "0x02",
                   "Access": "R/W",
-                  "Type": "uint16_t",
+                  "Type": "int16_t",
                   "Unit": "cNm",
                   "Description": "When the battery voltage is low, the torque will be limited to this value. the value is the motor torque before the gear ratio, in cNm.",
                   "Valid_Range": {

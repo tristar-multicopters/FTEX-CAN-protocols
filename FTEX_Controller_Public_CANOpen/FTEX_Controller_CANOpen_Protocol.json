@@ -691,11 +691,11 @@
           "Subindex": "0x11",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Unit": "%",
-          "Description": "The range rectifier value allows the user to artificially add a conversation value on the estimated range. For instance, if the estimated range is 10km and the range rectifier is 10%, the final estimated range displayed will be 9km, following this equation: final_range = estimated_range - (rectifier_value/100)*estimated_range.",
+          "Unit": "% x 100",
+          "Description": "The range rectifier value allows the user to artificially modify the estimated range. A value smaller than 100 would reduce the range, a value greater than 100 would increase the range and a value equals to 100 would use the estimated range as is. The rectified range would be calculated as : final_range = estimated_range * (rectifying_factor/100).",
           "Valid_Range": {
               "min": 0,
-              "max": 500
+              "max": 200
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"

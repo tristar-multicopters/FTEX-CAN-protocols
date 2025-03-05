@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.19"
+    "version": "2.4.20"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1772,7 +1772,6 @@
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Unit": "ms",
           "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
         }
       }

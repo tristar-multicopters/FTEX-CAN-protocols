@@ -1103,6 +1103,24 @@
           "Obfuscation": "True"
         }
       }
+    },
+    "CO_ID_VEHICLE_UNLOCK_POWERTRAIN_AT_PAS_0": {
+      "CANOpen_Index": "0x202C",
+      "Description": "Allow the PAS, throttle, walk mode and cruise control to deliver power on PAS level 0",
+      "Parameters": {
+        "CO_PARAM_VEHICLE_UNLOCK_POWERTRAIN_AT_PAS_0": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Disable/Enable power delivery at PAS level 0.",
+          "Valid_Options": [
+            { "value": 0, "description": "Disabled: Power delivery is deactivated on PAS level 0." },
+            { "value": 1, "description": "Enabled: Power delivery is activated on PAS level 0." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        }
+      }
     }
   },
   "Metadata": {
@@ -1512,18 +1530,6 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "If the selected default PAS level is higher than the max number of levels, the max will be selected instead. If not specified, the default level is 0, which is preferable for safety reasons."
-        },
-        "CO_PARAM_PAS_ALLOW_POWER_PAS_0": {
-          "Subindex": "0x02",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Allow the bike to block/deliver PAS power on PAS level 0.",
-          "Valid_Options": [
-            { "value": 0, "description": "Power is disabled on PAS level 0." },
-            { "value": 1, "description": "Power is enabled on PAS level 0." }
-          ],
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
         }
       }
     },

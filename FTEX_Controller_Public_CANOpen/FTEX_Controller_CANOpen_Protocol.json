@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.20"
+    "version": "2.4.21"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -759,7 +759,7 @@
           "Description": "Real-time approximate requested torque on the motor. Note: This is a torque setpoint and may differ from the actual motor mechanical torque.",
           "Valid_Range": {
               "min": 0,
-              "max": 100000
+              "max": 65535
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"

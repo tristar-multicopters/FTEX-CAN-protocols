@@ -710,7 +710,7 @@
                   "Description": "When the battery voltage is low, the torque will be limited to this value. the value is the motor torque before the gear ratio, in cNm.",
                   "Valid_Range": {
                       "min": 1,
-                      "max": 200
+                      "max": 2000
                   },
                   "Persistence": "Persistent"
               }

@@ -1105,7 +1105,7 @@
       }
     },
     "CO_ID_VEHICLE_UNLOCK_POWERTRAIN_AT_PAS_0": {
-      "CANOpen_Index": "0x202C",
+      "CANOpen_Index": "0x203C",
       "Description": "Allow the PAS, throttle, walk mode and cruise control to deliver power on PAS level 0",
       "Parameters": {
         "CO_PARAM_VEHICLE_UNLOCK_POWERTRAIN_AT_PAS_0": {
@@ -1537,20 +1537,8 @@
       "CANOpen_Index": "0x201A",
       "Description": "Maximum speed for each PAS level.",
       "Parameters": {
-        "CO_PARAM_PAS_SPEED_LEVEL0": {
-          "Subindex": "0x00",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 0.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 99
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
         "CO_PARAM_PAS_SPEED_LEVEL1": {
-          "Subindex": "0x01",
+          "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 1.",
@@ -1562,7 +1550,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL2": {
-          "Subindex": "0x02",
+          "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 2.",
@@ -1574,7 +1562,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL3": {
-          "Subindex": "0x03",
+          "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 3.",
@@ -1586,7 +1574,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL4": {
-          "Subindex": "0x04",
+          "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 4.",
@@ -1598,7 +1586,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL5": {
-          "Subindex": "0x05",
+          "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 5.",
@@ -1610,7 +1598,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL6": {
-          "Subindex": "0x06",
+          "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 6.",
@@ -1622,7 +1610,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL7": {
-          "Subindex": "0x07",
+          "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 7.",
@@ -1634,7 +1622,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL8": {
-          "Subindex": "0x08",
+          "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 8.",
@@ -1646,10 +1634,22 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_SPEED_LEVEL9": {
-          "Subindex": "0x09",
+          "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 0.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1784,21 +1784,8 @@
       "CANOpen_Index": "0x201B",
       "Description": "How much torque can each PAS level deliver. Each % is expressed as a % of the max motor torque.",
       "Parameters": {
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL0": {
-          "Subindex": "0x00",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 0, in % of max torque.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 100
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL1": {
-          "Subindex": "0x01",
+          "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1811,7 +1798,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL2": {
-          "Subindex": "0x02",
+          "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1824,7 +1811,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL3": {
-          "Subindex": "0x03",
+          "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1837,7 +1824,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL4": {
-          "Subindex": "0x04",
+          "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1850,7 +1837,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL5": {
-          "Subindex": "0x05",
+          "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1863,7 +1850,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL6": {
-          "Subindex": "0x06",
+          "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1876,7 +1863,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL7": {
-          "Subindex": "0x07",
+          "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1889,7 +1876,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL8": {
-          "Subindex": "0x08",
+          "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1902,11 +1889,24 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL9": {
-          "Subindex": "0x09",
+          "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
           "Description": "Get or set the maximum torque of PAS level 9, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 0, in % of max torque.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -1920,21 +1920,8 @@
       "CANOpen_Index": "0x2019",
       "Description": "Minimum torque settings for PAS levels. Minimum torque represents a floor of how much torque is driven in the motor if PAS is detected. This is useful for a bike with a torque sensor, to drive a hybrid feeling. eg. set min torque to 10%, and as soon as cadence is detected, a little bit of power will be driven in the motor. More power can be driven in the motor if the user presses harder on the pedals.",
       "Parameters": {
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL0": {
-          "Subindex": "0x00",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 0.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 100
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL1": {
-          "Subindex": "0x01",
+          "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1947,7 +1934,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL2": {
-          "Subindex": "0x02",
+          "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1960,7 +1947,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL3": {
-          "Subindex": "0x03",
+          "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1973,7 +1960,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL4": {
-          "Subindex": "0x04",
+          "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1986,7 +1973,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL5": {
-          "Subindex": "0x05",
+          "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -1999,7 +1986,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL6": {
-          "Subindex": "0x06",
+          "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -2012,7 +1999,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL7": {
-          "Subindex": "0x07",
+          "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -2025,7 +2012,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL8": {
-          "Subindex": "0x08",
+          "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
@@ -2038,11 +2025,24 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_MIN_TORQUE_LEVEL9": {
-          "Subindex": "0x09",
+          "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
           "Description": "Get or set the minimum torque to apply when PAS is detected, for level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 0.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2056,7 +2056,7 @@
       "CANOpen_Index": "0x2018",
       "Description": "Torque input gain settings for PAS levels. This gain is used to affect the torque delivery when PAS torque input is detected. Higher values mean the controller will push more power with less pedal effort. A higher value (eg. 200-500%) means the bike feels more cadence-y. A lower value (eg. 100-150%) means the bike feels more sporty and reactive 1-1 to the torque sensor input. Here are a few examples. A gain of 100% means max torque is reached when a 100% press on the torque sensor input is detected. A gain of 200% means max torque is reached when a 50% press on the torque sensor input is detected.",
       "Parameters": {
-        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL0": {
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL1": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint16_t",
@@ -2069,21 +2069,8 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL1": {
-          "Subindex": "0x01",
-          "Access": "R/W",
-          "Type": "uint16_t",
-          "Unit": "%",
-          "Description": "Torque sensor gain for level 1.",
-          "Valid_Range": {
-              "min": 1,
-              "max": 1000
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL2": {
-          "Subindex": "0x02",
+          "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2096,7 +2083,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL3": {
-          "Subindex": "0x03",
+          "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2109,7 +2096,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL4": {
-          "Subindex": "0x04",
+          "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2122,7 +2109,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL5": {
-          "Subindex": "0x05",
+          "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2135,7 +2122,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL6": {
-          "Subindex": "0x06",
+          "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2148,7 +2135,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL7": {
-          "Subindex": "0x07",
+          "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2161,7 +2148,7 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL8": {
-          "Subindex": "0x08",
+          "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
@@ -2174,11 +2161,24 @@
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL9": {
-          "Subindex": "0x09",
+          "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "%",
           "Description": "Torque sensor gain for level 9.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 0.",
           "Valid_Range": {
               "min": 1,
               "max": 1000

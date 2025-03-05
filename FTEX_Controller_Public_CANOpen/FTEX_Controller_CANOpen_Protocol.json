@@ -759,7 +759,7 @@
           "Description": "Real-time approximate requested torque on the motor. Note: This is a torque setpoint and may differ from the actual motor mechanical torque.",
           "Valid_Range": {
               "min": 0,
-              "max": 100000
+              "max": 65535
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"

@@ -1,14 +1,7 @@
 # FTEX CANOpen Protocol
 
-This folder contains the public and internal FTEX protocols. Most importantly are the CANOpen protocol which drive all of the configurability of the FTEX controller platform.
-
-#### Notable files:
-- *FTEX_Controller_CANOpen_Protocol.json: this is our "public" protocol, shareable with third parties*
-- *FTEX_Controller_JSON_Schema.json: this is the JSON schema validation file*
-- *FTEX_Schema_validator.py: this script validates a JSON file against a schema*
-
 ## Protocol specification:
-FTEX follows standard CANOpen protocol: https://www.can-cia.org/canopen/
+FTEX follows standard CANOpen protocol: [https://www.can-cia.org/canopen/](https://www.can-cia.org/can-knowledge/canopen)
 
 FTEX uses SDO expedited transfer for transferring objects with up to four bytes.
 
@@ -64,18 +57,5 @@ However, the following must be supported by the peripherals on the CAN bus to us
 #### HMI and BMS
 - Node ID: see the node ID section above. 
 - Heartbeat: An HMI communicating over CAN bus with the controller must send CAN heartbeats (https://www.can-cia.org/can-knowledge/canopen/error-control-protocols - Heartbeat section)
-The controller expects healthy heartbeats from the HMI at least every 50ms.
+The controller expects healthy heartbeats from the HMI at least every 50ms. Do not send heartbeats while the system is off, or it might wakeup the controller and increase the battery drain.
 If no HMI heartbeats are detected within a 500ms window, the controller determines that screen communication is lost, and disables HMI-driven features like throttle and cruise over CAN. Also, an error is raised over CAN if there are missing heartbeats from the HMI or from the BMS.
-
-*Todos:*
-- Add protocol communication specification [DONE]
-- Add BMS protocol in JSON format [DONE]
-- Add autotune JSON protocol [DONE]
-- Add internal FTEX protocol for motor configuration [DONE]
-- Add internal FTEX protocol specification for DFU [DONE]
-- Add (or redo) internal FTEX protocol specification for custom IoT stuff
-- Add schema validation in the CI/CD pipeline [DONE]
-- Controller firmware should consume the newly minted JSON files [DONE]
-- Config and diags tools should consume the newly minted JSON files too
-- Add Error codes definition [DONE]
-- schema validation of unique CO_ID name, unique param names, unique index, and unique subindex within an index [DONE]

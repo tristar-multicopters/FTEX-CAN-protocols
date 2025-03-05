@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.8"
+      "version": "1.4.10"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -701,6 +701,18 @@
                       "max": 200
                   },
                   "Persistence": "Persistent"
+              },
+              "CO_PARAM_LOW_BATTERY_TORQUE": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "int16_t",
+                  "Unit": "cNm",
+                  "Description": "When the battery voltage is low, the torque will be limited to this value. the value is the motor torque before the gear ratio, in cNm.",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 2000
+                  },
+                  "Persistence": "Persistent"
               }
           }
       },
@@ -1134,11 +1146,10 @@
                 "Subindex": "0x00",
                 "Access": "R/W",
                 "Type": "uint8_t",
-                "Description": "Unlock CAN key, sent from the IoT.",
+                "Description": "Allows the user to select a preset harness pinout. Default value is 0.",
                 "Valid_Options": [
                     { "value": 0, "description": "Default pinout config file, pin 17 and 18 used as UART comm port." },
-                    { "value": 1, "description": "Pinout config used by Legacy Super73 DC/DC Converter and horn support." },
-                    { "value": 255, "description": "Using a custom pinout hal_config.h config file, imported during firmware compilation time." }
+                    { "value": 1, "description": "Pinout config used by custom DC/DC Converter and horn support." }
                 ],
                 "Persistence": "Persistent"
               }

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.18"
+    "version": "2.4.20"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -686,6 +686,19 @@
           "Persistence": "Real-time",
           "Obfuscation": "False",
           "Notes": "Remaining battery capacity comes from the BMS over CANOpen if available; otherwise it is roughly computed from the SOC and from the parameter CO_PARAM_BATTERY_CONFIG_MAX_CAPACITY"
+        },
+        "CO_PARAM_ESTIMATED_RANGE_RECTIFIER": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "% x 100",
+          "Description": "The range rectifier value allows the user to artificially modify the estimated range. A value smaller than 100 would reduce the range, a value greater than 100 would increase the range and a value equals to 100 would use the estimated range as is. The rectified range would be calculated as : final_range = estimated_range * (rectifying_factor/10000).",
+          "Valid_Range": {
+              "min": 0,
+              "max": 20000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1090,6 +1103,24 @@
           "Obfuscation": "True"
         }
       }
+    },
+    "CO_ID_VEHICLE_POWERTRAIN_BEHAVIOR_AT_PAS_0": {
+      "CANOpen_Index": "0x203C",
+      "Description": "Allow the PAS, throttle, walk mode and cruise control to deliver power on PAS level 0",
+      "Parameters": {
+        "CO_PARAM_VEHICLE_POWERTRAIN_BEHAVIOR_AT_PAS_0": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Disable/Enable power delivery at PAS level 0.",
+          "Valid_Options": [
+            { "value": 0, "description": "Disabled: Power delivery is deactivated on PAS level 0." },
+            { "value": 1, "description": "Enabled: Power delivery is activated on PAS level 0." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        }
+      }
     }
   },
   "Metadata": {
@@ -1368,7 +1399,7 @@
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "0: Disabled, 1: Enabled. If enabled, the bike will automatically disable the motor and raise an error if no IoT is detected after vehicle power-on.",
+          "Description": "0: Disabled, 1: Enabled. If enabled, the bike will automatically disable the motor and raise an error if there isn't an FTEX IoT detected after vehicle power-on.",
           "Valid_Options": [
             { "value": 0, "description": "Disabled" },
             { "value": 1, "description": "Enabled" }
@@ -1607,6 +1638,18 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Description": "Get or set the maximum speed of PAS level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_SPEED_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum speed of PAS level 0.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1856,6 +1899,19 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the maximum torque of PAS level 0, in % of max torque.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1979,6 +2035,19 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_MIN_TORQUE_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "%",
+          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 0.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -2096,6 +2165,19 @@
           "Type": "uint16_t",
           "Unit": "%",
           "Description": "Torque sensor gain for level 9.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 1000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_TORQUE_GAIN_CONFIG_LEVEL0": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "%",
+          "Description": "Torque sensor gain for level 0.",
           "Valid_Range": {
               "min": 1,
               "max": 1000

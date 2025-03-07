@@ -93,15 +93,16 @@
           "Type": "uint8_t",
           "Description": "UART protocol selection. Default is 0x00 : UART Disable.",
           "Valid_Options": [
-            { "value": 0, "description": "UART Disable : The FTEX controller does not used any UART protocol."},
-            { "value": 1, "description": "UART APT Screen : The FTEX controller uses the APT screen protocol."},
-            { "value": 2, "description": "UART Cloud Drive Screen : The FTEX controller uses the Cloud Drive screen protocol."},
-            { "value": 3, "description": "UART KD718 Screen : The FTEX controller uses the KD718 screen protocol."},
-            { "value": 4, "description": "UART EOL Tester Protocol : The FTEX controller uses the EOL tester protocol."},
-            { "value": 100, "description": "UART High Speed Logger : The FTEX controller uses the high speed logger. This protocol is specified as an internal FTEX protocol."}
+            { "value": 0, "description": "UART Disabled"},
+            { "value": 1, "description": "UART APT Screen"},
+            { "value": 2, "description": "UART Cloud Drive Screen"},
+            { "value": 3, "description": "UART KD718 Screen"},
+            { "value": 4, "description": "UART EOL Tester Protocol"},
+            { "value": 100, "description": "UART High Speed Logger [internal]"}
           ],
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes: "Please contact FTEX if your screen communication is not working"
         }
       }
     }

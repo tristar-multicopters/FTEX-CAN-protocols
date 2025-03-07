@@ -188,8 +188,8 @@
           "Type": "uint8_t",
           "Description": "Get/set if the throttle is enabled. This allows or disallows the throttle as a peripheral.",
           "Valid_Options": [
-            { "value": 0, "description": "Throttle is disabled" },
-            { "value": 1, "description": "Throttle is enabled" }
+            { "value": 0, "description": "Throttle disabled" },
+            { "value": 1, "description": "Throttle enabled" }
           ],
           "Persistence": "Both",
           "Obfuscation": "True"
@@ -214,8 +214,8 @@
           "Type": "uint8_t",
           "Description": "Set the priority of throttle vs PAS.",
           "Valid_Options": [
-            { "value": 0, "description": "Throttle has priority over PAS" },
-            { "value": 1, "description": "PAS has priority over throttle" }
+            { "value": 0, "description": "Throttle priority over PAS" },
+            { "value": 1, "description": "PAS priority over throttle" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -500,12 +500,13 @@
           "Type": "uint8_t",
           "Description": "Select the behaviour on the controller once a battery error is detected.",
           "Valid_Options": [
-            { "value": 0, "description": "Ignore error: The controller will not display the battery error over CAN/HMI. Powertrain will work as usual." },
-            { "value": 1, "description": "Display error: The controller will raise the error over CAN/HMI. Powertrain will work as usual."},
-            { "value": 2, "description": "Disable powertrain: The controller will raise the error over CAN/HMI. Powertrain will be disable for the entire battery error duration."}
+            { "value": 0, "description": "Ignore error" },
+            { "value": 1, "description": "Display error"},
+            { "value": 2, "description": "Display error and disable powertrain"}
           ],
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "Ignore error: The controller will not display the battery error over CAN/HMI. Powertrain will work as usual. Display error: The controller will raise the error over CAN/HMI. Powertrain will work as usual. Display error and disable powertrain: The controller will raise the error over CAN/HMI. Powertrain will be disable for the entire battery error duration."
         },
         "CO_PARAM_BMS_PROTOCOL_CONFIG": {
           "Subindex": "0x31",
@@ -513,13 +514,13 @@
           "Type": "uint8_t",
           "Description": "Select the BMS protocol on the vehicle. 0 = no BMS protocol. 1 = FTEX BMS Protocol. >1 = custom BMS protocol",
           "Valid_Options": [
-            { "value": 0, "description": "No BMS protocol specified: Controller will use its default values." },
-            { "value": 1, "description": "FTEX BMS Protocol: Controller will use the FTEX BMS protocol."},
-            { "value": 100, "description": "FTEX Custom BMS Protocol 1: Controller will use the proprietary BMS protocol 1."}
+            { "value": 0, "description": "No BMS protocol" },
+            { "value": 1, "description": "FTEX BMS Protocol"},
+            { "value": 100, "description": "FTEX Custom BMS Protocol 1 [internal]"}
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "The default is 1: FTEX BMS Protocol"
+          "Notes": "The default is 1: FTEX BMS Protocol. Please contact FTEX for custom BMS integrations."
         },
         "CO_PARAM_BMS_MISSING_CONFIG": {
           "Subindex": "0x32",
@@ -530,10 +531,11 @@
           "Obfuscation": "True",
           "Notes": "The BMS must send frequent heartbeats to be detected as alive, and it must send valid messages to the controller. CO_PARAM_BMS_MISSING_CONFIG is only relevant if CO_PARAM_BMS_PROTOCOL_CONFIG !=0, otherwise this parameter is ignored. Default is 1.",
           "Valid_Options": [
-            { "value": 0, "description": "Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters." },
-            { "value": 1, "description": "Stop_powertrain: If we lose the BMS communication, stop the powertrain and prevent any power from being pushed to the motor."},
-            { "value": 2, "description": "Raise_error_on_can: If we lose the BMS communication, raise an error on the controller's CAN parameter."}
-          ]
+            { "value": 0, "description": "Fallback To Config" },
+            { "value": 1, "description": "Stop Powertrain"},
+            { "value": 2, "description": "Raise Error on CAN"}
+          ],
+          "Notes": "Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters. Stop powertrain: If we lose the BMS communication, stop the powertrain and prevent any power from being pushed to the motor. Raise Error on CAN: If we lose the BMS communication, raise an error on the controller's CAN parameter."
         }
       }
     },
@@ -999,8 +1001,8 @@
           "Type": "uint8_t",
           "Description": "Get or set the output's default state for when the vehicle powers on.",
           "Valid_Options": [
-            { "value": 0, "description": "Output is off when the vehicle powers on" },
-            { "value": 1, "description": "Output is on when the vehicle powers on" }
+            { "value": 0, "description": "Output is off, on bootup" },
+            { "value": 1, "description": "Output is on, on bootup" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1010,11 +1012,11 @@
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
+          "Description": "Configure the special output behavior to adopt when a specific trigger is detected.",
           "Valid_Options": [
-            { "value": 0, "description": "No special behavior on brake" },
-            { "value": 1, "description": "Blink the output on brake" },
-            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
+            { "value": 0, "description": "N/A on brake" },
+            { "value": 1, "description": "On brake: blink output" },
+            { "value": 2, "description": "On brake: turn on" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1045,8 +1047,8 @@
           "Type": "uint8_t",
           "Description": "Get or set the output's default state for when the vehicle powers on.",
           "Valid_Options": [
-            { "value": 0, "description": "Output is off when the vehicle powers on" },
-            { "value": 1, "description": "Output is on when the vehicle powers on" }
+            { "value": 0, "description": "Output is off, on bootup" },
+            { "value": 1, "description": "Output is on, on bootup" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1058,9 +1060,9 @@
           "Type": "uint8_t",
           "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
           "Valid_Options": [
-            { "value": 0, "description": "No special behavior on brake" },
-            { "value": 1, "description": "Blink the output on brake" },
-            { "value": 2, "description": "Turn on the light on brake. If the light is already on, the light will simply stay on." }
+            { "value": 0, "description": "N/A on brake" },
+            { "value": 1, "description": "On brake: blink output" },
+            { "value": 2, "description": "On brake: turn on" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1097,11 +1099,12 @@
           "Type": "uint8_t",
           "Description": "Get or set the vehicle on off configuration.",
           "Valid_Options": [
-            { "value": 0, "description": "Vehicle power is always on. The controller starts as soon as the power is active, e.g. throttle, PAS will be activated and motor will push power" },
-            { "value": 1, "description": "Vehicle power requires a power lock signal. Until the controller receives this power signal, the controller will not be powered on. On pin J-P-22. This powerlock signal is also referred to as KEY IN in some datasheets." }
+            { "value": 0, "description": "Vehicle Always On" },
+            { "value": 1, "description": "Power Lock Signal" }
           ],
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "Vehicle Always On: The controller starts as soon as the power is active, without needing a powerlock/key-in signal. Power Lock Signal: The controller powers on when it receives a key-in/powerlock signal."
         }
       }
     },
@@ -1115,8 +1118,8 @@
           "Type": "uint8_t",
           "Description": "Disable/Enable power delivery at PAS level 0.",
           "Valid_Options": [
-            { "value": 0, "description": "Disabled: Power delivery is deactivated on PAS level 0." },
-            { "value": 1, "description": "Enabled: Power delivery is activated on PAS level 0." }
+            { "value": 0, "description": "Disabled" },
+            { "value": 1, "description": "Enabled" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True"
@@ -1438,8 +1441,8 @@
           "Type": "uint8_t",
           "Description": "0: IoT is expected to be absent in the FTEX system, 1: IoT is expected to be present in the FTEX system.",
           "Valid_Options": [
-            { "value": 0, "description": "IoT is absent" },
-            { "value": 1, "description": "IoT is present" }
+            { "value": 0, "description": "IoT Not Present" },
+            { "value": 1, "description": "IoT Present" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True"
@@ -1456,7 +1459,7 @@
           "Type": "uint8_t",
           "Description": "0: Reset disabled, the controller behaves as usual. 1: Reset is requested, the controller will reset as soon as it processes this value. This delay is usually around 100ms.",
           "Valid_Options": [
-            { "value": 0, "description": "Reset disabled, default idle value." },
+            { "value": 0, "description": "Reset disabled," },
             { "value": 1, "description": "Reset enabled." }
           ],
           "Persistence": "Real-time",

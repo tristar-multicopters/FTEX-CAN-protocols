@@ -27,7 +27,7 @@
             "Type": "uint8_t",
             "Description": "Enable or disable the CAN bus 120 Ω termination resistor.",
             "Valid_Options": [
-              { "value": 0, "description": "Not enabled" },
+              { "value": 0, "description": "Not Enabled" },
               { "value": 1, "description": "Enabled" }
             ],
             "Persistence": "Persistent",
@@ -188,8 +188,8 @@
           "Type": "uint8_t",
           "Description": "Get/set if the throttle is enabled. This allows or disallows the throttle as a peripheral.",
           "Valid_Options": [
-            { "value": 0, "description": "Throttle disabled" },
-            { "value": 1, "description": "Throttle enabled" }
+            { "value": 0, "description": "Throttle Disabled" },
+            { "value": 1, "description": "Throttle Enabled" }
           ],
           "Persistence": "Both",
           "Obfuscation": "True"
@@ -214,8 +214,8 @@
           "Type": "uint8_t",
           "Description": "Set the priority of throttle vs PAS.",
           "Valid_Options": [
-            { "value": 0, "description": "Throttle priority over PAS" },
-            { "value": 1, "description": "PAS priority over throttle" }
+            { "value": 0, "description": "Throttle Priority Over PAS" },
+            { "value": 1, "description": "PAS Priority Over Throttle" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -500,9 +500,9 @@
           "Type": "uint8_t",
           "Description": "Select the behaviour on the controller once a battery error is detected.",
           "Valid_Options": [
-            { "value": 0, "description": "Ignore error" },
-            { "value": 1, "description": "Display error"},
-            { "value": 2, "description": "Display error and disable powertrain"}
+            { "value": 0, "description": "Ignore Error" },
+            { "value": 1, "description": "Display Error"},
+            { "value": 2, "description": "Display Error And Disable Powertrain"}
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1001,8 +1001,8 @@
           "Type": "uint8_t",
           "Description": "Get or set the output's default state for when the vehicle powers on.",
           "Valid_Options": [
-            { "value": 0, "description": "Output is off, on bootup" },
-            { "value": 1, "description": "Output is on, on bootup" }
+            { "value": 0, "description": "Bootup: Output Off" },
+            { "value": 1, "description": "Bootup: Output On" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1015,8 +1015,8 @@
           "Description": "Configure the special output behavior to adopt when a specific trigger is detected.",
           "Valid_Options": [
             { "value": 0, "description": "N/A on brake" },
-            { "value": 1, "description": "On brake: blink output" },
-            { "value": 2, "description": "On brake: turn on" }
+            { "value": 1, "description": "On Brake: Blink Output" },
+            { "value": 2, "description": "On Brake: Turn On" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1034,8 +1034,8 @@
           "Type": "uint8_t",
           "Description": "Manually get or set the togglable output 2.",
           "Valid_Options": [
-            { "value": 0, "description": "Output is off." },
-            { "value": 1, "description": "Output is on." }
+            { "value": 0, "description": "Bootup: Output Off" },
+            { "value": 1, "description": "Bootup: Output On" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False",
@@ -1061,8 +1061,8 @@
           "Description": "Configure the special output behavior to adopt when specific trigger is detected.",
           "Valid_Options": [
             { "value": 0, "description": "N/A on brake" },
-            { "value": 1, "description": "On brake: blink output" },
-            { "value": 2, "description": "On brake: turn on" }
+            { "value": 1, "description": "On Brake: Blink Output" },
+            { "value": 2, "description": "On Brake: Turn On" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
@@ -1423,8 +1423,8 @@
           "Type": "uint8_t",
           "Description": "0: Bike is unlocked, 1: Bike is locked. When locked, the motor is disabled and an error is raised.",
           "Valid_Options": [
-            { "value": 0, "description": "Bike is unlocked" },
-            { "value": 1, "description": "Bike is locked" }
+            { "value": 0, "description": "Bike unlocked" },
+            { "value": 1, "description": "Bike locked" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "True"
@@ -1441,8 +1441,8 @@
           "Type": "uint8_t",
           "Description": "0: IoT is expected to be absent in the FTEX system, 1: IoT is expected to be present in the FTEX system.",
           "Valid_Options": [
-            { "value": 0, "description": "IoT Not Present" },
-            { "value": 1, "description": "IoT Present" }
+            { "value": 0, "description": "Not Present" },
+            { "value": 1, "description": "Present" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True"

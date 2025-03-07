@@ -529,13 +529,12 @@
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "The BMS must send frequent heartbeats to be detected as alive, and it must send valid messages to the controller. CO_PARAM_BMS_MISSING_CONFIG is only relevant if CO_PARAM_BMS_PROTOCOL_CONFIG !=0, otherwise this parameter is ignored. Default is 1.",
           "Valid_Options": [
             { "value": 0, "description": "Fallback To Config" },
             { "value": 1, "description": "Stop Powertrain"},
             { "value": 2, "description": "Raise Error on CAN"}
           ],
-          "Notes": "Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters. Stop powertrain: If we lose the BMS communication, stop the powertrain and prevent any power from being pushed to the motor. Raise Error on CAN: If we lose the BMS communication, raise an error on the controller's CAN parameter."
+          "Notes": "The BMS must send frequent heartbeats to be detected as alive, and it must send valid messages to the controller. CO_PARAM_BMS_MISSING_CONFIG is only relevant if CO_PARAM_BMS_PROTOCOL_CONFIG !=0, otherwise this parameter is ignored. Fallback_to_config: If we lose the BMS communication, fallback to the configuration that is in the CO_PARAM_BATTERY_* parameters. Stop powertrain: If we lose the BMS communication, stop the powertrain and prevent any power from being pushed to the motor. Raise Error on CAN: If we lose the BMS communication, raise an error on the controller's CAN parameter."
         }
       }
     },

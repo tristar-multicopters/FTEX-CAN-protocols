@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.10"
+      "version": "1.4.11"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -678,32 +678,65 @@
           "CANOpen_Index": "0x5002",
           "Description": "Motor power configuration parameters.",
           "Parameters": {
-              "CO_PARAM_MAX_SPEED_SYSTEM_EFFICIENCY": {
+              "CO_PARAM_MAXIMUM_SYSTEM_EFFICIENCY": {
                   "Subindex": "0x00",
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "Estimated system efficiency at motor max speed (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Description": "Maximum system efficiency (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
                   "Valid_Range": {
                       "min": 1,
-                      "max": 200
+                      "max": 100
                   },
                   "Persistence": "Persistent"
               },
-              "CO_PARAM_LOW_SPEED_SYSTEM_EFFICIENCY": {
+              "CO_PARAM_MINIMUM_SYSTEM_EFFICIENCY": {
                   "Subindex": "0x01",
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "Estimated system efficiency at motor low speed (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Description": "Minimum system efficiency (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
                   "Valid_Range": {
                       "min": 1,
-                      "max": 200
+                      "max": 100
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_EFFICIENCY_CALCULATOR_QUADRATIC_TERM": {
+                  "Subindex": "0x02",
+                  "Access": "R/W",
+                  "Type": "int32_t",
+                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A'in the quadratic equation: Ax^2 + Bx + C",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 2147483647
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_EFFICIENCY_CALCULATOR_LINEAR_TERM": {
+                  "Subindex": "0x03",
+                  "Access": "R/W",
+                  "Type": "int32_t",
+                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B'in the quadratic equation: Ax^2 + Bx + C",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 2147483647
+                  },
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_EFFICIENCY_CALCULATOR_CONSTANT_TERM": {
+                  "Subindex": "0x04",
+                  "Access": "R/W",
+                  "Type": "int32_t",
+                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C'in the quadratic equation: Ax^2 + Bx + C",
+                  "Valid_Range": {
+                      "min": 1,
+                      "max": 2147483647
                   },
                   "Persistence": "Persistent"
               },
               "CO_PARAM_LOW_BATTERY_TORQUE": {
-                  "Subindex": "0x02",
+                  "Subindex": "0x05",
                   "Access": "R/W",
                   "Type": "uint16_t",
                   "Unit": "cNm",

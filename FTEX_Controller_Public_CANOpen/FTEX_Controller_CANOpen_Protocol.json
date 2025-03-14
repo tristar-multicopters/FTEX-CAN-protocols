@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.21"
+    "version": "2.4.22"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -2206,6 +2206,84 @@
           "Persistence": "Real-time",
           "Obfuscation": "False",
           "Notes": "Under the covers, setting to 1 will set the minimum torque % setting to 0%, and setting to 2 will set the minimum torque % setting to be the same as max torque % (because if min torque % is equal to max torque %, the bike feels like cadence)."
+        }
+      }
+    },
+    "CO_ID_PAS_POWER_FILTER": {
+      "CANOpen_Index": "0x203D",
+      "Description": "Parameters that allows the user to tune the power delivery based on PAS sensors.",
+      "Parameters": {
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_UP": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay before reaching max torque based power. This delay ramp effect is linear. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_MAX_POWER_ALLOWED": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay allowed to stay at max power after the last torque sensor trigger. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay after the max torque power allowed is exhausted, linearly reducing power from max power to 0. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_CADENCE_RAMP_UP": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay before reaching max cadence based power. This delay ramp effect is linear. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_CADENCE_MAX_POWER_ALLOWED": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay allowed to stay at max power after the last cadence sensor trigger. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_CADENCE_RAMP_DOWN": {
+          "Subindex": "0x12",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Description": "Delay after the max cadence power allowed is exhausted, linearly reducing power from max power to 0. Value is expressed in milliseconds.",
+          "Valid_Range": {
+              "min": 1,
+              "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }

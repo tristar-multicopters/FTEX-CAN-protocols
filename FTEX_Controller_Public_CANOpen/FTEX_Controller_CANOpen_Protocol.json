@@ -2220,20 +2220,20 @@
           "Unit": "ms",
           "Description": "Delay before reaching max torque based power. This delay ramp effect is linear. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_POWER_FILTER_TORQUE_MAX_POWER_ALLOWED": {
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "ms",
           "Description": "Delay allowed to stay at max power after the last torque sensor trigger. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",
@@ -2246,7 +2246,7 @@
           "Unit": "ms",
           "Description": "Delay after the max torque power allowed is exhausted, linearly reducing power from max power to 0. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",
@@ -2259,20 +2259,20 @@
           "Unit": "ms",
           "Description": "Delay before reaching max cadence based power. This delay ramp effect is linear. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_POWER_FILTER_CADENCE_MAX_POWER_ALLOWED": {
+        "CO_PARAM_PAS_POWER_FILTER_CADENCE_TIME_AT_MAX_POWER_ALLOWED": {
           "Subindex": "0x11",
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "ms",
           "Description": "Delay allowed to stay at max power after the last cadence sensor trigger. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",
@@ -2285,7 +2285,7 @@
           "Unit": "ms",
           "Description": "Delay after the max cadence power allowed is exhausted, linearly reducing power from max power to 0. Value is expressed in milliseconds.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 10000
           },
           "Persistence": "Persistent",

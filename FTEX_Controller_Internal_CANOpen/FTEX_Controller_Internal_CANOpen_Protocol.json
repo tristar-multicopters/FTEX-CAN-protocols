@@ -683,7 +683,7 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "This parameter represents the highest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an upper limit for the efficiency calculated by the efficiency calculator.",
+                  "Description": "This parameter represents the highest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an upper limit for the efficiency calculated by the efficiency calculation formula.",
                   "Valid_Range": {
                       "min": 1,
                       "max": 100
@@ -695,7 +695,7 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "This parameter represents the lowest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an lower limit for the efficiency calculated by the efficiency calculator.",
+                  "Description": "This parameter represents the lowest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an lower limit for the efficiency calculated by the efficiency calculation formula.",
                   "Valid_Range": {
                       "min": 1,
                       "max": 100
@@ -706,7 +706,7 @@
                   "Subindex": "0x02",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A' in the quadratic equation: efficiecny = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio).",
+                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio).",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -717,7 +717,7 @@
                   "Subindex": "0x03",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B' in the quadratic equation: efficiecny = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -728,7 +728,7 @@
                   "Subindex": "0x04",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C' in the quadratic equation: efficiecny = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647

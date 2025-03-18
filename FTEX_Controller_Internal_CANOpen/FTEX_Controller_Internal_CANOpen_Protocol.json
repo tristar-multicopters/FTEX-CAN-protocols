@@ -683,7 +683,7 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "Maximum system efficiency (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Description": "This parameter represents the highest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an upper limit for the efficiency calculated by the efficiency calculator.",
                   "Valid_Range": {
                       "min": 1,
                       "max": 100
@@ -695,7 +695,7 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "%",
-                  "Description": "Minimum system efficiency (ie. DC power to mechanical power conversion efficiency). This parameter is used to estimate the DC current, since the controller doesn't have a current sensor on the DC bus.",
+                  "Description": "This parameter represents the lowest efficiency that can be found in the datasheet. If it's not available in the datasheet, it must be calculated with a dyno test. This parameter is used as an lower limit for the efficiency calculated by the efficiency calculator.",
                   "Valid_Range": {
                       "min": 1,
                       "max": 100
@@ -708,7 +708,7 @@
                   "Type": "int32_t",
                   "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A'in the quadratic equation: Ax^2 + Bx + C",
                   "Valid_Range": {
-                      "min": 1,
+                      "min": -2147483648,
                       "max": 2147483647
                   },
                   "Persistence": "Persistent"
@@ -719,7 +719,7 @@
                   "Type": "int32_t",
                   "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B'in the quadratic equation: Ax^2 + Bx + C",
                   "Valid_Range": {
-                      "min": 1,
+                      "min": -2147483648,
                       "max": 2147483647
                   },
                   "Persistence": "Persistent"
@@ -730,7 +730,7 @@
                   "Type": "int32_t",
                   "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C'in the quadratic equation: Ax^2 + Bx + C",
                   "Valid_Range": {
-                      "min": 1,
+                      "min": -2147483648,
                       "max": 2147483647
                   },
                   "Persistence": "Persistent"

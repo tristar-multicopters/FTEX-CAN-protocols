@@ -934,7 +934,7 @@
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Disable/Enabled speed control. This features allows a smoother speed control, especially around the vehicle max speed range.",
+          "Description": "This parameter enables or disables limiting the speed at the vehicle speed limit, set to a value specified by the parameter CO_PARAM_MAX_VEHICLE_SPEED.",
           "Valid_Options": [
             { "value": 0, "description": "Speed control disabled." },
             { "value": 1, "description": "Speed control enabled." }

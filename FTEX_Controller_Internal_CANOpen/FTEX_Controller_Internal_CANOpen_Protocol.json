@@ -935,12 +935,13 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "C",
-                  "Description": "Motor foldback temperature.\n\nThis is the temperature of the motor where the controller will start to apply power derating, in order to slow down the heating of the motor.",
+                  "Description": "Motor Foldback Temperature Delta.\n\nThe temperature margin below the maximum motor temperature (CO_PARAM_MOTOR_CONFIG_MAX_TEMP) at which the controller begins reducing power output. This gradual power reduction helps slow motor heating as it approaches its temperature limit.",
                   "Valid_Range": {
                       "min": 0,
                       "max": 255
                   },
-                  "Persistence": "Persistent"
+                  "Persistence": "Persistent",
+                  "Notes":"eg. If the maximum motor temperature is set to 100°C and this delta is set to 10°C, power reduction begins when motor temperature reaches 90°C (100°C - 10°C)."
               }
           }
       },

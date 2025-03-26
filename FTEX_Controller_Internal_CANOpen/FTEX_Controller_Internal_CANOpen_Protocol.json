@@ -934,7 +934,7 @@
                   "Subindex": "0x22",
                   "Access": "R/W",
                   "Type": "uint8_t",
-                  "Unit": "deg C",
+                  "Unit": "C",
                   "Description": "Motor foldback temperature.\n\nThis is the temperature of the motor where the controller will start to apply power derating, in order to slow down the heating of the motor.",
                   "Valid_Range": {
                       "min": 0,

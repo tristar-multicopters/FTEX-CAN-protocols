@@ -935,7 +935,7 @@
                   "Access": "R/W",
                   "Type": "uint8_t",
                   "Unit": "C",
-                  "Description": "Motor foldback temperature.\n\nThis is the amount of degrees C temperature of the motor where the controller will start to apply power derating, in order to slow down the heating of the motor.\n\neg. this setting is set to 10 Celsius, max motor temp is set to 100 Celsius. The power derating starts once the motor temperature reaches (100 - 10) = 90 Celsius",
+                  "Description": "Motor foldback temperature.\n\nThis is the temperature difference before the motor's maximum temperature where the controller will start to apply power derating, in order to slow down the heating of the motor.\n\neg. this setting is set to 10 Celsius, max motor temp is set to 100 Celsius. The power derating starts once the motor temperature reaches (100 - 10) = 90 Celsius",
                   "Valid_Range": {
                       "min": 0,
                       "max": 255

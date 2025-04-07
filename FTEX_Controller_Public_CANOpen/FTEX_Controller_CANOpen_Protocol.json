@@ -1116,6 +1116,18 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "Vehicle Always On: The controller starts as soon as the power is active, without needing a powerlock/key-in signal. Power Lock Signal: The controller powers on when it receives a key-in/powerlock signal."
+        },
+        "CO_PARAM_VEHICLE_POWERLOCK_SIGNAL": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Allow the user to bypass the hardware powerlock signal via direct CANOpen message.",
+          "Valid_Options": [
+            { "value": 0, "description": "Default value, no signal is sent. Bike is off" },
+            { "value": 1, "description": "Powerlock signal is sent. Bike is on" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },

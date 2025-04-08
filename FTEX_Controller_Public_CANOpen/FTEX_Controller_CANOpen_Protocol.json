@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.23"
+    "version": "2.4.24"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -418,6 +418,32 @@
           "Type": "uint16_t",
           "Unit": "centivolts",
           "Description": "Battery full voltage. Needs to be greater than battery empty voltage above.",
+          "Valid_Range": {
+              "min": 2800,
+              "max": 8499
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_BATTERY_CONFIG_UNDER_VOLTAGE": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Battery under voltage protection. This value is set as a strict threshold for the controller. If the battery voltage is below this limit, no power will be delivered from the controller.",
+          "Valid_Range": {
+              "min": 2800,
+              "max": 8499
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_BATTERY_CONFIG_OVER_VOLTAGE": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint16_t",
+          "Unit": "centivolts",
+          "Description": "Battery over voltage protection. This value is set as a strict threshold for the controller. If the voltage is above this limit, no power will be delivered from the controller.",
           "Valid_Range": {
               "min": 2800,
               "max": 8499

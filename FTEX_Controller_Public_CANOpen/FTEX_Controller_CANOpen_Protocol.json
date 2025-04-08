@@ -430,7 +430,7 @@
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "centivolts",
-          "Description": "Battery under voltage protection. This value is set as a strict threshold for the controller. If the battery voltage is below this limit, no power will be delivered from the controller.",
+          "Description": "Battery under voltage protection. This value is set as a strict threshold for the controller. If the battery voltage is below this limit, no power will be delivered from the controller. A battery error will also be raised.",
           "Valid_Range": {
               "min": 2800,
               "max": 8499
@@ -443,7 +443,7 @@
           "Access": "R/W",
           "Type": "uint16_t",
           "Unit": "centivolts",
-          "Description": "Battery over voltage protection. This value is set as a strict threshold for the controller. If the voltage is above this limit, no power will be delivered from the controller.",
+          "Description": "Battery over voltage protection. This value is set as a strict threshold for the controller. If the voltage is above this limit, no power will be delivered from the controller. A battery error will also be raised.",
           "Valid_Range": {
               "min": 2800,
               "max": 8499

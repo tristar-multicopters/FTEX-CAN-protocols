@@ -1102,7 +1102,7 @@
     },
     "CO_ID_VEHICLE_ON_OFF_CONFIGURATION": {
       "CANOpen_Index": "0x2023",
-      "Description": "Vehicle power on|off configuration",
+      "Description": "Vehicle power on off configuration",
       "Parameters": {
         "CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION": {
           "Subindex": "0x00",
@@ -1111,11 +1111,25 @@
           "Description": "Get or set the vehicle on off configuration.",
           "Valid_Options": [
             { "value": 0, "description": "Vehicle Always On" },
-            { "value": 1, "description": "Power Lock Signal" }
+            { "value": 1, "description": "Vehicle is using Powerlock / Key-In signal" }
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "Vehicle Always On: The controller starts as soon as the power is active, without needing a powerlock/key-in signal. Power Lock Signal: The controller powers on when it receives a key-in/powerlock signal."
+          "Notes": "Vehicle Always On: The controller starts as soon as the power is active, without needing a Powerlock / Key-in signal. Powerlock / Key-in Signal: The controller powers on when it receives a Powerlock / Key-in signal."
+        },
+        "CO_PARAM_VEHICLE_POWERLOCK_SIGNAL": {
+          "Subindex": "0x01",
+          "Access": "W",
+          "Type": "uint8_t",
+          "Description": "Allow the user to bypass the hardware Powerlock / Key-in signal via direct CANOpen message. No CAN wakeup messages are necessary, the bike power state will be updated by simply sending this CANOpen message.",
+          "Valid_Options": [
+            { "value": 0, "description": "Default value, no signal is sent. Bike will remain in its current state, either on or off." },
+            { "value": 1, "description": "Powerlock on / Key-in signal is sent. The controller will turn on." },
+            { "value": 2, "description": "Powerlock off / Key-out signal is sent. The controller will turn off." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True",
+          "Notes": "If the vehicle is set to 'Vehicle Always On' by the CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION, the CO_PARAM_VEHICLE_POWERLOCK_SIGNAL can still power off the controller via the value 2: Powerlock off / Key out signal."
         }
       }
     },

@@ -1128,7 +1128,8 @@
             { "value": 2, "description": "Powerlock off / Key-out signal is sent. The controller will turn off." }
           ],
           "Persistence": "Real-time",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "If the vehicle is set to 'Vehicle Always On' by the CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION, the CO_PARAM_VEHICLE_POWERLOCK_SIGNAL can still power off the controller via the value 2: Powerlock off / Key out signal."
         }
       }
     },

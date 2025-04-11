@@ -706,7 +706,7 @@
                   "Subindex": "0x02",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio).",
+                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A * (10^9)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio).",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -717,7 +717,7 @@
                   "Subindex": "0x03",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B * (10^9)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -728,7 +728,7 @@
                   "Subindex": "0x04",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C * (10^6)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -772,7 +772,7 @@
                   "Type": "uint16_t",
                   "Description": "PID Speed Kp value",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent"
@@ -783,7 +783,7 @@
                   "Type": "uint16_t",
                   "Description": "PID Speed Ki value",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent"
@@ -794,7 +794,7 @@
                   "Type": "uint16_t",
                   "Description": "PID Speed control Ki gain divider. This value must be a power of 2. eg. 512, or 1024, or 2048, or 4096, etc",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent"
@@ -956,7 +956,7 @@
                   "Unit": "cNm/s",
                   "Description": "Torque control up ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent"
@@ -968,7 +968,7 @@
                   "Unit": "cNm/s",
                   "Description": "Torque control down ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent"
@@ -980,7 +980,7 @@
                   "Unit": "rpm/s",
                   "Description": "Speed control up ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent",
@@ -993,7 +993,7 @@
                   "Unit": "rpm/s",
                   "Description": "Speed control down ramp\n\nThis is the pure motor control ramp, and is applied after other ramps, such as filtering, PAS ramps, etc.",
                   "Valid_Range": {
-                      "min": 0,
+                      "min": 1,
                       "max": 65535
                   },
                   "Persistence": "Persistent",

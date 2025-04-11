@@ -1056,11 +1056,11 @@
               "CO_PARAM_MOTOR_CONFIG_HALL_SENSORS_ELECTRICAL_PHASE_SHIFT": {
                   "Subindex": "0x02",
                   "Access": "R/W",
-                  "Type": "int16_t",
+                  "Type": "uint16_t",
                   "Unit": "degrees",
                   "Description": "Electrical phase shift between the low to high transition of signal H1 and the zero crossing of the back EMF induced between phase A and B",
                   "Valid_Range": {
-                      "min": -360,
+                      "min": 0,
                       "max": 360
                   },
                   "Persistence": "Persistent"

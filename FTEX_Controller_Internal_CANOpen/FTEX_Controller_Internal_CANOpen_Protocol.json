@@ -706,7 +706,7 @@
                   "Subindex": "0x02",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A * (10^9)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio).",
+                  "Description": "This parameter defines the quadratic coefficient used in the efficiency calculation formula. It is 'A' in the quadratic equation: efficiency = (Ax^2 + Bx + C * 1000 ) / 10^9 , where x is the motor RPM (Hub RPM * Gear Ratio).",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -717,7 +717,7 @@
                   "Subindex": "0x03",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B * (10^9)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the linear coefficient used in the efficiency calculation formula. It is 'B' in the quadratic equation: efficiency = (Ax^2 + Bx + C * 1000 ) / 10^9 , where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647
@@ -728,7 +728,7 @@
                   "Subindex": "0x04",
                   "Access": "R/W",
                   "Type": "int32_t",
-                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C * (10^6)' in the quadratic equation: efficiency = Ax^2 + Bx + C, where x is the motor RPM (Hub RPM * Gear Ratio)",
+                  "Description": "This parameter defines the constant used in the efficiency calculation formula. It is 'C' in the quadratic equation: efficiency = (Ax^2 + Bx + C * 1000 ) / 10^9 , where x is the motor RPM (Hub RPM * Gear Ratio)",
                   "Valid_Range": {
                       "min": -2147483648,
                       "max": 2147483647

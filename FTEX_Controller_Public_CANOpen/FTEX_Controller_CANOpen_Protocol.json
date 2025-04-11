@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.24"
+    "version": "2.4.25"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1147,7 +1147,7 @@
           "Subindex": "0x01",
           "Access": "W",
           "Type": "uint8_t",
-          "Description": "Allow the user to bypass the hardware Powerlock / Key-in signal via direct CANOpen message. No CAN wakeup messages are necessary, the bike power state will be updated by simply sending this CANOpen message.",
+          "Description": "Allow the user to bypass the hardware Powerlock / Key-in signal via direct CANOpen message. No CAN wakeup messages are necessary, the bike power state will be updated by simply sending this CANOpen message. The current power state of the vehicle can be read from the next parameter: CO_PARAM_VEHICLE_POWERLOCK_SIGNAL.",
           "Valid_Options": [
             { "value": 0, "description": "Default value, no signal is sent. Bike will remain in its current state, either on or off." },
             { "value": 1, "description": "Powerlock on / Key-in signal is sent. The controller will turn on." },
@@ -1156,6 +1156,18 @@
           "Persistence": "Real-time",
           "Obfuscation": "True",
           "Notes": "If the vehicle is set to 'Vehicle Always On' by the CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION, the CO_PARAM_VEHICLE_POWERLOCK_SIGNAL can still power off the controller via the value 2: Powerlock off / Key out signal."
+        },
+        "CO_PARAM_VEHICLE_POWER_STATE": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Display the current power state of the vehicle. If the vehicle is powered off (off state), the value is 0. If the vehicle is powered on (on state), the value is 1. This state can be controller via the CO_PARAM_VEHICLE_POWERLOCK_SIGNAL and/or and hardware Powerlock / Key-in signal.",
+          "Valid_Options": [
+            { "value": 0, "description": "Vehicle is powered off." },
+            { "value": 1, "description": "Vehicle is powered on." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.24"
+    "version": "2.4.25"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1156,6 +1156,18 @@
           "Persistence": "Real-time",
           "Obfuscation": "True",
           "Notes": "If the vehicle is set to 'Vehicle Always On' by the CO_PARAM_VEHICLE_ON_OFF_CONFIGURATION, the CO_PARAM_VEHICLE_POWERLOCK_SIGNAL can still power off the controller via the value 2: Powerlock off / Key out signal."
+        },
+        "CO_PARAM_VEHICLE_POWER_STATE": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Display the current power state of the vehicle. If the vehicle is powered off (off state), the value is 0. If the vehicle is powered on (on state), the value is 1",
+          "Valid_Options": [
+            { "value": 0, "description": "Vehicle is powered off." },
+            { "value": 1, "description": "Vehicle is powered on." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
         }
       }
     },

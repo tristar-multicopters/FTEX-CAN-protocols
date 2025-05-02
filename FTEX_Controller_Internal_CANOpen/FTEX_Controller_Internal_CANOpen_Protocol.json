@@ -1098,7 +1098,7 @@
                 "Valid_Options": [
                     { "value": 0, "description": "On standby" },
                     { "value": 1, "description": "Prepare for file transfer" },
-                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash." }
+                    { "value": 2, "description": "Deleting the previous firmware file saved in the controller's external flash." }
                 ],
                 "Persistence": "Real-time"
               },

@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.13"
+      "version": "1.4.14"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -1097,7 +1097,8 @@
                 "Description": "OTA commands.",
                 "Valid_Options": [
                     { "value": 0, "description": "On standby" },
-                    { "value": 1, "description": "Prepare for file transfer" }
+                    { "value": 1, "description": "Prepare for file transfer" },
+                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash." }
                 ],
                 "Persistence": "Real-time"
               },

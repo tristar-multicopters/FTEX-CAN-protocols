@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.25"
+    "version": "2.4.26"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -834,106 +834,12 @@
           "Subindex": "0x00",
           "Access": "R",
           "Type": "uint32_t",
-          "Description": "Get the active errors currently detected by the controller. Multiple errors at the same time can be raised in parallel. Retrieving individual errors can be done using a bitmask.",
+          "Description": "Get the active errors currently detected by the controller. Multiple errors at the same time can be raised in parallel. Retrieving individual errors can be done using a bitmask. Here's a list of all possible system errors. 0: No_error: No error. 1: Throttle_Error: If the controller turns on and it detects that the throttle is immediately/already above the minimum threshold value, the motor assistance is disabled and this error is shown on the screen. 2: DC_Undervoltage_Error: When the DC bus goes under the safe voltage operating range of the controller. 4: DC_Overvoltage_Error: When the DC bus goes over the safe voltage operating range of the controller. 8: Controller_Undertemperature_Error: If the controller is detecting that the temperature is under safe operating limits (around -30C). 16: Motor_Overtemperature_Error: The motor is overheating and assistance is stopped. 32: Motor_Overtemperature_Foldback_Warning: Foldback has been applied because motor is overheating. 64: Motor_Undertemperature_Error: Motor temperature sensor is disconnected or cold warning. 128: Controller_Overtemperature_Error: When the controller shuts down due to overheating. 256: Controller_Foldback_Warning: Foldback has been applied because the controller is overheating. 512: Motor_Hall_Sensor_Error: Controller can’t read the motor hall sensor, or the reading is not within safe/normal range. 1024: Motor_Phase_Error: Motor phase wire connection is detected as being faulted. 2048: IoT_Communication_Error: When the controller loses communication with the IoT module over CAN bus. 4096: Controller_Dual_Communication_Error: Display this error when the master controller (which controls the screen) loses communication with the slave controller (which controls the second motor), if slave controller is enabled. 8192: Controller_Overcurrent_Warning: When the controller hits an overcurrent. This is a warning but the controller self-recovers. 16384: Battery_Low_Error: Battery is low and needs charging. 32768: PAS_Torque_Startup_Error: If the controller is detecting that the PAS torque did not return to a normal original value when the controller started up. 65536: Controller_Anomaly_Error: The controller detects that the system is in a bad or unrecoverable state. For example, a short in the harness can trigger this error. 131072: Brake_Error: The brake cutoff sensor has an anomaly (e.g., the reading did not go back to the normal, original value on startup). 262144: Screen_Communication_Error: If the controller detects that it has lost communication with the HMI peripheral on the system.\n- If CANOpen screen, then it means that there was a CAN heartbeats timeout detected.\n- If UART screen, then it means that there was a timeout detected for receiving UART frames from the screen. 524288: PAS_Torque_Stuck_Error: If the controller is detecting that the torque sensor input is detected, but no cadence pulses are detected (potential hardware problem with the PAS sensor). 1048576: Bike_Locked_Error: If the IoT lock protection is activated and stopping powertrain, this error is raised over CAN. 2097152: Battery_Error: Default battery error, signaling that battery is either damaged or signaled an internal error to the controller, stopping powertrain. 4194304: BMS_Communication_Error: This error is raised if the BMS communication with the controller failed or if an <n> number of invalid inputs were sent to the controller.",
           "Notes": "Eg. if there is a brake error (0x20000) and a hall sensor error (0x200), the controller will raise 0x20200 ie. 0d131584",
-          "Valid_Options": [
-            {
-              "value": 0,
-              "description": "No_error: No error."
-            },
-            {
-              "value": 1,
-              "description": "Throttle_Error: If the controller turns on and it detects that the throttle is immediately/already above the minimum threshold value, the motor assistance is disabled and this error is shown on the screen."
-            },
-            {
-              "value": 2,
-              "description": "DC_Undervoltage_Error: When the DC bus goes under the safe voltage operating range of the controller."
-            },
-            {
-              "value": 4,
-              "description": "DC_Overvoltage_Error: When the DC bus goes over the safe voltage operating range of the controller."
-            },
-            {
-              "value": 8,
-              "description": "Controller_Undertemperature_Error: If the controller is detecting that the temperature is under safe operating limits (around -30C)."
-            },
-            {
-              "value": 16,
-              "description": "Motor_Overtemperature_Error: The motor is overheating and assistance is stopped."
-            },
-            {
-              "value": 32,
-              "description": "Motor_Overtemperature_Foldback_Warning: Foldback has been applied because motor is overheating."
-            },
-            {
-              "value": 64,
-              "description": "Motor_Undertemperature_Error: Motor temperature sensor is disconnected or cold warning."
-            },
-            {
-              "value": 128,
-              "description": "Controller_Overtemperature_Error: When the controller shuts down due to overheating."
-            },
-            {
-              "value": 256,
-              "description": "Controller_Foldback_Warning: Foldback has been applied because the controller is overheating."
-            },
-            {
-              "value": 512,
-              "description": "Motor_Hall_Sensor_Error: Controller can’t read the motor hall sensor, or the reading is not within safe/normal range."
-            },
-            {
-              "value": 1024,
-              "description": "Motor_Phase_Error: Motor phase wire connection is detected as being faulted."
-            },
-            {
-              "value": 2048,
-              "description": "IoT_Communication_Error: When the controller loses communication with the IoT module over CAN bus."
-            },
-            {
-              "value": 4096,
-              "description": "Controller_Dual_Communication_Error: Display this error when the master controller (which controls the screen) loses communication with the slave controller (which controls the second motor), if slave controller is enabled."
-            },
-            {
-              "value": 8192,
-              "description": "Controller_Overcurrent_Warning: When the controller hits an overcurrent. This is a warning but the controller self-recovers."
-            },
-            {
-              "value": 16384,
-              "description": "Battery_Low_Error: Battery is low and needs charging."
-            },
-            {
-              "value": 32768,
-              "description": "PAS_Torque_Startup_Error: If the controller is detecting that the PAS torque did not return to a normal original value when the controller started up."
-            },
-            {
-              "value": 65536,
-              "description": "Controller_Anomaly_Error: The controller detects that the system is in a bad or unrecoverable state. For example, a short in the harness can trigger this error."
-            },
-            {
-              "value": 131072,
-              "description": "Brake_Error: The brake cutoff sensor has an anomaly (e.g., the reading did not go back to the normal, original value on startup)."
-            },
-            {
-              "value": 262144,
-              "description": "Screen_Communication_Error: If the controller detects that it has lost communication with the HMI peripheral on the system.\n- If CANOpen screen, then it means that there was a CAN heartbeats timeout detected.\n- If UART screen, then it means that there was a timeout detected for receiving UART frames from the screen."
-            },
-            {
-              "value": 524288,
-              "description": "PAS_Torque_Stuck_Error: If the controller is detecting that the torque sensor input is detected, but no cadence pulses are detected (potential hardware problem with the PAS sensor)."
-            },
-            {
-              "value": 1048576,
-              "description": "Bike_Locked_Error: If the IoT lock protection is activated and stopping powertrain, this error is raised over CAN."
-            },
-            {
-              "value": 2097152,
-              "description": "Battery_Error: Default battery error, signaling that battery is either damaged or signaled an internal error to the controller, stopping powertrain."
-            },
-            {
-              "value": 4194304,
-              "description": "BMS_Communication_Error: This error is raised if the BMS communication with the controller failed or if an <n> number of invalid inputs were sent to the controller."
-            }
-          ],
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          },
           "Persistence": "Real-time",
           "Obfuscation": "False"
         }

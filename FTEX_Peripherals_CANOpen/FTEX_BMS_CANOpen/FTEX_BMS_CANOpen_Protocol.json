@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX BMS CANOpen protocol",
     "description": "CANOpen protocol specification that a BMS must follow in order to be compatible with the FTEX controller. See the protocol readme for details on node ID, baud rate, etc. The BMS is passive and must not proactively send anything on CAN. The controller or IoT (or HMI) may perform SDO reads on the BMS whenever it needs a value. The query frequency setting explains how often the controller may query the value from the BMS. The query frequency is approximate, and the controller may request data more or less often than what is specified there. A query frequency of ad-hoc means that the controller may get this value at any time. A query frequency of boot-up means that the controller will get this value once, every time the vehicle powers up. A query frequency of real-time means the controller will get this information very rapidly and very often, so the BMS must keep this value updated rapidly.",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "Notes": "If there are two batteries, the controller will only communicate with the main battery node ID. The second battery should still be on the CAN network for diagnostic purposes, but while the vehicle is running, the main battery node ID should communicate the capabilities of both batteries (eg. total max discharge current)."
   },
   "Health": {
@@ -14,51 +14,13 @@
           "Subindex": "0x00",
           "Access": "R",
           "Type": "uint32_t",
-          "Description": "Bitmask of errors currently detected by the BMS system. If more than one error is occurring, the BMS does an OR mask between errors, to flag different error bits.",
+          "Description": "Bitmask of errors currently detected by the BMS system. If more than one error is occurring, the BMS does an OR mask between errors, to flag different error bits. Here's a list of all possible BMS errors. 0: External_BMS_No_error: No error. 1: External_BMS_Overtemperature_Error: The BMS detects that the temperature is above the safe operating range. 2: External_BMS_Undertemperature_Error: The BMS detects that the temperature is below the safe operating range. 4: External_BMS_Cell_Imbalance_Warning: The BMS detects an imbalance between individual cells in the battery pack. 8: External_BMS_Overvoltage_Error: The BMS detects that the voltage exceeds the safe operating range. 16: External_BMS_Undervoltage_Error: The BMS detects that the voltage is below the safe operating range. 32: External_BMS_Charge_Overcurrent_Error: The BMS detects an overcurrent condition during charging. 64: External_BMS_Discharge_Overcurrent_Error: The BMS detects an overcurrent condition during discharge. 128: External_BMS_Shortcircuit_Error: The BMS detects a short circuit condition. 2147483648: External_BMS_Internal_Error: The BMS detects an unmapped or undefined error.",
           "Query_frequency": "real-time",
           "Notes": "For example, if the BMS detect a cell imbalance warning and an overvoltage error, this parameter should have a value of 20 (ie. 0x4 | 0x20)",
-          "Valid_Options": [
-            {
-              "value": 0,
-              "description": "External_BMS_No_error: No error."
-            },
-            {
-              "value": 1,
-              "description": "External_BMS_Overtemperature_Error: The BMS detects that the temperature is above the safe operating range."
-            },
-            {
-              "value": 2,
-              "description": "External_BMS_Undertemperature_Error: The BMS detects that the temperature is below the safe operating range."
-            },
-            {
-              "value": 4,
-              "description": "External_BMS_Cell_Imbalance_Warning: The BMS detects an imbalance between individual cells in the battery pack."
-            },
-            {
-              "value": 8,
-              "description": "External_BMS_Overvoltage_Error: The BMS detects that the voltage exceeds the safe operating range."
-            },
-            {
-              "value": 16,
-              "description": "External_BMS_Undervoltage_Error: The BMS detects that the voltage is below the safe operating range."
-            },
-            {
-              "value": 32,
-              "description": "External_BMS_Charge_Overcurrent_Error: The BMS detects an overcurrent condition during charging."
-            },
-            {
-              "value": 64,
-              "description": "External_BMS_Discharge_Overcurrent_Error: The BMS detects an overcurrent condition during discharge."
-            },
-            {
-              "value": 128,
-              "description": "External_BMS_Shortcircuit_Error: The BMS detects a short circuit condition."
-            },
-            {
-              "value": 2147483648,
-              "description": "External_BMS_Internal_Error: The BMS detects an unmapped or undefined error."
-            }
-          ]
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
         },
         "CO_PARAM_EXTERNAL_BMS_TEMPERATURE": {
           "Subindex": "0x01",

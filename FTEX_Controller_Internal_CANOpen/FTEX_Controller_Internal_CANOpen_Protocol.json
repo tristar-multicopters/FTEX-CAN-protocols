@@ -1097,8 +1097,8 @@
                 "Description": "OTA commands.",
                 "Valid_Options": [
                     { "value": 0, "description": "On standby" },
-                    { "value": 1, "description": "Prepare for file transfer" },
-                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash." }
+                    { "value": 1, "description": "Preparing for file transfer" },
+                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash. This command can be sent with or without having to trigger a DFU process. Controller will reboot once the command is finished executing. This operation can take up to 15 seconds." }
                 ],
                 "Persistence": "Real-time"
               },

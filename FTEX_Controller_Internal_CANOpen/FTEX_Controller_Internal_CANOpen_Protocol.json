@@ -1098,7 +1098,7 @@
                 "Valid_Options": [
                     { "value": 0, "description": "On standby" },
                     { "value": 1, "description": "Prepare for file transfer" },
-                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash." }
+                    { "value": 6, "description": "Deleting the previous firmware file saved in the controller's external flash. This command can be sent without having to trigger a DFU process. Controller will reboot once the command is finish executing." }
                 ],
                 "Persistence": "Real-time"
               },

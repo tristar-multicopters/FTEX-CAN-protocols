@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.26"
+    "version": "2.4.27"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1639,11 +1639,11 @@
       "CANOpen_Index": "0x2034",
       "Description": "Startup and runtime thresholds of the PAS detection (A and B in the diagram in the Notes on PAS Detection).",
       "Parameters": {
-        "CO_PARAM_SPEED_THRESHOLD_A": {
+        "CO_PARAM_SPEED_THRESHOLD_STARTUP": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the speed threshold A of the PAS detection algorithm.",
+          "Description": "Get or set the startup speed threshold (speed threshold A) of the PAS detection algorithm.",
           "Valid_Range": {
               "min": 0,
               "max": 255
@@ -1652,11 +1652,11 @@
           "Obfuscation": "True",
           "Unit": "km/h"
         },
-        "CO_PARAM_SPEED_THRESHOLD_B": {
+        "CO_PARAM_SPEED_THRESHOLD_RUNTIME": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the speed threshold B of the PAS detection algorithm.",
+          "Description": "Get or set the runtime speed threshold (speed threshold B) of the PAS detection algorithm.",
           "Valid_Range": {
               "min": 0,
               "max": 255

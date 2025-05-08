@@ -280,8 +280,8 @@
                   "Type": "uint16_t",
                   "Description": "Autotune input: rated motor current (AC current)",
                   "Valid_Range": {
-                      "min": 0,
-                      "max": 65535
+                      "min": 25,
+                      "max": 100
                   },
                   "Persistence": "Real-time",
                   "Notes": "Autotune currently only works for current up to the max current of the hardware"
@@ -483,8 +483,8 @@
                   "Unit": "A",
                   "Description": "Max current that can go in the motor (ie. AC current)",
                   "Valid_Range": {
-                      "min": 1,
-                      "max": 65536
+                      "min": 25,
+                      "max": 100
                   },
                   "Persistence": "Persistent"
               },

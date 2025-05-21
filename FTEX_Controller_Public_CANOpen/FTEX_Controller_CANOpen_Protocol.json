@@ -290,7 +290,7 @@
           "Subindex": "0x30",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Description": "PAS torque sensor min value (offset), between 0–65535 (0V to 3.30V). Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Description": "PAS torque sensor min value (offset), between 0–65535 (0V to 3.30V). Minimum value is 4966 (approx. 0.25V) for safety.",
           "Valid_Range": {
               "min": 4966,
               "max": 65535
@@ -302,7 +302,7 @@
           "Subindex": "0x31",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Description": "PAS torque sensor max value, between 0–65535 (0V to 3.30V). Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Description": "PAS torque sensor max value, between 0–65535 (0V to 3.30V). Minimum value is 4966 (approx. 0.25V) for safety.",
           "Valid_Range": {
               "min": 4966,
               "max": 65535

@@ -278,7 +278,7 @@
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get/set the number of magnets per rotation of the PAS cadence sensor. Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Description": "Get/set the number of magnets per rotation of the PAS cadence sensor.",
           "Valid_Range": {
               "min": 0,
               "max": 50
@@ -302,7 +302,7 @@
           "Subindex": "0x31",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Description": "PAS torque sensor max value, between 0–65535 (0V to 3.30V). ",
+          "Description": "PAS torque sensor max value, between 0–65535 (0V to 3.30V). Minimum value is 4965 (approx. 0.25V) for safety.",
           "Valid_Range": {
               "min": 4966,
               "max": 65535

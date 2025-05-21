@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.27"
+    "version": "2.4.28"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -290,7 +290,7 @@
           "Subindex": "0x30",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Description": "PAS torque sensor min value (offset), between 0–65535 (0V to 3.3V). Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Description": "PAS torque sensor min value (offset), between 0–65535 (0.25V to 3.05V).",
           "Valid_Range": {
               "min": 4966,
               "max": 65535
@@ -302,33 +302,9 @@
           "Subindex": "0x31",
           "Access": "R/W",
           "Type": "uint16_t",
-          "Description": "PAS torque sensor max value, between 0–65535. Minimum value is 4965 (approx. 0.25V) for safety.",
+          "Description": "PAS torque sensor max value, between 0–65535 (0.25V to 3.05V).",
           "Valid_Range": {
               "min": 4966,
-              "max": 65535
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
-        "CO_PARAM_PAS_TORQUE_FILTERING_ACCELERATION_CONFIG": {
-          "Subindex": "0x40",
-          "Access": "R/W",
-          "Type": "uint16_t",
-          "Description": "Low pass filter bandwidth value on torque sensor acceleration. Increasing this value increases the filtering on the input (smoother acceleration), which may help reduce the yo-yo effect sometimes felt from pure PAS torque assistance.",
-          "Valid_Range": {
-              "min": 1,
-              "max": 65535
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
-        },
-        "CO_PARAM_PAS_TORQUE_FILTERING_DECELERATION_CONFIG": {
-          "Subindex": "0x41",
-          "Access": "R/W",
-          "Type": "uint16_t",
-          "Description": "Low pass filter bandwidth value on torque sensor deceleration. Increasing this value increases the filtering on the input (smoother deceleration), which may help reduce the yo-yo effect sometimes felt from pure PAS torque assistance.",
-          "Valid_Range": {
-              "min": 1,
               "max": 65535
           },
           "Persistence": "Persistent",

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.4.28"
+    "version": "2.5.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {

@@ -1069,7 +1069,7 @@
       },
       "CO_ID_MOTOR_SEQUENCE_CONFIG": {
           "CANOpen_Index": "0x500B",
-          "Description": "Motor phase sequence preset.",
+          "Description": "Motor phase sequence and hall sensor sequence preset.",
           "Parameters": {
               "CO_PARAM_MOTOR_PHASE_SEQUENCE_PRESET": {
                   "Subindex": "0x00",

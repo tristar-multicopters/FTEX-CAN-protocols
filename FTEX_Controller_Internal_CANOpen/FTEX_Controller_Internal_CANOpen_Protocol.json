@@ -803,7 +803,8 @@
                   "Subindex": "0x13",
                   "Access": "R/W",
                   "Type": "uint8_t",
-                  "Description": "PID Speed control minimum torque will apply to avoid clutch desengagement while the speed control is active",
+		  "Unit": "cNm",
+                  "Description": "PID Speed control minimum torque will be applied to avoid clutch disengagement while the speed control is active",
                   "Valid_Range": {
                       "min": 0,
                       "max": 255

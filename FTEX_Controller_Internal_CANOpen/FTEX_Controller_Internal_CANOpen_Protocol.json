@@ -828,7 +828,7 @@
                   "Subindex": "0x21",
                   "Access": "R/W",
                   "Type": "uint8_t",
-                  "Description": "Speed foldback enable or disable, Speed foldback is a back up feature for the speed control and it becomes active depend on the application",
+                  "Description": "Enable or disable speed foldback. For most applications that use speed control, speed foldback should be enabled, but one may disable speed foldback and rely only on speed control PID. Mid-drives usually need speed foldback disabled.",
                   "Valid_Options": [
                       { "value": 0, "description": "Disabled" },
                       { "value": 1, "description": "Enabled" }

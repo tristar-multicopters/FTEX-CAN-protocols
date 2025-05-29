@@ -1090,9 +1090,9 @@
               }
           }
       },
-      "CO_ID_MOTOR_PHASE_SEQUENCE_CONFIG": {
+      "CO_ID_MOTOR_SEQUENCE_CONFIG": {
           "CANOpen_Index": "0x500B",
-          "Description": "Motor phase sequence preset.",
+          "Description": "Motor phase sequence and hall sensor sequence preset.",
           "Parameters": {
               "CO_PARAM_MOTOR_PHASE_SEQUENCE_PRESET": {
                   "Subindex": "0x00",
@@ -1102,6 +1102,17 @@
                   "Valid_Options": [
                       { "value": 0, "description": "Configuration: Phase sequence: UVW (Blue-Yellow-Green)." },
                       { "value": 1, "description": "Configuration: Phase sequence: VUW (Yellow-Blue-Green)." }
+                  ],
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_HALL_SENSOR_SEQUENCE_PRESET": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Motor hall sensor sequence configuration, based on pre-defined presets.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Configuration: Hall sensor sequence: UVW (Blue-Yellow-Green)." },
+                      { "value": 1, "description": "Configuration: Hall sensor sequence: VUW (Yellow-Blue-Green)." }
                   ],
                   "Persistence": "Persistent"
               }

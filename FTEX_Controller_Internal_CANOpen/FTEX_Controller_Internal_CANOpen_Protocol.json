@@ -799,6 +799,18 @@
                   },
                   "Persistence": "Persistent"
               },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_MIMIMUM_TORQUE": {
+                  "Subindex": "0x13",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+		  "Unit": "cNm",
+                  "Description": "PID Speed control minimum torque will be applied to avoid clutch disengagement while the speed control is active",
+                  "Valid_Range": {
+                      "min": 0,
+                      "max": 255
+                  },
+                  "Persistence": "Persistent"
+              },
               "CO_PARAM_MOTOR_CONFIG_SPEED_PID_FOLDBACK_INTERVAL": {
                   "Subindex": "0x20",
                   "Access": "R/W",
@@ -811,6 +823,17 @@
                   },
                   "Persistence": "Persistent",
                   "Notes": "The rpm is the internal motor rpm, before gear ratio is applied."
+              },
+              "CO_PARAM_MOTOR_CONFIG_SPEED_PID_FOLDBACK_ENABLE": {
+                  "Subindex": "0x21",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Speed foldback enable or disable",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Disabled" },
+                      { "value": 1, "description": "Enabled" }
+                  ],
+                  "Persistence": "Persistent"
               }
           }
       },

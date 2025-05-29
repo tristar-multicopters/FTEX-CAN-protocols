@@ -828,7 +828,7 @@
                   "Subindex": "0x21",
                   "Access": "R/W",
                   "Type": "uint8_t",
-                  "Description": "Speed foldback enable or disable",
+                  "Description": "Speed foldback enable or disable, Speed foldback is a back up feature for the speed control and it becomes active depend on the application",
                   "Valid_Options": [
                       { "value": 0, "description": "Disabled" },
                       { "value": 1, "description": "Enabled" }

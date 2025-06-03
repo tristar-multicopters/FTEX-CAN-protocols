@@ -309,6 +309,18 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_SENSOR_TYPE_PRESET": {
+          "Subindex": "0x40",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "PAS sensor type preset.",
+          "Valid_Options": [
+            { "value": 0, "description": "Analog input sources preset. The torque sensor, cadence sensor and wheel speed sensor is expected to be all analog signals." },
+            { "value": 100, "description": "FTEX Custom PAS Sensor Configuration Preset 1 [internal]." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     },
@@ -1479,25 +1491,6 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "If the selected default PAS level is higher than the max number of levels, the max will be selected instead. If not specified, the default level is 0, which is preferable for safety reasons."
-        }
-      }
-    },
-    "CO_ID_PAS_SENSOR_TYPE_PRESET": {
-      "CANOpen_Index": "0x203E",
-      "Description": "Select the PAS sensor type configuration preset. This preset will determine which input source (Analog, UART, CANOpen, etc.) is expected for each PAS sensors.",
-      "Parameters": {
-        "CO_PARAM_PAS_SENSOR_TYPE_PRESET": {
-          "Subindex": "0x00",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "PAS sensor type preset.",
-          "Valid_Options": [
-            { "value": 0, "description": "Analog input sources preset. The torque sensor, cadence sensor and wheel speed sensor is expected to be all analog signals." },
-            { "value": 1, "description": "FTEX CAN protocol. The torque sensor, cadence sensor is expected to be over CANOpen, defined by the FTEX_PAS_CANOpen_protocol.json file. The wheel speed sensor is an analog input. Please, note that this configuration is not available yet." },
-            { "value": 100, "description": "FTEX Custom PAS Sensor Configuration Preset 1 [internal]." }
-          ],
-          "Persistence": "Persistent",
-          "Obfuscation": "True"
         }
       }
     },

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.5.1"
+    "version": "2.5.2"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1504,11 +1504,11 @@
       "CANOpen_Index": "0x201A",
       "Description": "Maximum speed for each PAS level.",
       "Parameters": {
-        "CO_PARAM_PAS_SPEED_LEVEL1": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL1": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 1.",
+          "Description": "Get or set the maximum torque based speed of PAS level 1.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1516,11 +1516,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL2": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL2": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 2.",
+          "Description": "Get or set the maximum torque based speed of PAS level 2.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1528,11 +1528,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL3": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL3": {
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 3.",
+          "Description": "Get or set the maximum torque based speed of PAS level 3.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1540,11 +1540,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL4": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL4": {
           "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 4.",
+          "Description": "Get or set the maximum torque based speed of PAS level 4.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1552,11 +1552,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL5": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL5": {
           "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 5.",
+          "Description": "Get or set the maximum torque based speed of PAS level 5.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1564,11 +1564,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL6": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL6": {
           "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 6.",
+          "Description": "Get or set the maximum torque based speed of PAS level 6.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1576,11 +1576,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL7": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL7": {
           "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 7.",
+          "Description": "Get or set the maximum torque based speed of PAS level 7.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1588,11 +1588,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL8": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL8": {
           "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 8.",
+          "Description": "Get or set the maximum torque based speed of PAS level 8.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1600,11 +1600,11 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL9": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL9": {
           "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 9.",
+          "Description": "Get or set the maximum torque based speed of PAS level 9.",
           "Valid_Range": {
               "min": 0,
               "max": 99
@@ -1612,11 +1612,131 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_LEVEL0": {
+        "CO_PARAM_PAS_TORQUE_SPEED_LEVEL0": {
+          "Subindex": "0x09",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum torque based speed of PAS level 0.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL1": {
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Get or set the maximum speed of PAS level 0.",
+          "Description": "Get or set the maximum cadence based speed of PAS level 1.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL2": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 2.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL3": {
+          "Subindex": "0x12",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 3.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL4": {
+          "Subindex": "0x13",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 4.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL5": {
+          "Subindex": "0x14",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 5.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL6": {
+          "Subindex": "0x15",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 6.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL7": {
+          "Subindex": "0x16",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 7.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL8": {
+          "Subindex": "0x17",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 8.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL9": {
+          "Subindex": "0x18",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 9.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_SPEED_LEVEL0": {
+          "Subindex": "0x19",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Get or set the maximum cadence based speed of PAS level 0.",
           "Valid_Range": {
               "min": 0,
               "max": 99

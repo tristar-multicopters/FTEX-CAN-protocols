@@ -316,7 +316,7 @@
           "Type": "uint8_t",
           "Description": "PAS sensor type preset.",
           "Valid_Options": [
-            { "value": 0, "description": "Analog input sources preset. The torque sensor, cadence sensor and wheel speed sensor is expected to be all analog signals." },
+            { "value": 0, "description": "Analog/Digital input sources preset. The torque sensor, cadence sensor and wheel speed sensor is expected to be all analog signals. Torque signal is optional, but cadence and wheel speed is required." },
             { "value": 100, "description": "FTEX Custom PAS Sensor Configuration Preset 1 [internal]." }
           ],
           "Persistence": "Persistent",

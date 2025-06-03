@@ -1482,7 +1482,7 @@
         }
       }
     },
-    "CO_ID_PAS_SENSOR_TYPE_PRESET": {
+    "CO_ID_PAS_WSS_SENSOR_TYPE_PRESET": {
       "CANOpen_Index": "0x203E",
       "Description": "Select the PAS sensor type configuration preset. This preset will determine which input source (Analog, UART, CANOpen, etc.) is expected for each PAS sensors.",
       "Parameters": {

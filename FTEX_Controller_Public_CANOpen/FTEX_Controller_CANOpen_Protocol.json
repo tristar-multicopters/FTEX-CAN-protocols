@@ -1508,6 +1508,7 @@
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 1. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1520,6 +1521,7 @@
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 2. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1532,6 +1534,7 @@
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 3. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1544,6 +1547,7 @@
           "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 4. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1556,6 +1560,7 @@
           "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 5. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1568,6 +1573,7 @@
           "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 6. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1580,6 +1586,7 @@
           "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 7. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1592,6 +1599,7 @@
           "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 8. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1604,6 +1612,7 @@
           "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 9. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1616,6 +1625,7 @@
           "Subindex": "0x09",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum torque based speed of PAS level 0. The usual configuration would set this value higher than its cadence counter part.",
           "Valid_Range": {
               "min": 0,
@@ -1628,6 +1638,7 @@
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 1.",
           "Valid_Range": {
               "min": 0,
@@ -1640,6 +1651,7 @@
           "Subindex": "0x11",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 2.",
           "Valid_Range": {
               "min": 0,
@@ -1652,6 +1664,7 @@
           "Subindex": "0x12",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 3.",
           "Valid_Range": {
               "min": 0,
@@ -1664,6 +1677,7 @@
           "Subindex": "0x13",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 4.",
           "Valid_Range": {
               "min": 0,
@@ -1676,6 +1690,7 @@
           "Subindex": "0x14",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 5.",
           "Valid_Range": {
               "min": 0,
@@ -1688,6 +1703,7 @@
           "Subindex": "0x15",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 6.",
           "Valid_Range": {
               "min": 0,
@@ -1700,6 +1716,7 @@
           "Subindex": "0x16",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 7.",
           "Valid_Range": {
               "min": 0,
@@ -1712,6 +1729,7 @@
           "Subindex": "0x17",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 8.",
           "Valid_Range": {
               "min": 0,
@@ -1724,6 +1742,7 @@
           "Subindex": "0x18",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 9.",
           "Valid_Range": {
               "min": 0,
@@ -1736,6 +1755,7 @@
           "Subindex": "0x19",
           "Access": "R/W",
           "Type": "uint8_t",
+          "Unit": "km/h",
           "Description": "Get or set the maximum cadence based speed of PAS level 0.",
           "Valid_Range": {
               "min": 0,

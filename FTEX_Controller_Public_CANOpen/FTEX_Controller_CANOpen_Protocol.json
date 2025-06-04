@@ -1070,7 +1070,350 @@
           "Obfuscation": "True"
         }
       }
+    },
+    "CO_ID_VEHICLE_CHAIN_TABLE": {
+      "CANOpen_Index": "0x2040",
+      "Description": "Chain ratio configuration. It holds the number of gears and the chain ratio values. The chain table must be sorted from the smallest to the largest value. The table only accepts values up to the specified gear count. For example, if the number of gears is 5, then CO_PARAM_CHAIN_TABLE_6 to CO_PARAM_CHAIN_TABLE_27 will remain zero. This is only used and relevant if the motor type (CO_PARAM_MOTOR_CONFIG_MOTORTYPE) is mid-drive.",
+      "Parameters": {
+        "CO_PARAM_CHAIN_RATIO_COUNT": {
+          "Subindex": "0x00",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Number of gears in the chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 27
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_1": {
+          "Subindex": "0x01",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 1 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_2": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 2 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_3": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 3 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_4": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 4 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_5": {
+          "Subindex": "0x05",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 5 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_6": {
+          "Subindex": "0x06",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 6 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_7": {
+          "Subindex": "0x07",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 7 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_8": {
+          "Subindex": "0x08",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 8 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_9": {
+          "Subindex": "0x09",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 9 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_10": {
+          "Subindex": "0x0A",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 10 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_11": {
+          "Subindex": "0x0B",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 11 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_12": {
+          "Subindex": "0x0C",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 12 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_13": {
+          "Subindex": "0x0D",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 13 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_14": {
+          "Subindex": "0x0E",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 14 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_15": {
+          "Subindex": "0x0F",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 15 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_16": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 16 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_17": {
+          "Subindex": "0x11",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 17 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_18": {
+          "Subindex": "0x12",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 18 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_19": {
+          "Subindex": "0x13",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 19 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_20": {
+          "Subindex": "0x14",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 20 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_21": {
+          "Subindex": "0x15",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 21 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_22": {
+          "Subindex": "0x16",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 22 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_23": {
+          "Subindex": "0x17",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 23 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_24": {
+          "Subindex": "0x18",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 24 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_25": {
+          "Subindex": "0x19",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 25 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_26": {
+          "Subindex": "0x1A",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 26 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_CHAIN_RATIO_TABLE_27": {
+          "Subindex": "0x1B",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Gear 27 value in chain table.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 255
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        }
+      }
     }
+
   },
   "Metadata": {
     "CO_ID_SERIAL_NUMBER": {

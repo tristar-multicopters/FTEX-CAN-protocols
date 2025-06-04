@@ -1073,7 +1073,7 @@
     },
     "CO_ID_CHAIN_TABLE": {
       "CANOpen_Index": "0x2040",
-      "Description": "Chain table configuration. It holds the number of gears and the chain ratio values.",
+      "Description": "Chain table configuration. It holds the number of gears and the chain ratio values. The chain table must be sorted from the smallest to the largest value. The table only accepts values up to the specified gear count. For example, if the number of gears is 5, then CO_PARAM_CHAIN_TABLE_6 to CO_PARAM_CHAIN_TABLE_27 will remain zero.",
       "Parameters": {
         "CO_PARAM_CHAIN_TABLE_COUNT": {
           "Subindex": "0x00",

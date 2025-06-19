@@ -27,7 +27,7 @@ The <Data> field is written with the data that are to be written, if applicable;
 - 0x03: Node ID of the FTEX slave controller (optional)
 (This is only used in the case of dual motor, with one controller as master and one controller as slave. Therefore, this is only applicable in case of dual communication. You should only communicate with the master controller)"
 - 0x04: Default node ID of the HMI (if present)
-- 0x05: Default node ID of the battery/BMS (if present)
+- 0x05: Default node ID of the battery/BMS (if present). If a second battery is present, it will use 0x15.
 - 0x10: Default node ID of the PAS sensor (if present)
 
 For now, the node IDs are not configurable. Contact FTEX otherwise.

@@ -702,7 +702,7 @@
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "Depending of the CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG, the PAS power detection and be enabled if the CO_PARAM_PAS_TORQUE_DETECTION and/or CO_PARAM_PAS_CADENCE_DETECTION are enabled."
+          "Notes": "Depending of the CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG, the PAS power detection is enabled if the CO_PARAM_PAS_TORQUE_DETECTION and/or CO_PARAM_PAS_CADENCE_DETECTION are enabled."
         },
         "CO_PARAM_PAS_TORQUE_DETECTION": {
           "Subindex": "0x11",

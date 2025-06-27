@@ -695,7 +695,7 @@
           "Subindex": "0x10",
           "Access": "R",
           "Type": "uint8_t",
-          "Description": "Diagnostic flag mapped to the vehicle power enable state. This reflects the PAS controller detection state.",
+          "Description": "Diagnostic flag mapped to the PAS power enable state. This reflects the PAS controller detection state.",
           "Valid_Options": [
             { "value": 0, "description": "PAS power is disabled." },
             { "value": 1, "description": "PAS power is enabled." }

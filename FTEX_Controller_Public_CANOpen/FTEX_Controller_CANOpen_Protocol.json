@@ -700,7 +700,7 @@
             { "value": 0, "description": "PAS power is disabled." },
             { "value": 1, "description": "PAS power is enabled." }
           ],
-          "Persistence": "Persistent",
+          "Persistence": "Real-time",
           "Obfuscation": "True",
           "Notes": "Depending of the CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG, the PAS power detection is enabled if the CO_PARAM_PAS_TORQUE_DETECTION and/or CO_PARAM_PAS_CADENCE_DETECTION are enabled."
         },
@@ -713,7 +713,7 @@
             { "value": 0, "description": "PAS torque detection is inactive." },
             { "value": 1, "description": "PAS torque detection is active." }
           ],
-          "Persistence": "Persistent",
+          "Persistence": "Real-time",
           "Obfuscation": "True"
         },
         "CO_PARAM_PAS_CADENCE_DETECTION": {
@@ -725,7 +725,19 @@
             { "value": 0, "description": "PAS cadence detection is inactive." },
             { "value": 1, "description": "PAS cadence detection is active." }
           ],
-          "Persistence": "Persistent",
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_STARTUP_RUNTIME_CONDITION": {
+          "Subindex": "0x13",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the PAS condition, either startup or runtime.",
+          "Valid_Options": [
+            { "value": 0, "description": "Startup Condition." },
+            { "value": 1, "description": "Runtime condition." }
+          ],
+          "Persistence": "Real-time",
           "Obfuscation": "True"
         }
       }

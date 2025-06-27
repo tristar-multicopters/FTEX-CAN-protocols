@@ -679,7 +679,7 @@
           "Subindex": "0x01",
           "Access": "R",
           "Type": "uint8_t",
-          "Description": "This value allows the user to validate from which power mode is used to deliver a torque to the vehicle motor.",
+          "Description": "This value allows the user to validate which power source is used to deliver the torque reference to the vehicle motor.",
           "Valid_Options": [
             { "value": 0, "description": "No source: No power mode is currently active. The motor is expected to be off." },
             { "value": 1, "description": "PAS Torque: The power is computed and delivered from the pedal torque sensor." },

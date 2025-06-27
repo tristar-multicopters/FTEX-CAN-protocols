@@ -659,6 +659,77 @@
     }
   },
   "Vehicle": {
+    "CO_ID_VEHICLE_DIAGNOSTICS": {
+      "CANOpen_Index": "0x2039",
+      "Description": "Vehicle diagnostics parameters, including PAS detection, expected torque reference and type of power source.",
+      "Parameters": {
+        "CO_PARAM_TORQUE_REFERENCE": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "int16_t",
+          "Description": "This value represents the expected torque sent by the vehicle control to the vehicle motor.",
+          "Valid_Range": {
+              "min": -5000,
+              "max": 5000
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_POWERTRAIN_SOURCE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "This value allows the user to validate from which power mode is used to deliver a torque to the vehicle motor.",
+          "Valid_Options": [
+            { "value": 0, "description": "No source: No power mode is currently active. The motor is expected to be off." },
+            { "value": 1, "description": "PAS Torque: The power is computed and delivered from the pedal torque sensor." },
+            { "value": 2, "description": "PAS Cadence: The power is computed and delivered from the pedal cadence sensor." },
+            { "value": 3, "description": "Walk Mode: The power is computed and delivered from the walk mode." },
+            { "value": 4, "description": "Cruise Control: The power is computed and delivered from the cruise control." },
+            { "value": 5, "description": "Throttle: The power is computed and delivered from the throttle." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_ENABLE": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the vehicle power enable state.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS power is disabled." },
+            { "value": 1, "description": "PAS power is enabled." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "Depending of the CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG, the PAS power detection and be enabled if the CO_PARAM_PAS_TORQUE_DETECTION and/or CO_PARAM_PAS_CADENCE_DETECTION are enabled."
+        },
+        "CO_PARAM_PAS_TORQUE_DETECTION": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the torque sensor PAS detection.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS torque detection is inactive." },
+            { "value": 1, "description": "PAS torque detection is active." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_DETECTION": {
+          "Subindex": "0x12",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the cadence sensor PAS detection.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS cadence detection is inactive." },
+            { "value": 1, "description": "PAS cadence detection is active." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        }
+      }
+    },
     "CO_ID_ODOMETER_AND_RANGE": {
       "CANOpen_Index": "0x2030",
       "Description": "Controller odometer and range configuration and values.",

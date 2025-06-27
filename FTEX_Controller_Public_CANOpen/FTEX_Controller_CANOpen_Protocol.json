@@ -681,7 +681,7 @@
           "Type": "uint8_t",
           "Description": "This value allows the user to validate which power source is used to deliver the torque reference to the vehicle motor.",
           "Valid_Options": [
-            { "value": 0, "description": "No source: No power mode is currently active. The motor is expected to be off." },
+            { "value": 0, "description": "No source: No power mode is currently active. Controller is not injecting any current into the motor." },
             { "value": 1, "description": "PAS Torque: The power is computed and delivered from the pedal torque sensor." },
             { "value": 2, "description": "PAS Cadence: The power is computed and delivered from the pedal cadence sensor." },
             { "value": 3, "description": "Walk Mode: The power is computed and delivered from the walk mode." },

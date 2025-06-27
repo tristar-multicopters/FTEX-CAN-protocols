@@ -667,7 +667,7 @@
           "Subindex": "0x00",
           "Access": "R",
           "Type": "int16_t",
-          "Units": "cNm",
+          "Unit": "cNm",
           "Description": "This value represents the expected torque sent by the vehicle control to the Motor Control layer, which may apply folbacks on top of it based on speed, temperature, etc.",
           "Valid_Range": {
               "min": -20000,

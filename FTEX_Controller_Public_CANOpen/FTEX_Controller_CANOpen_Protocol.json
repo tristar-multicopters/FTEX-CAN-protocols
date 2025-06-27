@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.5.3"
+    "version": "2.6.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -659,6 +659,91 @@
     }
   },
   "Vehicle": {
+    "CO_ID_VEHICLE_DIAGNOSTICS": {
+      "CANOpen_Index": "0x2039",
+      "Description": "Vehicle diagnostics parameters, including PAS detection, expected torque reference and type of power source.",
+      "Parameters": {
+        "CO_PARAM_TORQUE_REFERENCE": {
+          "Subindex": "0x00",
+          "Access": "R",
+          "Type": "int16_t",
+          "Unit": "cNm",
+          "Description": "This value represents the expected torque sent by the vehicle control to the Motor Control layer, which may apply folbacks on top of it based on speed, temperature, etc.",
+          "Valid_Range": {
+              "min": -20000,
+              "max": 20000
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "True",
+          "Notes": "This value is based on motor torque, before gear reduction."
+        },
+        "CO_PARAM_POWERTRAIN_SOURCE": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "This value allows the user to validate which power source is used to deliver the torque reference to the Motor Control layer.",
+          "Valid_Options": [
+            { "value": 0, "description": "No source: No power source is currently active. Controller is not injecting any current into the motor." },
+            { "value": 1, "description": "PAS Torque: The power is computed and delivered from the pedal torque sensor." },
+            { "value": 2, "description": "PAS Cadence: The power is computed and delivered from the pedal cadence sensor." },
+            { "value": 3, "description": "Walk Mode: The power is computed and delivered from the walk mode." },
+            { "value": 4, "description": "Cruise Control: The power is computed and delivered from the cruise control." },
+            { "value": 5, "description": "Throttle: The power is computed and delivered from the throttle." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_ENABLE_STATUS": {
+          "Subindex": "0x10",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the PAS power enable state. This reflects the PAS controller detection state.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS power is disabled." },
+            { "value": 1, "description": "PAS power is enabled." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True",
+          "Notes": "Depending of the CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG, the PAS power detection is enabled if the CO_PARAM_PAS_TORQUE_DETECTION and/or CO_PARAM_PAS_CADENCE_DETECTION are enabled."
+        },
+        "CO_PARAM_PAS_TORQUE_DETECTION_STATUS": {
+          "Subindex": "0x11",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the torque sensor PAS detection.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS torque detection is inactive." },
+            { "value": 1, "description": "PAS torque detection is active." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_CADENCE_DETECTION_STATUS": {
+          "Subindex": "0x12",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the cadence sensor PAS detection.",
+          "Valid_Options": [
+            { "value": 0, "description": "PAS cadence detection is inactive." },
+            { "value": 1, "description": "PAS cadence detection is active." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_DETECTION_SPEED_CONDITIONS_STATUS": {
+          "Subindex": "0x13",
+          "Access": "R",
+          "Type": "uint8_t",
+          "Description": "Diagnostic flag mapped to the PAS condition, either startup or runtime.",
+          "Valid_Options": [
+            { "value": 0, "description": "Startup Condition." },
+            { "value": 1, "description": "Runtime condition." }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        }
+      }
+    },
     "CO_ID_ODOMETER_AND_RANGE": {
       "CANOpen_Index": "0x2030",
       "Description": "Controller odometer and range configuration and values.",
@@ -1443,114 +1528,6 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "False"
-        }
-      }
-    },
-    "CO_ID_BLOB_STORAGE": {
-      "CANOpen_Index": "0x2039",
-      "Description": "Dual blob storage. This allow the user to store n amount of bytes on the non-volatile controller memory.",
-      "Parameters": {
-        "CO_PARAM_BLOB_1_OPERATION": {
-          "Subindex": "0x00",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Current blob 1 state. This allows the user to enter read/write/idle blob mode. Default state is 0:Idle",
-          "Valid_Options": [
-            { "value": 0, "description": "Idle: Blob storage is in idle mode, it is currently not reading nor writing." },
-            { "value": 1, "description": "Read: Blob storage is in read mode, it is currently reading data on its file descriptor." },
-            { "value": 2, "description": "Write: Blob storage is in write mode, it is currently writing its own data on its file descriptor." }
-          ],
-          "Persistence": "Real-time",
-          "Obfuscation": "True",
-          "Notes": "On controller boot up, the state will always be 0:Idle."
-        },
-        "CO_PARAM_BLOB_2_OPERATION": {
-          "Subindex": "0x01",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Current blob 2 state. This allows the user to enter read/write/idle blob mode. Default state is 0:Idle",
-          "Valid_Options": [
-            { "value": 0, "description": "Idle: Blob storage is in idle mode, it is currently not reading nor writing." },
-            { "value": 1, "description": "Read: Blob storage is in read mode, user can read data on its file descriptor." },
-            { "value": 2, "description": "Write: Blob storage is in write mode, user can write data on its file descriptor." }
-          ],
-          "Persistence": "Real-time",
-          "Obfuscation": "True",
-          "Notes": "On controller boot up, the state will always be 0:Idle."
-        },
-        "CO_PARAM_BLOB_1_CAPACITY": {
-          "Subindex": "0x10",
-          "Access": "R",
-          "Type": "uint16_t",
-          "Description": "Blob 1 max memory size, in bytes.",
-          "Valid_Range": {
-              "min": 1,
-              "max": 512
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True",
-          "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
-        },
-        "CO_PARAM_BLOB_2_CAPACITY": {
-          "Subindex": "0x11",
-          "Access": "R",
-          "Type": "uint16_t",
-          "Description": "Blob 2 max memory size, in bytes.",
-          "Valid_Range": {
-              "min": 1,
-              "max": 512
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True",
-          "Notes": "This value is currently set to a fixed size of 256(bytes). It is currently impossible to modify this value."
-        },
-        "CO_PARAM_BLOB_1_OPERATION_FRAME_INDEX": {
-          "Subindex": "0x30",
-          "Access": "R/W",
-          "Type": "uint16_t",
-          "Description": "Read/Write data index. This allows the user to target a specific blob storage index for read or write operation. Please note that each frame is composed of one data word.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 65535
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True"
-        },
-        "CO_PARAM_BLOB_2_OPERATION_FRAME_INDEX": {
-          "Subindex": "0x31",
-          "Access": "R/W",
-          "Type": "uint16_t",
-          "Description": "Read/Write data index. This allows the user to target a specific blob storage index for read or write operation. Please note that each frame is composed of one data word.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 65535
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True"
-        },
-        "CO_PARAM_BLOB_1_FILE_DESCRIPTOR": {
-          "Subindex": "0xF0",
-          "Access": "R/W",
-          "Type": "uint32_t",
-          "Description": "File descriptor pipe. During a write operation, this is where you placed the write data to transfer to blob storage. During a read operation, the data will be displayed on this data pipe.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 4294967295
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True"
-        },
-        "CO_PARAM_BLOB_2_FILE_DESCRIPTOR": {
-          "Subindex": "0xF1",
-          "Access": "R/W",
-          "Type": "uint32_t",
-          "Description": "File descriptor pipe. During a write operation, this is where you placed the write data to transfer to blob storage. During a read operation, the data will be displayed on this data pipe.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 4294967295
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True"
         }
       }
     },

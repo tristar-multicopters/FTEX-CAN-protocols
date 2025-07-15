@@ -2344,14 +2344,14 @@
     },
     "CO_ID_PAS_CADENCE_POWER_CONFIG": {
       "CANOpen_Index": "0x2019",
-      "Description": "How much cadence-sensor based power can each PAS level deliver. Each % is expressed as a % of the max motor power.",
+      "Description": "Specifies the maximum motor output that can be delivered based on cadence sensor input for each PAS level. The value is expressed as a percentage of the maximum motor power and limits the cadence-sensor-based proportional assistance provided at each PAS level.",
       "Parameters": {
         "CO_PARAM_PAS_CADENCE_POWER_LEVEL1": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 1, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 1, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2364,7 +2364,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 2, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 2, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2377,7 +2377,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 3, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 3, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2390,7 +2390,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 4, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 4, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2403,7 +2403,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 5, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 5, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2416,7 +2416,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 6, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 6, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2429,7 +2429,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 7, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 7, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2442,7 +2442,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 8, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 8, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2455,7 +2455,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 9, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 9, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2468,7 +2468,7 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum cadence-sensor based power of PAS level 0, in % of max power.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 0, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100

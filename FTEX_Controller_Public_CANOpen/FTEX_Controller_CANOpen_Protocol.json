@@ -2624,12 +2624,13 @@
           "Type": "uint8_t",
           "Description": "Set of rapid presets to switch between PAS behaviors in real-time.",
           "Valid_Options": [
-            { "value": 1, "description": "Torque feeling preset" },
-            { "value": 2, "description": "Cadence feeling preset" }
+            { "value": 1, "description": "Torque only preset" },
+            { "value": 2, "description": "Cadence only preset" },
+            { "value": 3, "description": "Hybrid preset" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False",
-          "Notes": "Under the covers, setting to 1 will set the minimum torque % setting to 0%, and setting to 2 will set the minimum torque % setting to be the same as max torque % (because if min torque % is equal to max torque %, the bike feels like cadence)."
+          "Notes": "Torque only preset: The controller will only deliver power based on torque sensor input. Cadence only preset: The controller will only deliver power based on cadence sensor input. Hybrid preset : The controller will deliver power based on both torque and cadence sensor input."
         }
       }
     },

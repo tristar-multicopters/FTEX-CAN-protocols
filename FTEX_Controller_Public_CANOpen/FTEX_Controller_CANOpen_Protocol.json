@@ -2630,7 +2630,7 @@
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False",
-          "Notes": "Torque only preset: The controller will only deliver power based on torque sensor input. Cadence only preset: The controller will only deliver power based on cadence sensor input. Hybrid preset : The controller will deliver power based on both torque and cadence sensor input."
+          "Notes": "Torque only preset: Only torque-based power (as defined by CO_ID_PAS_TORQUE_POWER_CONFIG parameters) will be delivered. Cadence-based power (CO_ID_PAS_CADENCE_POWER_CONFIG) will not be used. Cadence only preset: Only cadence-based power (CO_ID_PAS_CADENCE_POWER_CONFIG) will be delivered. Torque-based power (CO_ID_PAS_TORQUE_POWER_CONFIG) will not be used. Hybrid preset: Both torque-based and cadence-based power will be applied if applicable (i.e., if a torque sensor is present and PAS is configured with both torque and cadence power)."
         }
       }
     },

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.6.0"
+    "version": "2.7.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -2206,16 +2206,16 @@
   },
   "PAS Power Delivery": {
     "Notes": "This section is for configuration of the power delivered in the motor when PAS is detected. PAS detection configuration is done in the PAS Detection section.",
-    "CO_ID_PAS_MOTOR_MAX_TORQUE_CONFIG": {
+    "CO_ID_PAS_TORQUE_POWER_CONFIG": {
       "CANOpen_Index": "0x201B",
-      "Description": "How much torque can each PAS level deliver. Each % is expressed as a % of the max motor torque.",
+      "Description": "Specifies the maximum motor output that can be delivered proportionally based on torque sensor input for each PAS level. The value is expressed as a percentage of the configured maximum motor power and limits the torque-sensor-based proportional assistance provided at each PAS level.",
       "Parameters": {
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL1": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL1": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 1, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 1, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2223,12 +2223,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL2": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL2": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 2, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 2, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2236,12 +2236,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL3": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL3": {
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 3, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 3, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2249,12 +2249,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL4": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL4": {
           "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 4, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 4, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2262,12 +2262,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL5": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL5": {
           "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 5, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 5, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2275,12 +2275,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL6": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL6": {
           "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 6, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 6, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2288,12 +2288,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL7": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL7": {
           "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 7, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 7, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2301,12 +2301,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL8": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL8": {
           "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 8, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 8, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2314,12 +2314,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL9": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL9": {
           "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 9, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 9, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2327,12 +2327,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MOTOR_TORQUE_CONFIG_LEVEL0": {
+        "CO_PARAM_PAS_TORQUE_POWER_CONFIG_LEVEL0": {
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the maximum torque of PAS level 0, in % of max torque.",
+          "Description": "Get or set the maximum torque-sensor PAS power for PAS level 0, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2342,16 +2342,16 @@
         }
       }
     },
-    "CO_ID_PAS_MOTOR_MIN_TORQUE_CONFIG": {
+    "CO_ID_PAS_CADENCE_POWER_CONFIG": {
       "CANOpen_Index": "0x2019",
-      "Description": "Minimum torque settings for PAS levels. Minimum torque represents a floor of how much torque is driven in the motor if PAS is detected. This is useful for a bike with a torque sensor, to drive a hybrid feeling. eg. set min torque to 10%, and as soon as cadence is detected, a little bit of power will be driven in the motor. More power can be driven in the motor if the user presses harder on the pedals.",
+      "Description": "Specifies the maximum motor output that can be delivered based on cadence sensor input for each PAS level. The value is expressed as a percentage of the maximum motor power and limits the cadence-sensor-based proportional assistance provided at each PAS level.",
       "Parameters": {
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL1": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL1": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 1.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 1, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2359,12 +2359,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL2": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL2": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 2.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 2, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2372,12 +2372,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL3": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL3": {
           "Subindex": "0x02",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 3.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 3, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2385,12 +2385,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL4": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL4": {
           "Subindex": "0x03",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 4.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 4, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2398,12 +2398,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL5": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL5": {
           "Subindex": "0x04",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 5.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 5, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2411,12 +2411,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL6": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL6": {
           "Subindex": "0x05",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 6.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 6, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2424,12 +2424,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL7": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL7": {
           "Subindex": "0x06",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 7.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 7, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2437,12 +2437,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL8": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL8": {
           "Subindex": "0x07",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 8.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 8, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2450,12 +2450,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL9": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL9": {
           "Subindex": "0x08",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 9.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 9, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2463,12 +2463,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_MIN_TORQUE_LEVEL0": {
+        "CO_PARAM_PAS_CADENCE_POWER_LEVEL0": {
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "%",
-          "Description": "Get or set the minimum torque to apply when PAS is detected, for level 0.",
+          "Description": "Get or set the maximum cadence-sensor PAS power for PAS level 0, as a percentage of the maximum motor power.",
           "Valid_Range": {
               "min": 0,
               "max": 100
@@ -2624,12 +2624,13 @@
           "Type": "uint8_t",
           "Description": "Set of rapid presets to switch between PAS behaviors in real-time.",
           "Valid_Options": [
-            { "value": 1, "description": "Torque feeling preset" },
-            { "value": 2, "description": "Cadence feeling preset" }
+            { "value": 1, "description": "Torque only preset" },
+            { "value": 2, "description": "Cadence only preset" },
+            { "value": 3, "description": "Hybrid preset" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False",
-          "Notes": "Under the covers, setting to 1 will set the minimum torque % setting to 0%, and setting to 2 will set the minimum torque % setting to be the same as max torque % (because if min torque % is equal to max torque %, the bike feels like cadence)."
+          "Notes": "Torque only preset: Only torque-based power (as defined by CO_ID_PAS_TORQUE_POWER_CONFIG parameters) will be delivered. Cadence-based power (CO_ID_PAS_CADENCE_POWER_CONFIG) will not be used. Cadence only preset: Only cadence-based power (CO_ID_PAS_CADENCE_POWER_CONFIG) will be delivered. Torque-based power (CO_ID_PAS_TORQUE_POWER_CONFIG) will not be used. Hybrid preset: Both torque-based and cadence-based power will be applied if applicable (i.e., if a torque sensor is present and PAS is configured with both torque and cadence power)."
         }
       }
     },

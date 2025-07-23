@@ -221,7 +221,7 @@
           "Obfuscation": "True",
           "Notes": "If throttle has priority, then PAS is ignored while throttle is engaged. If PAS has priority, then throttle is ignored while PAS is engaged."
         },
-        "CO_PARAM_THROTTLE_POWER_FILTER_RAMP_UP": {
+        "CO_PARAM_THROTTLE_CONFIG_POWER_FILTER_RAMP_UP": {
           "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint16_t",

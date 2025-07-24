@@ -2690,6 +2690,32 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_DECAY_MODULATION_START_SPEED": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "km/h",
+          "Description": "Start value of linear speed modulation of torque decay envelope parameters.",
+          "Valid_Range": {
+              "min": -100,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_FILTER_TORQUE_DECAY_MODULATION_END_SPEED": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "km/h",
+          "Description": "Start value of linear speed modulation of torque decay envelope parameters.",
+          "Valid_Range": {
+              "min": -100,
+              "max": 100
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
         "CO_PARAM_PAS_POWER_FILTER_CADENCE_RAMP_UP": {
           "Subindex": "0x10",
           "Access": "R/W",

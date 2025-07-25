@@ -917,7 +917,7 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_ERRORS_FILTER": {
+        "CO_PARAM_SUPPORTED_VEHICLE_ERRORS": {
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint32_t",

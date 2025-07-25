@@ -918,7 +918,7 @@
           "Obfuscation": "False"
         },
         "CO_PARAM_CAN_ACTIVE_ERRORS_FILTER": {
-          "Subindex": "0x01",
+          "Subindex": "0x10",
           "Access": "R/W",
           "Type": "uint32_t",
           "Description": "Filter on CO_PARAM_ACTIVE_ERRORS. This CO_PARAM_CAN_ACTIVE_ERRORS_FILTER parameter can be used to specify which errors can be raised on CAN. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND bitmask operation between the ACTIVE_ERRORS and the ACTIVE_ERRORS_FILTER.",

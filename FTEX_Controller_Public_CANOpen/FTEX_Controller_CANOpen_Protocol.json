@@ -921,7 +921,8 @@
           "Subindex": "0x01",
           "Access": "R/W",
           "Type": "uint32_t",
-          "Description": "Active error filter: Bitmask used to silence targeted errors. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND operation between both values.",
+          "Description": "Filter on CO_PARAM_ACTIVE_ERRORS. This CO_PARAM_CAN_ACTIVE_ERRORS_FILTER parameter can be used to specify which errors are supported on CAN. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND bitmask operation between the ACTIVE_ERRORS and the ACTIVE_ERRORS_FILTER. For example, if you don't want Bike_Locked_Error to be raised on CAN, you would set this filter parameter to 0b11111111111011111111111111111111, or 0xFFEFFFFF",
+          "Notes": "This can only silence errors on CAN. A filter on UART errors is not supported by this parameter.",
           "Valid_Range": {
             "min": 0,
             "max": 4294967295

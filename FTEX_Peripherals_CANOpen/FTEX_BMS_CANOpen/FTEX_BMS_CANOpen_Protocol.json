@@ -279,7 +279,7 @@
           "Description": "Remaining capacity of the battery, according to the SOC. This values needs to be lower than CO_PARAM_EXTERNAL_BMS_MAXIMUM_CAPACITY.",
           "Query_frequency": "real-time",
           "Valid_Range": {
-            "min": 100,
+            "min": 0,
             "max": 5000
           }
         }

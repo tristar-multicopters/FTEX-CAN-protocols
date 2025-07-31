@@ -868,10 +868,10 @@
               "CO_PARAM_MOTOR_CONFIG_FLUX_WEAKENING_DIRECTION": {
                   "Subindex": "0x04",
                   "Access": "R/W",
-                  "Type": "uint8_t",
+                  "Type": "int8_t",
                   "Description": "Flux Weakening Direction.",
                   "Valid_Options": [
-                      { "value": 0, "description": "Counterclockwise" },
+                      { "value": -1, "description": "Counterclockwise" },
                       { "value": 1, "description": "Clockwise" }
                   ],
                   "Persistence": "Persistent",

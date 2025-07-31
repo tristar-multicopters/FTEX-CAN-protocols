@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.4.17"
+      "version": "1.5.0"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -868,10 +868,10 @@
               "CO_PARAM_MOTOR_CONFIG_FLUX_WEAKENING_DIRECTION": {
                   "Subindex": "0x04",
                   "Access": "R/W",
-                  "Type": "uint8_t",
+                  "Type": "int8_t",
                   "Description": "Flux Weakening Direction.",
                   "Valid_Options": [
-                      { "value": 0, "description": "Counterclockwise" },
+                      { "value": -1, "description": "Counterclockwise" },
                       { "value": 1, "description": "Clockwise" }
                   ],
                   "Persistence": "Persistent",

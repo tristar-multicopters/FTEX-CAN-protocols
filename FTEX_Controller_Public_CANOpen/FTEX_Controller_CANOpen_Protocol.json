@@ -2136,12 +2136,12 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PAS_SPEED_ACTIVATION_THRESHOLD": {
+        "CO_PARAM_PAS_MIN_SPEED_REQUIRED": {
           "Subindex": "0x20",
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "km/h",
-          "Description": "Speed threshold where the bike needs to reached before allowing any PAS power delivery.",
+          "Description": "Minimum vehicle speed required for pedal assist power. Under this threshold, PAS input is ignored.",
           "Valid_Range": {
               "min": 0,
               "max": 99

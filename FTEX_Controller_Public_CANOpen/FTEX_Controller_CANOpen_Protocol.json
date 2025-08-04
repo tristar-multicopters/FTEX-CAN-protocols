@@ -2729,33 +2729,33 @@
           "Persistence": "Persistent",
           "Obfuscation": "True"
         },
-        "CO_PARAM_PEDAL_ASSIST_SYSTEM_POWER_OUTPUT_TORQUE_FILTER_CONFIGURATION_FOR_MAXIMUM_ALLOWED_POWER_DURATION_AND_RAMP_DOWN_GAIN_SCALING_INITIAL_CADENCE_RPM_THRESHOLD_STARTING_REFERENCE_POINT": {
+        "CO_PARAM_PAS_TORQUE_FILTER_RAMP_START": {
           "Subindex": "0x03",
           "Access": "R/W",
           "Type": "int16_t",
-          "Unit": "RPM",
-          "Description": "Linear amplification, from 0 to 100%, of both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN. This parameter represents the start point, in pedaling RPM, of the linear amplification. If the cadence RPM is lower or equal than the regression start point, both torque filter parameters will be 0. If the cadence RPM is higher or equal than the regression end point, both torque filter parameters will be set to their full default values. Between both regression points, both torque values will be amplified linearly, from 0 to 100%.",
-          "Notes": "This value can be negative in order to allow the user more precise linear regression tuning.",
+          "Unit": "rpm",
+          "Description": "Start of the torque filter on pedaling rpm, ie. a filter applied on both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN.",
           "Valid_Range": {
               "min": -500,
               "max": 500
           },
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "This filter can be used to increase the torque downramp and max power allowed as the pedaling rpm increases. This helps have the bike retain responsiveness at low rpm while reducing the yo-yo sensation at higher pedaling rpm. The filter will have a value of 0% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_START and 100% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_END (ie. CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN are multiplied by 0% when pedaling rpm is <= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START, and are fully applied at 100% of their value at pedaling rpms >= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START."
         },
-        "CO_PARAM_PEDAL_ASSIST_SYSTEM_POWER_OUTPUT_TORQUE_FILTER_CONFIGURATION_FOR_MAXIMUM_ALLOWED_POWER_DURATION_AND_RAMP_DOWN_GAIN_SCALING_INITIAL_CADENCE_RPM_THRESHOLD_ENDING_REFERENCE_POINT": {
-          "Subindex": "0x04",
+        "CO_PARAM_PAS_TORQUE_FILTER_RAMP_END": {
+          "Subindex": "0x03",
           "Access": "R/W",
           "Type": "int16_t",
-          "Unit": "RPM",
-          "Description": "Linear amplification, from 0 to 100%, of both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN. This parameter represents the end point, in pedaling RPM, of the linear amplification. If the cadence RPM is lower or equal than the regression start point, both torque filter parameters will be 0. If the cadence RPM is higher or equal than the regression end point, both torque filter parameters will be set to their full default values. Between both regression points, both torque values will be amplified linearly, from 0 to 100%.",
-          "Notes": "This value can be negative in order to allow the user more precise linear regression tuning.",
+          "Unit": "rpm",
+          "Description": "End of the torque filter on pedaling rpm, ie. a filter applied on both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN.",
           "Valid_Range": {
               "min": -500,
               "max": 500
           },
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "This filter can be used to increase the torque downramp and max power allowed as the pedaling rpm increases. This helps have the bike retain responsiveness at low rpm while reducing the yo-yo sensation at higher pedaling rpm. The filter will have a value of 0% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_START and 100% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_END (ie. CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN are multiplied by 0% when pedaling rpm is <= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START, and are fully applied at 100% of their value at pedaling rpms >= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START."
         },
         "CO_PARAM_PAS_POWER_FILTER_CADENCE_RAMP_UP": {
           "Subindex": "0x10",

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.7.3"
+    "version": "2.8.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -220,6 +220,19 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "If throttle has priority, then PAS is ignored while throttle is engaged. If PAS has priority, then throttle is ignored while PAS is engaged."
+        },
+        "CO_PARAM_THROTTLE_SPEED_ACTIVATION_THRESHOLD": {
+          "Subindex": "0x09",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Speed threshold where the bike needs to reached before allowing any throttle power delivery.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_THROTTLE_CONFIG_POWER_FILTER_RAMP_UP": {
           "Subindex": "0x10",
@@ -2122,6 +2135,19 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_SPEED_ACTIVATION_THRESHOLD": {
+          "Subindex": "0x20",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Speed threshold where the bike needs to reached before allowing any PAS power delivery.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }
@@ -2226,19 +2252,6 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Unit": "ms"
-        },
-        "CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG": {
-          "Subindex": "0x20",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Flag used to let the controller know the PAS detection criterias. 0 = Cadence OR Torque. 1 = Cadence AND Torque. (see details in the diagram in the Notes on PAS Detection)",
-          "Valid_Options": [
-            { "value": 0, "description": "Cadence OR Torque" },
-            { "value": 1, "description": "Cadence AND Torque" }
-          ],
-          "Persistence": "Persistent",
-          "Obfuscation": "True",
-          "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
         }
       }
     }
@@ -2712,6 +2725,34 @@
           "Valid_Range": {
               "min": 0,
               "max": 10000
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_TORQUE_DECAY_BY_CADENCE_RPM_START_POINT": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "RPM",
+          "Description": "Linear amplification, from 0 to 100%, of both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN. This parameter represents the start point, in pedaling RPM, of the linear amplification. If the cadence RPM is lower or equal than the regression start point, both torque filter parameters will be 0. If the cadence RPM is higher or equal than the regression end point, both torque filter parameters will be their full default values. Between both regression points, both torque values will be amplified linearly, from 0 to 100%.",
+          "Notes": "This value can be negative in order to allow the user more precise linear regression tuning.",
+          "Valid_Range": {
+              "min": -500,
+              "max": 500
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_POWER_TORQUE_DECAY_BY_CADENCE_RPM_END_POINT": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "RPM",
+          "Description": "Linear amplification, from 0 to 100%, of both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN. This parameter represents the end point, in pedaling RPM, of the linear amplification. If the cadence RPM is lower or equal than the regression start point, both torque filter parameters will be 0. If the cadence RPM is higher or equal than the regression end point, both torque filter parameters will be their full default values. Between both regression points, both torque values will be amplified linearly, from 0 to 100%.",
+          "Notes": "This value can be negative in order to allow the user more precise linear regression tuning.",
+          "Valid_Range": {
+              "min": -500,
+              "max": 500
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"

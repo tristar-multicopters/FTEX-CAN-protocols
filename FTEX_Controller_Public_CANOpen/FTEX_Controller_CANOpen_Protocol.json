@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.7.3"
+    "version": "2.8.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -220,6 +220,19 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Notes": "If throttle has priority, then PAS is ignored while throttle is engaged. If PAS has priority, then throttle is ignored while PAS is engaged."
+        },
+        "CO_PARAM_THROTTLE_CONFIG_MIN_SPEED_REQUIRED": {
+          "Subindex": "0x09",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Minimum vehicle speed required for throttle power. Under this threshold, throttle input is ignored.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         },
         "CO_PARAM_THROTTLE_CONFIG_POWER_FILTER_RAMP_UP": {
           "Subindex": "0x10",
@@ -2122,6 +2135,19 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_MIN_SPEED_REQUIRED": {
+          "Subindex": "0x20",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "km/h",
+          "Description": "Minimum vehicle speed required for pedal assist power. Under this threshold, PAS input is ignored.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 99
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
         }
       }
     }
@@ -2226,19 +2252,6 @@
           "Persistence": "Persistent",
           "Obfuscation": "True",
           "Unit": "ms"
-        },
-        "CO_PARAM_STARTUP_DETECTION_AND_OR_CONFIG": {
-          "Subindex": "0x20",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Description": "Flag used to let the controller know the PAS detection criterias. 0 = Cadence OR Torque. 1 = Cadence AND Torque. (see details in the diagram in the Notes on PAS Detection)",
-          "Valid_Options": [
-            { "value": 0, "description": "Cadence OR Torque" },
-            { "value": 1, "description": "Cadence AND Torque" }
-          ],
-          "Persistence": "Persistent",
-          "Obfuscation": "True",
-          "Notes": "The OR means that PAS will be considered detected if either cadence or torque conditions are fulfilled. The AND means that both cadence and torque conditions must be fulfilled for PAS to be considered detected."
         }
       }
     }
@@ -2715,6 +2728,34 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_TORQUE_FILTER_RAMP_START": {
+          "Subindex": "0x03",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "rpm",
+          "Description": "Start of the torque filter on pedaling rpm, ie. a filter applied on both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN.",
+          "Valid_Range": {
+              "min": -500,
+              "max": 500
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "This filter can be used to increase the torque downramp and max power allowed as the pedaling rpm increases. This helps have the bike retain responsiveness at low rpm while reducing the yo-yo sensation at higher pedaling rpm. The filter will have a value of 0% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_START and 100% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_END (ie. CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN are multiplied by 0% when pedaling rpm is <= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START, and are fully applied at 100% of their value at pedaling rpms >= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START."
+        },
+        "CO_PARAM_PAS_TORQUE_FILTER_RAMP_END": {
+          "Subindex": "0x04",
+          "Access": "R/W",
+          "Type": "int16_t",
+          "Unit": "rpm",
+          "Description": "End of the torque filter on pedaling rpm, ie. a filter applied on both CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN.",
+          "Valid_Range": {
+              "min": -500,
+              "max": 500
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "This filter can be used to increase the torque downramp and max power allowed as the pedaling rpm increases. This helps have the bike retain responsiveness at low rpm while reducing the yo-yo sensation at higher pedaling rpm. The filter will have a value of 0% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_START and 100% at CO_PARAM_PAS_TORQUE_FILTER_RAMP_END (ie. CO_PARAM_PAS_POWER_FILTER_TORQUE_TIME_AT_MAX_POWER_ALLOWED and CO_PARAM_PAS_POWER_FILTER_TORQUE_RAMP_DOWN are multiplied by 0% when pedaling rpm is <= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START, and are fully applied at 100% of their value at pedaling rpms >= CO_PARAM_PAS_TORQUE_FILTER_RAMP_START."
         },
         "CO_PARAM_PAS_POWER_FILTER_CADENCE_RAMP_UP": {
           "Subindex": "0x10",

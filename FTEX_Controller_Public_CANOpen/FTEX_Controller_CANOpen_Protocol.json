@@ -91,7 +91,7 @@
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "Communication protocol selection. Default is 0x00 : CAN Screen.",
+          "Description": "HMI Communication protocol selection.",
           "Valid_Options": [
             { "value": 0, "description": "CANOpen Screen (FTEX protocol)"},
             { "value": 1, "description": "UART APT Screen"},

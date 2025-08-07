@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.0"
+    "version": "2.8.1"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -83,26 +83,27 @@
         }
       }
     },
-    "CO_ID_UART_PROTOCOL": {
+    "CO_ID_COMMUNICATION_PROTOCOL": {
       "CANOpen_Index": "0x2038",
-      "Description": "UART protocol parameter allows the user to select a specific UART protcol, mostly used to connect a UART screen to the FTEX bike system.",
+      "Description": "Select a communication protocol, mostly used for HMI (ie. screen) communication.",
       "Parameters": {
-        "CO_PARAM_UART_PROTOCOL": {
+        "CO_PARAM_HMI_COMMUNICATION_PROTOCOL": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",
-          "Description": "UART protocol selection. Default is 0x00 : UART Disable.",
+          "Description": "HMI Communication protocol selection.",
           "Valid_Options": [
-            { "value": 0, "description": "UART Disabled"},
+            { "value": 0, "description": "CANOpen Screen (FTEX protocol)"},
             { "value": 1, "description": "UART APT Screen"},
             { "value": 2, "description": "UART Cloud Drive Screen"},
             { "value": 3, "description": "UART KD718 Screen"},
             { "value": 4, "description": "UART EOL Tester Protocol"},
-            { "value": 100, "description": "UART High Speed Logger [internal]"}
+            { "value": 100, "description": "UART High Speed Logger [internal]"},
+            { "value": 255, "description": "No communication protocol selected"}
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "Please contact FTEX if your screen communication is not working"
+          "Notes": "The communication protocol selected will drive how the controller detects and raises a Screen Communication Error. eg. if CANOpen screen is selected, the controller will expect CANOpen heartbeats from the HMI node. If a screen communication error is raised, digital throttles (ie. throttle by CAN/UART) are disabled."
         }
       }
     }
@@ -246,6 +247,19 @@
           },
           "Persistence": "Persistent",
           "Obfuscation": "True"
+        },
+        "CO_PARAM_THROTTLE_DISABLE_ON_SCREEN_ERROR": {
+          "Subindex": "0x20",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Description": "Throttle disable protection on screen error",
+          "Valid_Options": [
+            { "value": 0, "description": "Throttle is not disabled when the bike has an active screen error." },
+            { "value": 1, "description": "Throttle is disabled when the bike has an active screen error." }
+          ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True",
+          "Notes": "This parameters is often used when the throttle signal is provided by a CAN or UART screen."
         }
       }
     },

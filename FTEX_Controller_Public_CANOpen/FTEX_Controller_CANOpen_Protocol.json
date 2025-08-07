@@ -85,7 +85,7 @@
     },
     "CO_ID_COMMUNICATION_PROTOCOL": {
       "CANOpen_Index": "0x2038",
-      "Description": "Communication protocol parameter allows the user to select a specific communication protcol, mostly used to connect with a screen from the FTEX bike system.",
+      "Description": "Select a communication protocol, mostly used for HMI (ie. screen) communication.",
       "Parameters": {
         "CO_PARAM_COMMUNICATION_PROTOCOL": {
           "Subindex": "0x00",
@@ -93,7 +93,7 @@
           "Type": "uint8_t",
           "Description": "Communication protocol selection. Default is 0x00 : CAN Screen.",
           "Valid_Options": [
-            { "value": 0, "description": "CAN Screen"},
+            { "value": 0, "description": "CANOpen Screen (FTEX protocol)"},
             { "value": 1, "description": "UART APT Screen"},
             { "value": 2, "description": "UART Cloud Drive Screen"},
             { "value": 3, "description": "UART KD718 Screen"},
@@ -103,7 +103,7 @@
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Notes": "Please contact FTEX if your screen communication is not working"
+          "Notes": "The communication protocol selected will drive how the controller detects and raises a Screen Communication Error. eg. if CANOpen screen is selected, the controller will expect CANOpen heartbeats from the HMI node. If a screen communication error is raised, digital throttles (ie. throttle by CAN/UART) are disabled."
         }
       }
     }

@@ -85,7 +85,7 @@
     },
     "CO_ID_COMMUNICATION_PROTOCOL": {
       "CANOpen_Index": "0x2038",
-      "Description": "Communication protocol parameter allows the user to select a specific communication protcol, mostly used to connect with screen from the FTEX bike system.",
+      "Description": "Communication protocol parameter allows the user to select a specific communication protcol, mostly used to connect with a screen from the FTEX bike system.",
       "Parameters": {
         "CO_PARAM_COMMUNICATION_PROTOCOL": {
           "Subindex": "0x00",

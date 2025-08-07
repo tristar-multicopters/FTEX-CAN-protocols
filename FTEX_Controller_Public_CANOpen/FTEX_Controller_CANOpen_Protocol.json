@@ -87,7 +87,7 @@
       "CANOpen_Index": "0x2038",
       "Description": "Select a communication protocol, mostly used for HMI (ie. screen) communication.",
       "Parameters": {
-        "CO_PARAM_COMMUNICATION_PROTOCOL": {
+        "CO_PARAM_HMI_COMMUNICATION_PROTOCOL": {
           "Subindex": "0x00",
           "Access": "R/W",
           "Type": "uint8_t",

@@ -1187,7 +1187,8 @@
                 "Description": "Current test mode selected.",
                 "Valid_Options": [
                     { "value": 0, "description": "Test mode disabled, controller is running on normal firmware behaviour." },
-                    { "value": 1, "description": "EOL Test Mode 1 : Requested by manufacturing. Mode config : Speed limit : 99km/h | PAS 5 | Max DC Current 14A | Continuous DC Current 14A | Hybrid torque/cadence PAS | Front light ON | Rear light ON | Cadence AND Torque PAS detection | Deactivate CAN BMS. Please note that it is impossible to go back to Test mode disabled from this mode. You need to perform a complete bootup to restore the default firmware behaviour." }
+                    { "value": 1, "description": "EOL Test Mode 1 : Requested by manufacturing. Mode config : Speed limit : 99km/h | PAS 5 | Max DC Current 14A | Continuous DC Current 14A | Hybrid torque/cadence PAS | Front light ON | Rear light ON | Cadence AND Torque PAS detection | Deactivate CAN BMS. Please note that it is impossible to go back to Test mode disabled from this mode. You need to perform a complete bootup to restore the default firmware behaviour." },
+					{ "value": 2, "description": "EOL Test Mode 2 : Requested by manufacturing. Mode config : Speed limit : 99km/h | PAS 5 | Max DC Current 18A | Continuous DC Current 14A | Hybrid torque/cadence PAS | Front light togglable via CAN | Rear light togglable via CAN | Cadence AND Torque PAS detection | Deactivate CAN BMS. Please note that it is impossible to go back to Test mode disabled from this mode. You need to perform a complete bootup to restore the default firmware behaviour." }
                 ],
                 "Persistence": "Real-time"
               }

@@ -97,7 +97,6 @@
             { "value": 1, "description": "UART APT Screen"},
             { "value": 2, "description": "UART Cloud Drive Screen"},
             { "value": 3, "description": "UART KD718 Screen"},
-            { "value": 4, "description": "UART EOL Tester Protocol"},
             { "value": 100, "description": "UART High Speed Logger [internal]"},
             { "value": 255, "description": "No communication protocol selected"}
           ],

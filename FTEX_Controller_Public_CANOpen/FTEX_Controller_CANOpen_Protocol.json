@@ -98,6 +98,7 @@
             { "value": 2, "description": "UART Cloud Drive Screen"},
             { "value": 3, "description": "UART KD718 Screen"},
             { "value": 100, "description": "UART High Speed Logger [internal]"},
+            { "value": 101, "description": "Custom UART PAS driver 1 [internal]"},
             { "value": 255, "description": "No communication protocol selected"}
           ],
           "Persistence": "Persistent",

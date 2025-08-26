@@ -41,7 +41,7 @@
       "Parameters": {
         "CO_PARAM_SAVE_PARAMETERS": {
           "Subindex": "0x00",
-          "Access": "R/W",
+          "Access": "W",
           "Type": "uint16_t",
           "Description": "Write to this parameter to allow parameters to be saved to the controller's memory. See readme for details (parameters persistence section)",
           "Persistence": "Real-time",

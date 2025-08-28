@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.1"
+    "version": "2.8.2"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -880,12 +880,12 @@
       "CANOpen_Index": "0x2001",
       "Description": "Real-time power measurements.",
       "Parameters": {
-        "CO_PARAM_TOTAL_POWER": {
+        "CO_PARAM_LEGACY_TOTAL_POWER": {
           "Subindex": "0x00",
           "Access": "R",
           "Type": "uint16_t",
           "Unit": "watts",
-          "Description": "Real-time approximate total power of the vehicle (DC Power). Note: Screens/IoT devices should use this value for displaying power to the user. Also note that this is a rough estimation.",
+          "Description": "Real-time approximate total power of the vehicle (DC Power). Note: Screens/IoT devices should use this value for displaying power to the user. Also note that this is a rough estimation. This parameter is now deprecated, but will still be accessible for legacy screens and IoTs.",
           "Valid_Range": {
               "min": 0,
               "max": 50000
@@ -918,7 +918,20 @@
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"
-        }
+        },
+        "CO_PARAM_TOTAL_POWER": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "watts",
+          "Description": "Real-time approximate total power of the vehicle (DC Power). Note: Screens/IoT devices should use this value for displaying power to the user. Also note that this is a rough estimation.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 50000
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
       }
     },
     "CO_ID_MAX_POWER_LEGACY": {

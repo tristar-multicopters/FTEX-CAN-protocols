@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.1"
+    "version": "2.8.2"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -998,6 +998,19 @@
             { "value": 0, "description": "Speed control disabled." },
             { "value": 1, "description": "Speed control enabled." }
           ],
+          "Persistence": "Persistent",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_MAX_VEHICLE_SPEED_CUTOFF_OFFSET": {
+          "Subindex": "0x02",
+          "Access": "R/W",
+          "Type": "uint8_t",
+          "Unit": "hm/h",
+          "Description": "Max speed cutoff offset based on the CO_PARAM_MAX_VEHICLE_SPEED. This value allows to declare a hard motor power cutoff above the CO_PARAM_MAX_VEHICLE_SPEED + CO_PARAM_MAX_VEHICLE_SPEED_CUTOFF_OFFSET, preventing any possible overshoot above the defined offset. If this parameter is set to 0, the hard cutoff will be disabled and the speed will be allowed to overshoot above the CO_PARAM_MAX_VEHICLE_SPEED.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 100
+          },
           "Persistence": "Persistent",
           "Obfuscation": "True"
         }

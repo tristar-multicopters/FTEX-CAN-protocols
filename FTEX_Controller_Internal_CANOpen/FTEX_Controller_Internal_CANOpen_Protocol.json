@@ -2,7 +2,7 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.5.1"
+      "version": "1.5.2"
   },
   "Master_Slave": {
       "CO_ID_MOTOR_SPEED": {
@@ -1115,6 +1115,34 @@
                       { "value": 0, "description": "Configuration: Hall sensor sequence: UVW (Blue-Yellow-Green)." },
                       { "value": 1, "description": "Configuration: Hall sensor sequence: VUW (Yellow-Blue-Green)." }
                   ],
+                  "Persistence": "Persistent"
+              }
+          }
+      },
+      "CO_ID_MOTOR_REGEN_TORQUE": {
+          "CANOpen_Index": "0x500C",
+          "Description": "This feature enables a hard current cut to the motor as soon as the speed limit is reached. In order to set the current to 0, a small regen current is sent back to the battery.",
+          "Parameters": {
+              "CO_PARAM_MOTOR_REGEN_TORQUE_ACTIVATION_FLAG": {
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Flag allowing to enable/disable this feature.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Regen torque feature is disabled." },
+                      { "value": 1, "description": "Regen torque feature is enabled." }
+                  ],
+                  "Persistence": "Persistent"
+              },
+              "CO_PARAM_MOTOR_REGEN_TORQUE_AMOUNT": {
+                  "Subindex": "0x01",
+                  "Access": "R/W",
+                  "Type": "int16_t",
+                  "Description": "Amount of torque, converted back to current that is sent back as regen.",
+                  "Valid_Range": {
+                      "min": -1000,
+                      "max": 0
+                  },
                   "Persistence": "Persistent"
               }
           }

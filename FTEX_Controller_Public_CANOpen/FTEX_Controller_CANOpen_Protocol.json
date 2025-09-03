@@ -1006,13 +1006,14 @@
           "Access": "R/W",
           "Type": "uint8_t",
           "Unit": "hm/h",
-          "Description": "Max speed cutoff offset based on the CO_PARAM_MAX_VEHICLE_SPEED. This value allows to declare a hard motor power cutoff above the CO_PARAM_MAX_VEHICLE_SPEED + CO_PARAM_MAX_VEHICLE_SPEED_CUTOFF_OFFSET, preventing any possible overshoot above the defined offset. If this parameter is set to 0, the hard cutoff will be disabled and the speed will be allowed to overshoot above the CO_PARAM_MAX_VEHICLE_SPEED.",
+          "Description": "Offset on top of the CO_PARAM_MAX_VEHICLE_SPEED, above which the motor assistance is completely cut. Meant to be enabled for certification scenarios.",
           "Valid_Range": {
               "min": 0,
               "max": 100
           },
           "Persistence": "Persistent",
-          "Obfuscation": "True"
+          "Obfuscation": "True",
+          "Notes": "A normal speed control PID tuning can overshoot above a target speed. However, this parameter completely cuts the power at a specific threshold above the max speed, therefore preventing too much overshoot, if needed (eg. no-load)."
         }
       }
     },

@@ -1133,13 +1133,13 @@
                       { "value": 1, "description": "Enabled" }
                   ],
                   "Persistence": "Persistent",
-				  "Notes": "This feature is necessary for certain certification standards. When enabled, if the torque setpoint becomes 0 while the motor is spinning, the controller will slow down the motor actively by applying a regenerative current. This amount of current is relative to the torque set by the parameter CO_PARAM_MOTOR_REGEN_TORQUE_AMOUNT."
+				  "Notes": "This feature is necessary for certain certification standards. When enabled, if the torque setpoint becomes 0 while the motor is spinning, the controller will slow down the motor actively by applying a regenerative current. This amount of current is relative to the torque set by the parameter CO_PARAM_MOTOR_REGEN_ENHANCED_STOP_TORQUE."
               },
               "CO_PARAM_MOTOR_REGEN_ENHANCED_STOP_TORQUE": {
                   "Subindex": "0x01",
                   "Access": "R/W",
                   "Type": "int16_t",
-                  "Description": "Amount of torque, converted back to current that is sent back as regen.",
+                  "Description": "Amount of torque to use to slow down the motor if CO_PARAM_MOTOR_REGEN_ENHANCED_STOP is enabled.",
                   "Valid_Range": {
                       "min": -1000,
                       "max": 0

@@ -1119,22 +1119,23 @@
               }
           }
       },
-      "CO_ID_MOTOR_REGEN_TORQUE": {
+      "CO_ID_MOTOR_REGEN": {
           "CANOpen_Index": "0x500C",
-          "Description": "This feature enables a hard current cut to the motor as soon as the speed limit is reached. In order to set the current to 0, a small regen current is sent back to the battery.",
+          "Description": "Settings pertaining to the regenerative capabilities of the motor.",
           "Parameters": {
-              "CO_PARAM_MOTOR_REGEN_TORQUE_ACTIVATION_FLAG": {
+              "CO_PARAM_MOTOR_REGEN_ENHANCED_STOP": {
                   "Subindex": "0x00",
                   "Access": "R/W",
                   "Type": "uint8_t",
-                  "Description": "Flag allowing to enable/disable this feature.",
+                  "Description": "Flag allowing to enable/disable the enhanced stopping of the motor using regenerative current.",
                   "Valid_Options": [
-                      { "value": 0, "description": "Regen torque feature is disabled." },
-                      { "value": 1, "description": "Regen torque feature is enabled." }
+                      { "value": 0, "description": "Disabled" },
+                      { "value": 1, "description": "Enabled" }
                   ],
-                  "Persistence": "Persistent"
+                  "Persistence": "Persistent",
+				  "Notes": "This feature is necessary for certain certification standards. When enabled, if the torque setpoint becomes 0 while the motor is spinning, the controller will slow down the motor actively by applying a regenerative current. This amount of current is relative to the torque set by the parameter CO_PARAM_MOTOR_REGEN_TORQUE_AMOUNT."
               },
-              "CO_PARAM_MOTOR_REGEN_TORQUE_AMOUNT": {
+              "CO_PARAM_MOTOR_REGEN_ENHANCED_STOP_TORQUE": {
                   "Subindex": "0x01",
                   "Access": "R/W",
                   "Type": "int16_t",

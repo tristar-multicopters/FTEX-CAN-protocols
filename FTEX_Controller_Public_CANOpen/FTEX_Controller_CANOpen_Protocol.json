@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.2"
+    "version": "2.8.1"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1000,20 +1000,6 @@
           ],
           "Persistence": "Persistent",
           "Obfuscation": "True"
-        },
-        "CO_PARAM_MAX_VEHICLE_SPEED_CUTOFF_OFFSET": {
-          "Subindex": "0x02",
-          "Access": "R/W",
-          "Type": "uint8_t",
-          "Unit": "hm/h",
-          "Description": "Offset on top of the CO_PARAM_MAX_VEHICLE_SPEED, above which the motor assistance is completely cut. Meant to be enabled for certification scenarios.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 100
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "True",
-          "Notes": "A normal speed control PID tuning can overshoot above a target speed. However, this parameter completely cuts the power at a specific threshold above the max speed, therefore preventing too much overshoot, if needed (eg. no-load)."
         }
       }
     },

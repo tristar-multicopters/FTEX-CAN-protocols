@@ -604,7 +604,7 @@
           "Unit": "Celsius",
           "Description": "Temperature of the motor connected to the controller.",
           "Valid_Range": {
-              "min": -50,
+              "min": -65,
               "max": 250
           },
           "Persistence": "Real-time",
@@ -2555,7 +2555,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 1.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2568,7 +2568,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 2.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2581,7 +2581,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 3.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2594,7 +2594,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 4.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2607,7 +2607,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 5.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2620,7 +2620,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 6.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2633,7 +2633,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 7.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2646,7 +2646,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 8.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2659,7 +2659,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 9.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",
@@ -2672,7 +2672,7 @@
           "Unit": "%",
           "Description": "Torque sensor gain for level 0.",
           "Valid_Range": {
-              "min": 1,
+              "min": 0,
               "max": 1000
           },
           "Persistence": "Persistent",

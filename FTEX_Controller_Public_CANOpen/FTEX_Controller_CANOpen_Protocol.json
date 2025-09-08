@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.1"
+    "version": "2.9.0"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -584,7 +584,7 @@
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Valid_Options": [
+          "Valid_Flags": [
             { "value": 0, "description": "Fallback To Config" },
             { "value": 1, "description": "Stop Powertrain"},
             { "value": 2, "description": "Raise Error on CAN"}
@@ -948,27 +948,150 @@
           "Subindex": "0x00",
           "Access": "R",
           "Type": "uint32_t",
-          "Description": "Get the active errors currently detected by the controller. Multiple errors at the same time can be raised in parallel. Retrieving individual errors can be done using a bitmask. Here's a list of all possible system errors. 0: No_error. 1: Throttle_Error. 2: DC_Undervoltage_Error. 4: DC_Overvoltage_Error. 8: Controller_Undertemperature_Error. 16: Motor_Overtemperature_Error. 32: Motor_Overtemperature_Foldback_Warning. 64: Motor_Undertemperature_Error. 128: Controller_Overtemperature_Error. 256: Controller_Foldback_Warning. 512: Motor_Hall_Sensor_Error. 1024: Motor_Phase_Error. 2048: IoT_Communication_Error. 4096: Controller_Dual_Communication_Error. 8192: Controller_Overcurrent_Warning. 16384: Battery_Low_Error. 32768: PAS_Torque_Startup_Error. 65536: Controller_Anomaly_Error. 131072: Brake_Error. 262144: Screen_Communication_Error. 524288: PAS_Torque_Stuck_Error. 1048576: Bike_Locked_Error. 2097152: Battery_Error. 4194304: BMS_Communication_Error. 8388608: Wheel_Speed_Sensor_Warning",
-          "Notes": "Eg. if there is a brake error (0x20000) and a hall sensor error (0x200), the controller will raise 0x20200 ie. 0d131584. Error descriptions: No_error: No error, Throttle_Error: If the controller turns on and it detects that the throttle is immediately/already above the minimum threshold value, the motor assistance is disabled and this error is shown on the screen. DC_Undervoltage_Error: When the DC bus goes under the safe voltage operating range of the controller. DC_Overvoltage_Error: When the DC bus goes over the safe voltage operating range of the controller. Controller_Undertemperature_Error: If the controller is detecting that the temperature is under safe operating limits (around -30C). Motor_Overtemperature_Error: The motor is overheating and assistance is stopped. Motor_Overtemperature_Foldback_Warning: Foldback has been applied because motor is overheating. Motor_Undertemperature_Error: Motor temperature sensor is disconnected or cold warning. Controller_Overtemperature_Error: When the controller shuts down due to overheating. Controller_Foldback_Warning: Foldback has been applied because the controller is overheating. Motor_Hall_Sensor_Error: Controller can’t read the motor hall sensor, or the reading is not within safe/normal range. Motor_Phase_Error: Motor phase wire connection is detected as being faulted. IoT_Communication_Error: When the controller loses communication with the IoT module over CAN bus. Controller_Dual_Communication_Error: Display this error when the master controller (which controls the screen) loses communication with the slave controller (which controls the second motor), if slave controller is enabled. Controller_Overcurrent_Warning: When the controller hits an overcurrent. This is a warning but the controller self-recovers. Battery_Low_Error: Battery is low and needs charging. PAS_Torque_Startup_Error: If the controller is detecting that the PAS torque did not return to a normal original value when the controller started up. Controller_Anomaly_Error: The controller detects that the system is in a bad or unrecoverable state. For example, a short in the harness can trigger this error. Brake_Error: The brake cutoff sensor has an anomaly (e.g., the reading did not go back to the normal, original value on startup). Screen_Communication_Error: If the controller detects that it has lost communication with the HMI peripheral on the system.\n- If CANOpen screen, then it means that there was a CAN heartbeats timeout detected.\n- If UART screen, then it means that there was a timeout detected for receiving UART frames from the screen. PAS_Torque_Stuck_Error: If the controller is detecting that the torque sensor input is detected, but no cadence pulses are detected (potential hardware problem with the PAS sensor). Bike_Locked_Error: If the IoT lock protection is activated and stopping powertrain, this error is raised over CAN. Battery_Error: Default battery error, signaling that battery is either damaged or signaled an internal error to the controller, stopping powertrain. BMS_Communication_Error: This error is raised if the BMS communication with the controller failed or if an <n> number of invalid inputs were sent to the controller. Wheel_Speed_Sensor_Warning: The controller is not detecting the expected wheel speed sensor signal (the timeout is usually around 12 seconds). The powertrain is still enabled while this warning occurs.",
-          "Valid_Range": {
-            "min": 0,
-            "max": 4294967295
-          },
+          "Description": "Get the active errors currently detected by the controller. Multiple errors can be raised in parallel.",
+          "Notes": "Example: if there is a brake error (0x20000) and a hall sensor error (0x200), the controller will raise 0x20200 (decimal 131584).",
+          "Valid_Flags": [
+            {
+              "value": 0,
+              "name": "No_error",
+              "description": "No error"
+            },
+            {
+              "value": 1,
+              "name": "Throttle_Error",
+              "description": "If the controller turns on and detects that the throttle is immediately/already above the minimum threshold value, motor assistance is disabled"
+            },
+            {
+              "value": 2,
+              "name": "DC_Undervoltage_Error",
+              "description": "DC bus is under the safe voltage operating range of the controller"
+            },
+            {
+              "value": 4,
+              "name": "DC_Overvoltage_Error",
+              "description": "DC bus is over the safe voltage operating range of the controller"
+            },
+            {
+              "value": 8,
+              "name": "Controller_Undertemperature_Error",
+              "description": "Controller temperature is under safe operating limits (around -30C)"
+            },
+            {
+              "value": 16,
+              "name": "Motor_Overtemperature_Error",
+              "description": "Motor is overheating and assistance is stopped"
+            },
+            {
+              "value": 32,
+              "name": "Motor_Overtemperature_Foldback_Warning",
+              "description": "Foldback has been applied because motor is overheating"
+            },
+            {
+              "value": 64,
+              "name": "Motor_Undertemperature_Error",
+              "description": "Motor temperature sensor is disconnected or cold warning"
+            },
+            {
+              "value": 128,
+              "name": "Controller_Overtemperature_Error",
+              "description": "Controller shuts down due to overheating"
+            },
+            {
+              "value": 256,
+              "name": "Controller_Foldback_Warning",
+              "description": "Foldback has been applied because the controller is overheating"
+            },
+            {
+              "value": 512,
+              "name": "Motor_Hall_Sensor_Error",
+              "description": "Controller can't read motor hall sensor, or reading is not within safe/normal range"
+            },
+            {
+              "value": 1024,
+              "name": "Motor_Phase_Error",
+              "description": "Motor phase wire connection is detected as being faulted"
+            },
+            {
+              "value": 2048,
+              "name": "IoT_Communication_Error",
+              "description": "Controller lost communication with IoT module over CAN bus"
+            },
+            {
+              "value": 4096,
+              "name": "Controller_Dual_Communication_Error",
+              "description": "Master controller lost communication with slave controller (if slave enabled)"
+            },
+            {
+              "value": 8192,
+              "name": "Controller_Overcurrent_Warning",
+              "description": "Controller hit overcurrent (warning, self-recovers)"
+            },
+            {
+              "value": 16384,
+              "name": "Battery_Low_Error",
+              "description": "Battery is low and needs charging"
+            },
+            {
+              "value": 32768,
+              "name": "PAS_Torque_Startup_Error",
+              "description": "PAS torque did not return to normal original value when controller started"
+            },
+            {
+              "value": 65536,
+              "name": "Controller_Anomaly_Error",
+              "description": "System is in bad/unrecoverable state (e.g., harness short)"
+            },
+            {
+              "value": 131072,
+              "name": "Brake_Error",
+              "description": "Brake cutoff sensor anomaly (reading didn't return to normal on startup)"
+            },
+            {
+              "value": 262144,
+              "name": "Screen_Communication_Error",
+              "description": "Lost communication with HMI peripheral (CAN heartbeat or UART timeout)"
+            },
+            {
+              "value": 524288,
+              "name": "PAS_Torque_Stuck_Error",
+              "description": "Torque sensor input detected but no cadence pulses (potential hardware problem)"
+            },
+            {
+              "value": 1048576,
+              "name": "Bike_Locked_Error",
+              "description": "IoT lock protection activated, stopping powertrain"
+            },
+            {
+              "value": 2097152,
+              "name": "Battery_Error",
+              "description": "Battery damaged or signaled internal error, stopping powertrain"
+            },
+            {
+              "value": 4194304,
+              "name": "BMS_Communication_Error",
+              "description": "BMS communication failed or invalid inputs received"
+            },
+            {
+              "value": 8388608,
+              "name": "Wheel_Speed_Sensor_Warning",
+              "description": "Expected wheel speed sensor signal not detected (12 second timeout). Powertrain remains enabled"
+            }
+          ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_CAN_ACTIVE_ERRORS_FILTER": {
-          "Subindex": "0x10",
-          "Access": "R/W",
-          "Type": "uint32_t",
-          "Description": "Filter on CO_PARAM_ACTIVE_ERRORS. This CO_PARAM_CAN_ACTIVE_ERRORS_FILTER parameter can be used to specify which errors can be raised on CAN. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND bitmask operation between the ACTIVE_ERRORS and the ACTIVE_ERRORS_FILTER.",
-          "Notes": "For example, if you don't want Bike_Locked_Error to be raised on CAN, you would set this filter parameter to 0b11111111111011111111111111111111, or 0xFFEFFFFF. Note that this can only silence errors on CAN. A filter on UART errors is not supported by this parameter. Also, please note that this is a communication filter, and the controller will still internally raise the error and take action(s) accordingly.",
-          "Valid_Range": {
-            "min": 0,
-            "max": 4294967295
-          },
-          "Persistence": "Persistent",
-          "Obfuscation": "False"
+        "CO_PARAM_CAN_ACTIVE_ERRORS_FILTER": {	
+          "Subindex": "0x10",	
+          "Access": "R/W",	
+          "Type": "uint32_t",	
+          "Description": "Filter on CO_PARAM_ACTIVE_ERRORS. This CO_PARAM_CAN_ACTIVE_ERRORS_FILTER parameter can be used to specify which errors can be raised on CAN. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND bitmask operation between the ACTIVE_ERRORS and the ACTIVE_ERRORS_FILTER.",	
+          "Notes": "For example, if you don't want Bike_Locked_Error to be raised on CAN, you would set this filter parameter to 0b11111111111011111111111111111111, or 0xFFEFFFFF. Note that this can only silence errors on CAN. A filter on UART errors is not supported by this parameter. Also, please note that this is a communication filter, and the controller will still internally raise the error and take action(s) accordingly.",	
+          "Valid_Range": {	
+            "min": 0,	
+            "max": 4294967295	
+          },	
+          "Persistence": "Persistent",	
+          "Obfuscation": "False"	
         }
       }
     },

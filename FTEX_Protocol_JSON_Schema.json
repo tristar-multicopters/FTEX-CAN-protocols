@@ -113,7 +113,8 @@
                         "additionalProperties": false
                       },
                       "minItems": 1
-                    }
+                    },
+                    "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                   },
                   "required": ["Subindex", "Access", "Description", "Query_frequency"],
                   "additionalProperties": false,
@@ -135,6 +136,12 @@
                             "required": ["Valid_Options"],
                             "properties": {
                               "Valid_Options": { "$ref": "#/definitions/ValidOptions" }
+                            }
+                          },
+                          {
+                            "required": ["Valid_Flags"],
+                            "properties": {
+                              "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                             }
                           }
                         ]
@@ -203,7 +210,8 @@
                       "additionalProperties": false
                     },
                     "minItems": 1
-                  }
+                  },
+                  "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                 },
                 "required": ["Subindex", "Access", "Description", "Persistence"],
                 "additionalProperties": false,
@@ -225,6 +233,12 @@
                           "required": ["Valid_Options"],
                           "properties": {
                             "Valid_Options": { "$ref": "#/definitions/ValidOptions" }
+                          }
+                        },
+                        {
+                          "required": ["Valid_Flags"],
+                          "properties": {
+                            "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                           }
                         }
                       ]
@@ -257,6 +271,20 @@
         "type": "object",
         "properties": {
           "value": { "type": ["number", "string"] },
+          "description": { "type": "string" }
+        },
+        "required": ["value", "description"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "ValidFlags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "integer", "minimum": 0 },
+          "name": { "type": "string" },
           "description": { "type": "string" }
         },
         "required": ["value", "description"],

@@ -5,6 +5,19 @@ from collections import Counter
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 
+# Allowed integer types for parameters using Valid_Flags
+INT_TYPES = {"uint8_t", "uint16_t", "uint32_t", "int8_t", "int16_t", "int32_t"}
+
+# Maximum values for each integer type
+TYPE_MAX_VALUES = {
+    "uint8_t": 0xFF,
+    "uint16_t": 0xFFFF,
+    "uint32_t": 0xFFFFFFFF,
+    "int8_t": 0x7F,
+    "int16_t": 0x7FFF,
+    "int32_t": 0x7FFFFFFF,
+}
+
 # Custom exception for duplicate keys
 class DuplicateKeyError(Exception):
     pass
@@ -131,6 +144,79 @@ def check_parameter_names(data):
     print("All Parameter names are unique within each Parameters object.")
     return True
 
+def is_power_of_two(value: int) -> bool:
+    if value == 0:
+        return True  # allow 0 to represent "no flags set"
+    return (value & (value - 1)) == 0
+
+def validate_valid_flags(data):
+    print("Running Valid_Flags validation...")
+
+    def walk(obj, path_prefix=None):
+        if path_prefix is None:
+            path_prefix = []
+        errors = []
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                # Skip the protocol metadata
+                if key == "protocol":
+                    continue
+                if key.startswith("CO_ID_") and isinstance(value, dict):
+                    params = value.get("Parameters")
+                    if isinstance(params, dict):
+                        for param_name, param_data in params.items():
+                            if not isinstance(param_data, dict):
+                                continue
+                            if "Valid_Flags" in param_data:
+                                type_name = param_data.get("Type")
+                                if type_name not in INT_TYPES:
+                                    errors.append(f"{key} -> {param_name}: Valid_Flags requires integer Type, found '{type_name}'")
+                                flags = param_data.get("Valid_Flags")
+                                if not isinstance(flags, list) or len(flags) == 0:
+                                    errors.append(f"{key} -> {param_name}: Valid_Flags must be a non-empty array")
+                                    continue
+                                seen_values = set()
+                                max_value = TYPE_MAX_VALUES.get(type_name, None)
+                                for idx, flag in enumerate(flags):
+                                    location = f"{key} -> {param_name} -> Valid_Flags[{idx}]"
+                                    if not isinstance(flag, dict):
+                                        errors.append(f"{location}: each item must be an object")
+                                        continue
+                                    if "value" not in flag:
+                                        errors.append(f"{location}: missing 'value'")
+                                        continue
+                                    value_field = flag["value"]
+                                    if not isinstance(value_field, int):
+                                        errors.append(f"{location}: 'value' must be an integer")
+                                        continue
+                                    if value_field < 0:
+                                        errors.append(f"{location}: 'value' must be >= 0")
+                                        continue
+                                    if max_value is not None and value_field > max_value:
+                                        errors.append(f"{location}: 'value' {value_field} exceeds max for {type_name} ({max_value})")
+                                        continue
+                                    if value_field in seen_values:
+                                        errors.append(f"{location}: duplicate flag value {value_field}")
+                                        continue
+                                    seen_values.add(value_field)
+                                    if not is_power_of_two(value_field):
+                                        errors.append(f"{location}: 'value' must be 0 or a single-bit power of two")
+                # Recurse and accumulate errors
+                errors.extend(walk(value, path_prefix + [key]))
+        elif isinstance(obj, list):
+            for item in obj:
+                errors.extend(walk(item, path_prefix))
+        return errors
+
+    errors = walk(data)
+    if errors:
+        print("Valid_Flags validation errors:")
+        for e in errors:
+            print(f"- {e}")
+        return False
+    print("All Valid_Flags entries are valid bitmasks and types are correct.")
+    return True
+
 # class argument:
 #     schema_file = ""
 #     data_file = ""
@@ -172,9 +258,10 @@ def main():
     canopen_index_validation_passed = validate_unique_canopen_indexes(data)
     unique_subindexes_passed = check_unique_subindexes(data)
     param_names_passed = check_parameter_names(data)
+    valid_flags_passed = validate_valid_flags(data)
 
     # Exit with appropriate code
-    if schema_validation_passed and co_id_validation_passed and canopen_index_validation_passed and unique_subindexes_passed and param_names_passed:
+    if schema_validation_passed and co_id_validation_passed and canopen_index_validation_passed and unique_subindexes_passed and param_names_passed and valid_flags_passed:
         print("JSON data is valid.")
         sys.exit(0)  # Success
     else:

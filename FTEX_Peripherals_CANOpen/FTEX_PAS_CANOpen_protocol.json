@@ -14,14 +14,24 @@
           "Access": "R",
           "Type": "uint32_t",
           "Description": "Packed real-time cadence information. Byte 1 (MSB): Cadence pedaling state . Bytes 2-3: pedaling RPM (0-65535). Byte 4 (LSB): PAS sensor state",
-          "Notes": "Possible cadence pedaling states: 0=idle, 1=pedaling forward, 2=pedaling backward. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating"
+          "Notes": "Possible cadence pedaling states: 0=idle, 1=pedaling forward, 2=pedaling backward. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating",
+          "Persistence": "Real-time",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
         },
         "CO_PARAM_EXTERNAL_PAS_TORQUE_PACKED": {
           "Subindex": "0x01",
           "Access": "R",
           "Type": "uint32_t",
           "Description": "Packed real-time torque information. Byte 1 (MSB): Torque pedaling state. Bytes 2-3: torque percentage (0-10000, representing 0-100.00%. The unit is in % x 100 (eg. a value of 3245 means, 32.45% press). Byte 4 (LSB): PAS sensor state (0=idle, 1=active, 2=error, 3=calibrating)",
-          "Notes": "Possible torque pedaling states: 0=idle, 1=torque press on left crank, 2=torque press on right crank. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating"
+          "Notes": "Possible torque pedaling states: 0=idle, 1=torque press on left crank, 2=torque press on right crank. Possible PAS sensor states: 0=idle, 1=active, 2=error, 3=calibrating/updating",
+          "Persistence": "Real-time",
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          }
         },
         "CO_PARAM_EXTERNAL_PAS_TORQUE_RAW": {
           "Subindex": "0x02",
@@ -32,7 +42,8 @@
             "min": 0,
             "max": 65535
           },
-          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+          "Notes": "The value is scaled between 0 (0V) and 65535 (3.3V). Contact FTEX if your sensor voltage is different.",
+          "Persistence": "Real-time"
         },
         "CO_PARAM_EXTERNAL_PAS_CADENCE_RAW": {
           "Subindex": "0x03",
@@ -43,7 +54,8 @@
             "min": 0,
             "max": 65535
           },
-          "Notes": "This count should not reset to 0 if the user stops pedaling, it should just stop increasing, and start increasing again when the user pedals. The value is expected to reset to 0 only after it reaches 65535 (so the pulses count should be 0, 1, ..., 65534, 65535, 0, 1, ..."
+          "Notes": "This count should not reset to 0 if the user stops pedaling, it should just stop increasing, and start increasing again when the user pedals. The value is expected to reset to 0 only after it reaches 65535 (so the pulses count should be 0, 1, ..., 65534, 65535, 0, 1, ...",
+          "Persistence": "Real-time"
         },
         "CO_PARAM_EXTERNAL_PAS_TEMPERATURE": {
           "Subindex": "0x04",
@@ -54,7 +66,8 @@
           "Valid_Range": {
             "min": -40,
             "max": 125
-          }
+          },
+          "Persistence": "Real-time"
         }
       }
     }
@@ -69,7 +82,7 @@
           "Access": "R",
           "Type": "uint32_t",
           "Description": "Bitmask of errors currently detected by the PAS system. If more than one error is occurring, the PAS must do an OR mask between errors.",
-          "Valid_Options": [
+          "Valid_Flags": [
             {
               "value": 0,
               "description": "PAS_No_error: No error."
@@ -98,7 +111,8 @@
               "value": 2147483648,
               "description": "PAS_Internal_Error: The PAS detects an unmapped or undefined error."
             }
-          ]
+          ],
+          "Persistence": "Real-time"
         }
       }
     }
@@ -117,7 +131,8 @@
             "min": 0,
             "max": 65535
           },
-          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+          "Notes": "The value is scaled between 0 (0V) and 65535 (3.3V). Contact FTEX if your sensor voltage is different.",
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_TORQUE_ADC_MAX": {
           "Subindex": "0x01",
@@ -128,7 +143,8 @@
             "min": 0,
             "max": 65535
           },
-          "Notes": "The value is scaled between 0 (0V) and 65535 (5V). Contact FTEX if your sensor voltage is different."
+          "Notes": "The value is scaled between 0 (0V) and 65535 (3.3V). Contact FTEX if your sensor voltage is different.",
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_CADENCE_PULSES_PER_ROTATION": {
           "Subindex": "0x02",
@@ -138,7 +154,8 @@
           "Valid_Range": {
             "min": 0,
             "max": 65535
-          }
+          },
+          "Persistence": "Persistent"
         }
       }
     }
@@ -156,7 +173,8 @@
           "Valid_Range": {
             "min": 0,
             "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_SERIAL_NUMBER_LSB": {
           "Subindex": "0x01",
@@ -166,7 +184,8 @@
           "Valid_Range": {
             "min": 0,
             "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_FIRMWARE_VERSION": {
           "Subindex": "0x02",
@@ -176,7 +195,8 @@
           "Valid_Range": {
             "min": 0,
             "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_HARDWARE_VERSION": {
           "Subindex": "0x03",
@@ -186,7 +206,8 @@
           "Valid_Range": {
             "min": 0,
             "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_PROTOCOL_MAJOR_VERSION": {
           "Subindex": "0x10",
@@ -196,7 +217,8 @@
           "Valid_Range": {
               "min": 0,
               "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_MINOR_VERSION": {
           "Subindex": "0x11",
@@ -206,7 +228,8 @@
           "Valid_Range": {
               "min": 0,
               "max": 4294967295
-          }
+          },
+          "Persistence": "Persistent"
         },
         "CO_PARAM_EXTERNAL_PAS_BUILD_VERSION": {
           "Subindex": "0x12",
@@ -216,7 +239,8 @@
           "Valid_Range": {
               "min": 0,
               "max": 4294967295
-          }        
+          },
+          "Persistence": "Persistent"        
         }
       }
     }

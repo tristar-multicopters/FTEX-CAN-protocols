@@ -584,7 +584,7 @@
           "Description": "Behavior the controller should adopt if the BMS is missing. Set bitmask flags to enable/disable controller behaviors on a missing BMS.",
           "Persistence": "Persistent",
           "Obfuscation": "True",
-          "Valid_Options": [
+          "Valid_Flags": [
             { "value": 0, "description": "Fallback To Config" },
             { "value": 1, "description": "Stop Powertrain"},
             { "value": 2, "description": "Raise Error on CAN"}

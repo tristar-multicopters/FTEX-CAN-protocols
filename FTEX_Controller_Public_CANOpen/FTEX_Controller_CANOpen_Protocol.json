@@ -957,12 +957,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_1": {
+        "CO_PARAM_ACTIVE_SUB_CODE_1": {
           "Subindex": "0x01",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the first active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the first active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -970,12 +970,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_2": {
+        "CO_PARAM_ACTIVE_SUB_CODE_2": {
           "Subindex": "0x02",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the second active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the second active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -983,12 +983,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_3": {
+        "CO_PARAM_ACTIVE_SUB_CODE_3": {
           "Subindex": "0x03",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the third active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the third active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -996,12 +996,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_4": {
+        "CO_PARAM_ACTIVE_SUB_CODE_4": {
           "Subindex": "0x04",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the fourth active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the fourth active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -1009,12 +1009,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_5": {
+        "CO_PARAM_ACTIVE_SUB_CODE_5": {
           "Subindex": "0x05",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the fifth active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the fifth active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -1022,12 +1022,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_6": {
+        "CO_PARAM_ACTIVE_SUB_CODE_6": {
           "Subindex": "0x06",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the sixth active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the sixth active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -1035,12 +1035,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_7": {
+        "CO_PARAM_ACTIVE_SUB_CODE_7": {
           "Subindex": "0x07",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the seventh active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the seventh active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535
@@ -1048,12 +1048,12 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_ACTIVE_SUB_ERROR_8": {
+        "CO_PARAM_ACTIVE_SUB_CODE_8": {
           "Subindex": "0x08",
           "Access": "R",
           "Type": "uint16_t",
-          "Description": "Get the eighth active sub error, raised by the controller.",
-          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Description": "Get the eighth active sub code, raised by the controller.",
+          "Notes": "List of supported sub codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
           "Valid_Range": {
             "min": 0,
             "max": 65535

@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.8.1"
+    "version": "2.8.2"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -953,6 +953,110 @@
           "Valid_Range": {
             "min": 0,
             "max": 4294967295
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_1": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the first active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_2": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the second active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_3": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the third active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_4": {
+          "Subindex": "0x04",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the fourth active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_5": {
+          "Subindex": "0x05",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the fifth active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_6": {
+          "Subindex": "0x06",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the sixth active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_7": {
+          "Subindex": "0x07",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the seventh active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_ERROR_8": {
+          "Subindex": "0x08",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the eighth active sub error, raised by the controller.",
+          "Notes": "List of supported sub error codes: Battery over temperature: 0x0A01. Battery under temperature: 0x0A02. Battery over voltage: 0x0A04. Battery under voltage: 0x0A05. Battery charging over current: 0x0A06. Battery discharge over current: 0x0A07. Battery short circuit: 0x0A08. Battery internal error: 0x0A09.",
+          "Valid_Range": {
+            "min": 0,
+            "max": 65535
           },
           "Persistence": "Real-time",
           "Obfuscation": "False"

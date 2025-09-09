@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.9.0"
+    "version": "2.9.1"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1080,18 +1080,170 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_CAN_ACTIVE_ERRORS_FILTER": {	
-          "Subindex": "0x10",	
-          "Access": "R/W",	
-          "Type": "uint32_t",	
+        "CO_PARAM_ACTIVE_SUB_CODE_1": {
+          "Subindex": "0x01",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the first active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_2": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the second active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_3": {
+          "Subindex": "0x03",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the third active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_4": {
+          "Subindex": "0x04",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the fourth active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_5": {
+          "Subindex": "0x05",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the fifth active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_6": {
+          "Subindex": "0x06",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the sixth active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_7": {
+          "Subindex": "0x07",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the seventh active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_ACTIVE_SUB_CODE_8": {
+          "Subindex": "0x08",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Description": "Get the eighth active sub code, raised by the controller.",
+          "Valid_Options": [
+            { "value": 0, "description": "No active sub code" },
+            { "value": 2561, "description": "Battery is reporting an over temperature error, the current battery temperatuve is above the battery specific threshold" },
+            { "value": 2562, "description": "Battery is reporting an under temperature error, the current battery temperature is below the battery specific threshold" },
+            { "value": 2564, "description": "Battery is reporting an over voltage error, the voltage of the battery is above its threshold" },
+            { "value": 2565, "description": "Battery is reporting an under voltage error, the voltage of the battery is below its threshold" },
+            { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
+            { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
+            { "value": 2568, "description": "Battery is reporting an short circuit error" },
+            { "value": 2569, "description": "Battery is reporting an internal error" }
+          ],
+          "Persistence": "Real-time",
+          "Obfuscation": "False"
+        },
+        "CO_PARAM_CAN_ACTIVE_ERRORS_FILTER": {
+          "Subindex": "0x10",
+          "Access": "R/W",
+          "Type": "uint32_t",
           "Description": "Filter on CO_PARAM_ACTIVE_ERRORS. This CO_PARAM_CAN_ACTIVE_ERRORS_FILTER parameter can be used to specify which errors can be raised on CAN. The CO_PARAM_ACTIVE_ERRORS value will be filtered by this CO_PARAM_ACTIVE_ERRORS_FILTER, using an AND bitmask operation between the ACTIVE_ERRORS and the ACTIVE_ERRORS_FILTER.",	
           "Notes": "For example, if you don't want Bike_Locked_Error to be raised on CAN, you would set this filter parameter to 0b11111111111011111111111111111111, or 0xFFEFFFFF. Note that this can only silence errors on CAN. A filter on UART errors is not supported by this parameter. Also, please note that this is a communication filter, and the controller will still internally raise the error and take action(s) accordingly.",	
-          "Valid_Range": {	
-            "min": 0,	
-            "max": 4294967295	
-          },	
-          "Persistence": "Persistent",	
-          "Obfuscation": "False"	
+          "Valid_Range": {
+            "min": 0,
+            "max": 4294967295
+          },
+          "Persistence": "Persistent",
+          "Obfuscation": "False"
         }
       }
     },

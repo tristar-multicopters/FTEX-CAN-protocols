@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.9.1"
+    "version": "2.9.2"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -1075,6 +1075,11 @@
               "value": 8388608,
               "name": "Wheel_Speed_Sensor_Warning",
               "description": "Expected wheel speed sensor signal not detected (12 second timeout). Powertrain remains enabled"
+            },
+            {
+              "value": 16777216,
+              "name": "Motor_Fault",
+              "description": "Motor error is detected. The cause of the error is propagated to the sub code section. Possible values are: "
             }
           ],
           "Persistence": "Real-time",
@@ -1094,7 +1099,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1113,7 +1129,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1132,7 +1159,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1151,7 +1189,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1170,7 +1219,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1189,7 +1249,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1208,7 +1279,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"
@@ -1227,7 +1309,18 @@
             { "value": 2566, "description": "Battery is reporting an charging over current error, the current delivered to the battery is above the supported battery threshold" },
             { "value": 2567, "description": "Battery is reporting an discharge over current error, the current drained from the battery is above the supported battery threshold" },
             { "value": 2568, "description": "Battery is reporting an short circuit error" },
-            { "value": 2569, "description": "Battery is reporting an internal error" }
+            { "value": 2569, "description": "Battery is reporting an internal error" },
+            { "value": 38145, "description": "Over current error triggered by OCD2 error" },
+            { "value": 38146, "description": "Over current error triggered by OCD2 fault" },
+            { "value": 38147, "description": "Over current error triggered by OCSP error" },
+            { "value": 38148, "description": "Over current error triggered by OCD1 error" },
+            { "value": 38401, "description": "Under voltage read from the voltage bus sensor" },
+            { "value": 38402, "description": "Over voltage read from the voltage bus sensor" },
+            { "value": 38403, "description": "Motor is stuck; current is delivered without any motor RPM" },
+            { "value": 38404, "description": "Limited current protection is active" },
+            { "value": 38405, "description": "Invalid FOC duration" },
+            { "value": 38406, "description": "A software error was triggered" },
+            { "value": 38407, "description": "Motor is active with a zero torque reference" }
           ],
           "Persistence": "Real-time",
           "Obfuscation": "False"

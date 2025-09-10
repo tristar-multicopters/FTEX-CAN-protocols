@@ -1079,7 +1079,7 @@
             {
               "value": 16777216,
               "name": "Motor_Fault",
-              "description": "Motor error is detected. The cause of the error is propagated to the sub code section. Possible values are: "
+              "description": "Motor error is detected. The cause of the error is propagated to the sub code section."
             }
           ],
           "Persistence": "Real-time",

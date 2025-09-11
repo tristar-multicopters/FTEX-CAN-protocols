@@ -36,7 +36,7 @@
     }
   },
   "patternProperties": {
-    "^(?!protocol$|definitions$).*": {
+    "^(?!protocol$).*": {
       "type": "object",
       "minProperties": 1,
       "properties": {

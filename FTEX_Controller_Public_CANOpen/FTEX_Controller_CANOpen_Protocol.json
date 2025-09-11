@@ -984,7 +984,7 @@
             {
               "value": 32,
               "name": "Reserved_1",
-              "description": "Reserved for future use. Previously Motor_Overtemperature_Foldback_Warning."
+              "description": "Reserved for future use. Previously Motor_Overtemperature_Foldback_Warning"
             },
             {
               "value": 64,
@@ -999,7 +999,7 @@
             {
               "value": 256,
               "name": "Reserved_2",
-              "description": "Reserved for future use. Previously Controller_Foldback_Warning."
+              "description": "Reserved for future use. Previously Controller_Foldback_Warning"
             },
             {
               "value": 512,
@@ -1111,7 +1111,7 @@
               "value": 8,
               "name": "Motor_Malfunction_Warning",
               "description": "The motor hit a generic malfunction. Details of the malfunction are present in the subcode."
-            }
+            },
             {
               "value": 16,
               "name": "Wheel_Speed_Sensor_Warning",

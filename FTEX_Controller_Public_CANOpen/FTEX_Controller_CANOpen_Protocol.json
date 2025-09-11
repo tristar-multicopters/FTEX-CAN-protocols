@@ -1084,8 +1084,8 @@
           "Subindex": "0x20",
           "Access": "R",
           "Type": "uint32_t",
-          "Description": "Get the active errors currently detected by the controller. Multiple errors can be raised in parallel.",
-          "Notes": "Example: if there is a brake error (0x20000) and a hall sensor error (0x200), the controller will raise 0x20200 (decimal 131584).",
+          "Description": "Get the active warnings currently detected by the controller. Multiple warnings can be raised in parallel.",
+          "Notes": "Example: if there is a motor overtemp warning (0x1) and a controller foldback warning (0x2), the controller will raise 0x3 (0x1 | 0x2).",
           "Valid_Flags": [
             {
               "value": 0,

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FTEX Subcodes Schema",
+  "description": "Schema for FTEX controller subcode definitions",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference for this document"
+    },
+    "subcodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["value", "description"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": ["subcodes"],
+  "additionalProperties": false
+}

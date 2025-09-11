@@ -1,6 +1,7 @@
 import json
 import sys
 import argparse
+import os
 from collections import Counter
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
@@ -35,10 +36,59 @@ def json_load_with_duplicates_check(file_path):
     with open(file_path, 'r') as file:
         return json.load(file, object_pairs_hook=raise_on_duplicates)
 
+# Function to resolve external references in JSON data
+def resolve_external_references(data, base_dir):
+    """
+    Resolve external references like 'subcodes.json#/subcodes' in the JSON data
+    """
+    def resolve_refs(obj, path_prefix=None):
+        if path_prefix is None:
+            path_prefix = []
+        
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                if key == "Valid_Options" and isinstance(value, str) and ".json#" in value:
+                    # This is an external reference
+                    file_path, json_path = value.split("#/")
+                    full_file_path = os.path.join(base_dir, file_path)
+                    
+                    try:
+                        with open(full_file_path, 'r') as f:
+                            external_data = json.load(f)
+                        
+                        # Navigate to the referenced path
+                        resolved_value = external_data
+                        if json_path:  # If there's a path after #/
+                            for path_part in json_path.split('/'):
+                                if path_part:
+                                    resolved_value = resolved_value[path_part]
+                        else:
+                            # If no path specified, assume we want the 'subcodes' key
+                            resolved_value = external_data.get('subcodes', external_data)
+                        
+                        # Replace the reference with the actual data
+                        obj[key] = resolved_value
+                        print(f"Resolved external reference: {value} -> {len(resolved_value)} items")
+                        
+                    except (FileNotFoundError, KeyError, json.JSONDecodeError) as e:
+                        print(f"Warning: Could not resolve external reference {value}: {e}")
+                        # Keep the original reference string
+                else:
+                    resolve_refs(value, path_prefix + [key])
+        elif isinstance(obj, list):
+            for i, item in enumerate(obj):
+                resolve_refs(item, path_prefix + [i])
+    
+    resolve_refs(data)
+    return data
+
 # Function to validate JSON data against the schema
 def validate_json(data, schema):
+    # Create a copy of the data without the $schema field for validation
+    data_for_validation = {k: v for k, v in data.items() if k != "$schema"}
+    
     try:
-        validate(instance=data, schema=schema)
+        validate(instance=data_for_validation, schema=schema)
         print("Schema validation passed.")
     except ValidationError as err:
         print("Schema validation failed.")
@@ -104,7 +154,11 @@ def validate_unique_canopen_indexes(data):
 def check_unique_subindexes(data):
     print("Running Subindex uniqueness validation...")
     for key, value in data.items():
-        if key == "protocol":
+        if key == "protocol" or key == "$schema":
+            continue
+        
+        # Skip if value is not a dictionary (e.g., if it's a string)
+        if not isinstance(value, dict):
             continue
 
         for co_id, co_id_data in value.items():
@@ -125,8 +179,13 @@ def check_unique_subindexes(data):
 def check_parameter_names(data):
     print("Running Parameter name uniqueness validation...")
     for key, value in data.items():
-        if key == "protocol":
+        if key == "protocol" or key == "$schema":
             continue
+        
+        # Skip if value is not a dictionary (e.g., if it's a string)
+        if not isinstance(value, dict):
+            continue
+            
         for co_id, co_id_data in value.items():
             if co_id == "Notes":
                 continue
@@ -217,13 +276,9 @@ def validate_valid_flags(data):
     print("All Valid_Flags entries are valid bitmasks and types are correct.")
     return True
 
-# class argument:
-#     schema_file = ""
-#     data_file = ""
-
 def main():
     # Set up command-line argument parsing
-    parser = argparse.ArgumentParser(description='Validate JSON data against a JSON Schema.')
+    parser = argparse.ArgumentParser(description='Validate JSON data against a JSON Schema with external reference support.')
     parser.add_argument('schema_file', help='Path to the JSON Schema file')
     parser.add_argument('data_file', help='Path to the JSON data file')
     args = parser.parse_args()
@@ -251,6 +306,11 @@ def main():
     except json.JSONDecodeError as err:
         print(f"Error parsing the data file: {err}")
         sys.exit(1)
+
+    # Resolve external references
+    base_dir = os.path.dirname(args.data_file)
+    print("Resolving external references...")
+    data = resolve_external_references(data, base_dir)
 
     # Validate the data
     schema_validation_passed = validate_json(data, schema)

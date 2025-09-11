@@ -3,6 +3,10 @@
   "title": "FTEX Controller Configuration Schema",
   "type": "object",
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference for this document"
+    },
     "protocol": {
       "type": "object",
       "properties": {
@@ -32,7 +36,7 @@
     }
   },
   "patternProperties": {
-    "^(?!protocol$).*": {
+    "^(?!protocol$|definitions$).*": {
       "type": "object",
       "minProperties": 1,
       "properties": {
@@ -102,17 +106,13 @@
                       "additionalProperties": false
                     },
                     "Valid_Options": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "value": { "type": ["number", "string"] },
-                          "description": { "type": "string" }
-                        },
-                        "required": ["value", "description"],
-                        "additionalProperties": false
-                      },
-                      "minItems": 1
+                      "oneOf": [
+                        { "$ref": "#/definitions/ValidOptions" },
+                        { 
+                          "type": "string",
+                          "pattern": "^.*\\.json#/.*$"
+                        }
+                      ]
                     },
                     "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                   },
@@ -199,17 +199,13 @@
                     "additionalProperties": false
                   },
                   "Valid_Options": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "value": { "type": ["number", "string"] },
-                        "description": { "type": "string" }
-                      },
-                      "required": ["value", "description"],
-                      "additionalProperties": false
-                    },
-                    "minItems": 1
+                    "oneOf": [
+                      { "$ref": "#/definitions/ValidOptions" },
+                      { 
+                        "type": "string",
+                        "pattern": "^.*\\.json#/.*$"
+                      }
+                    ]
                   },
                   "Valid_Flags": { "$ref": "#/definitions/ValidFlags" }
                 },
@@ -285,6 +281,30 @@
         "properties": {
           "value": { "type": "integer", "minimum": 0 },
           "name": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["value", "description"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "SubcodeReference": {
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "pattern": "^#/definitions/Subcodes$"
+        }
+      },
+      "required": ["$ref"],
+      "additionalProperties": false
+    },
+    "Subcodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "integer", "minimum": 0 },
           "description": { "type": "string" }
         },
         "required": ["value", "description"],

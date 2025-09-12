@@ -666,7 +666,7 @@
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"
-        },
+        }
       }
     }
   },

@@ -55,7 +55,7 @@
     },
     "CO_ID_PERIPHERALS_NODE_ID": {
       "CANOpen_Index": "0x2037",
-      "Description": "Node IDs config for external bike peripherals, such as BMS and HMI. The contorller and IoT node IDs are currently fixed (node ID 1 and 3 respectively).",
+      "Description": "Node IDs config for external bike peripherals, such as BMS and HMI. The controller and IoT node IDs are currently fixed (node ID 1 and 3 respectively).",
       "Parameters": {
         "CO_PARAM_HMI_NODE_ID": {
           "Subindex": "0x00",

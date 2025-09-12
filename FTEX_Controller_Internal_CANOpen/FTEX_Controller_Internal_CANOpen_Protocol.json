@@ -19,7 +19,7 @@
                       { "value": 1, "description": "Start Autotune Process" }
                   ],
                   "Persistence": "Real-time"
-                },
+              },
               "CO_PARAM_AUTOTUNE_CONFIG_POLEPAIRS": {
                   "Subindex": "0x01",
                   "Access": "R/W",

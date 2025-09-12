@@ -55,7 +55,7 @@
     },
     "CO_ID_PERIPHERALS_NODE_ID": {
       "CANOpen_Index": "0x2037",
-      "Description": "Node IDs config for external bike peripherals, such as BMS and HMI. The master, IoT and slave node IDs are currently fixed (node ID 1, 2 and 3 respectively).",
+      "Description": "Node IDs config for external bike peripherals, such as BMS and HMI. The controller and IoT node IDs are currently fixed (node ID 1 and 3 respectively).",
       "Parameters": {
         "CO_PARAM_HMI_NODE_ID": {
           "Subindex": "0x00",
@@ -401,20 +401,6 @@
           "Persistence": "Real-time",
           "Obfuscation": "False"
         },
-        "CO_PARAM_BATTERY_REALTIME_VOLTAGE_SLAVE": {
-          "Subindex": "0x02",
-          "Access": "R",
-          "Type": "uint16_t",
-          "Unit": "centivolts",
-          "Description": "Real-time bus voltage on the vehicle battery connected to the slave controller, if present.",
-          "Valid_Range": {
-              "min": 0,
-              "max": 20000
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True",
-          "Notes": "This parameter will be deprecated"
-        },
         "CO_PARAM_BATTERY_CONFIG_EMPTY_VOLTAGE": {
           "Subindex": "0x03",
           "Access": "R/W",
@@ -610,19 +596,6 @@
           "Persistence": "Real-time",
           "Obfuscation": "True"
         },
-        "CO_PARAM_MOTOR_TEMPERATURE_MEASUREMENT_SLAVE": {
-          "Subindex": "0x01",
-          "Access": "R",
-          "Type": "int16_t",
-          "Unit": "Celsius",
-          "Description": "Temperature of the motor connected to the slave controller, if present.",
-          "Valid_Range": {
-              "min": -50,
-              "max": 250
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True"
-        },
         "CO_PARAM_MOTOR_RPM_BEFORE_GEAR_RATIO_MEASUREMENT": {
           "Subindex": "0x10",
           "Access": "R",
@@ -693,20 +666,6 @@
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"
-        },
-        "CO_PARAM_CONTROLLER_TEMPERATURE_MEASUREMENT_SLAVE": {
-          "Subindex": "0x01",
-          "Access": "R",
-          "Type": "int16_t",
-          "Unit": "Celsius",
-          "Description": "Current temperature of the slave controller, if present.",
-          "Valid_Range": {
-              "min": -50,
-              "max": 350
-          },
-          "Persistence": "Real-time",
-          "Obfuscation": "True",
-          "Notes": "This parameter will be deprecated"
         }
       }
     }
@@ -1018,12 +977,12 @@
             },
             {
               "value": 4096,
-              "name": "Controller_Dual_Communication_Error",
-              "description": "Master controller lost communication with slave controller (if slave enabled)"
+              "name": "Reserved_3",
+              "description": "Reserved for future use. Previously Dual_Comm_Error"
             },
             {
               "value": 8192,
-              "name": "Reserved_3",
+              "name": "Reserved_4",
               "description": "Reserved for future use. Previously Controller_Overcurrent_Warning"
             },
             {

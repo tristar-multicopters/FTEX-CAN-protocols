@@ -217,6 +217,90 @@ def validate_valid_flags(data):
     print("All Valid_Flags entries are valid bitmasks and types are correct.")
     return True
 
+def validate_active_sub_code_consistency(data):
+    print("Running CO_PARAM_ACTIVE_SUB_CODE consistency validation...")
+    
+    # Collect all CO_PARAM_ACTIVE_SUB_CODE parameters
+    active_sub_code_params = {}
+    
+    def collect_active_sub_code_params(obj, path_prefix=None):
+        if path_prefix is None:
+            path_prefix = []
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                # Skip the protocol metadata
+                if key == "protocol":
+                    continue
+                if key.startswith("CO_ID_") and isinstance(value, dict):
+                    params = value.get("Parameters")
+                    if isinstance(params, dict):
+                        for param_name, param_data in params.items():
+                            if param_name.startswith("CO_PARAM_ACTIVE_SUB_CODE") and isinstance(param_data, dict):
+                                active_sub_code_params[param_name] = {
+                                    'co_id': key,
+                                    'type': param_data.get("Type"),
+                                    'valid_options': param_data.get("Valid_Options", [])
+                                }
+                # Recurse
+                collect_active_sub_code_params(value, path_prefix + [key])
+        elif isinstance(obj, list):
+            for item in obj:
+                collect_active_sub_code_params(item, path_prefix)
+    
+    collect_active_sub_code_params(data)
+    
+    if not active_sub_code_params:
+        print("No CO_PARAM_ACTIVE_SUB_CODE parameters found.")
+        return True
+    
+    # Check if all parameters have the same type
+    types = set(param['type'] for param in active_sub_code_params.values())
+    if len(types) > 1:
+        print("CO_PARAM_ACTIVE_SUB_CODE validation errors:")
+        for param_name, param_data in active_sub_code_params.items():
+            print(f"- {param_data['co_id']} -> {param_name}: Type '{param_data['type']}' differs from expected")
+        return False
+    
+    expected_type = list(types)[0]
+    print(f"All CO_PARAM_ACTIVE_SUB_CODE parameters have consistent type: {expected_type}")
+    
+    # Check if all parameters have the same Valid_Options
+    valid_options_sets = []
+    for param_name, param_data in active_sub_code_params.items():
+        valid_options = param_data['valid_options']
+        if not isinstance(valid_options, list):
+            print(f"CO_PARAM_ACTIVE_SUB_CODE validation errors:")
+            print(f"- {param_data['co_id']} -> {param_name}: Valid_Options must be a list")
+            return False
+        
+        # Convert to a comparable format (list of tuples of value and description)
+        options_set = set()
+        for option in valid_options:
+            if not isinstance(option, dict) or 'value' not in option or 'description' not in option:
+                print(f"CO_PARAM_ACTIVE_SUB_CODE validation errors:")
+                print(f"- {param_data['co_id']} -> {param_name}: Invalid Valid_Options format")
+                return False
+            options_set.add((option['value'], option['description']))
+        
+        valid_options_sets.append((param_name, param_data['co_id'], options_set))
+    
+    # Compare all Valid_Options sets
+    reference_set = valid_options_sets[0][2]
+    errors = []
+    
+    for param_name, co_id, options_set in valid_options_sets[1:]:
+        if options_set != reference_set:
+            errors.append(f"{co_id} -> {param_name}: Valid_Options differ from reference")
+    
+    if errors:
+        print("CO_PARAM_ACTIVE_SUB_CODE validation errors:")
+        for error in errors:
+            print(f"- {error}")
+        return False
+    
+    print(f"All {len(active_sub_code_params)} CO_PARAM_ACTIVE_SUB_CODE parameters have consistent Valid_Options.")
+    return True
+
 # class argument:
 #     schema_file = ""
 #     data_file = ""
@@ -259,9 +343,10 @@ def main():
     unique_subindexes_passed = check_unique_subindexes(data)
     param_names_passed = check_parameter_names(data)
     valid_flags_passed = validate_valid_flags(data)
+    active_sub_code_consistency_passed = validate_active_sub_code_consistency(data)
 
     # Exit with appropriate code
-    if schema_validation_passed and co_id_validation_passed and canopen_index_validation_passed and unique_subindexes_passed and param_names_passed and valid_flags_passed:
+    if schema_validation_passed and co_id_validation_passed and canopen_index_validation_passed and unique_subindexes_passed and param_names_passed and valid_flags_passed and active_sub_code_consistency_passed:
         print("JSON data is valid.")
         sys.exit(0)  # Success
     else:

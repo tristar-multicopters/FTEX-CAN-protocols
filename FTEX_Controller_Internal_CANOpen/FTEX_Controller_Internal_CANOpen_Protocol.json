@@ -2,7 +2,26 @@
   "protocol": {
       "title": "FTEX Controller Internal CANOpen protocol",
       "description": "Internal part of the CANOpen protocol for real-time and persistent interaction with the FTEX controller. This protocol works conjointly with the public one. It is just not shared publicly.",
-      "version": "1.5.2"
+      "version": "1.5.3"
+  },
+  "IoT": {
+      "CO_ID_IOT_POWER_SIGNAL": {
+          "CANOpen_Index": "0x2013",
+          "Description": "Power on/off signal sent from the controller to the IoT.",
+          "Parameters": {
+              "CO_PARAM_IOT_POWER_SIGNAL":{
+                  "Subindex": "0x00",
+                  "Access": "R/W",
+                  "Type": "uint8_t",
+                  "Description": "Power on/off signal sent from the controller to the IoT.",
+                  "Valid_Options": [
+                      { "value": 0, "description": "Power off signal." },
+                      { "value": 1, "description": "Power on signal." }
+                  ],
+              "Persistence": "Real-time"
+              }
+          }
+      }
   },
   "Autotune": {
       "CO_ID_AUTOTUNE_CONFIG_AND_CONTROL": {

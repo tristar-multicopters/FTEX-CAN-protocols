@@ -2,7 +2,7 @@
   "protocol": {
     "title": "FTEX Controller CANOpen protocol",
     "description": "CANOpen protocol for real-time and persistent interaction with the FTEX controller.",
-    "version": "2.10.0"
+    "version": "2.10.1"
   },
   "Communication and memory configuration": {
     "CO_ID_CAN_CONFIG": {
@@ -301,7 +301,7 @@
           "Obfuscation": "True",
           "Notes": "Only forward pedaling is supported currently."
         },
-        "CO_PARAM_PAS_TORQUE": {
+        "CO_PARAM_PAS_TORQUE_PERCENTAGE": {
           "Subindex": "0x01",
           "Access": "R",
           "Type": "uint8_t",
@@ -310,6 +310,19 @@
           "Valid_Range": {
               "min": 0,
               "max": 100
+          },
+          "Persistence": "Real-time",
+          "Obfuscation": "True"
+        },
+        "CO_PARAM_PAS_TORQUE_ADC_VALUE": {
+          "Subindex": "0x02",
+          "Access": "R",
+          "Type": "uint16_t",
+          "Unit": "ADC",
+          "Description": "Real-time torque detected on the pedals (if torque sensor is present), expressed from the ADC value read by the internal torque sensor. This value represents a digital range from 0 to 3.3V.",
+          "Valid_Range": {
+              "min": 0,
+              "max": 65535
           },
           "Persistence": "Real-time",
           "Obfuscation": "True"
